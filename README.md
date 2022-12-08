@@ -1,5 +1,5 @@
-# SAMS : Surfacec to Air Missile System
--------------
+# SAMS : Surface to Air Missile System
+
 👍LIG NEX-1 SW 신입연수 미니 프로젝트 : 대공유도탄 모의 시스템
 -------------
 👏 만든이들
@@ -10,6 +10,6 @@
 
 👏 조원 : 이채현 연구원 🤷‍♂️
 
-👏 조원 : 정우진 연구원 🤷‍♀️ 
+👏 조원 : 장우진 연구원 🤷‍♀️ 
 
 👏 조원 : 우용안 연구원 🤷‍♂️
