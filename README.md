@@ -1,5 +1,4 @@
-# SAMS
-Surfacec to Air Missile System
+# SAMS : Surfacec to Air Missile System
 -------------
 👍LIG NEX-1 SW 신입연수 미니 프로젝트 : 대공유도탄 모의 시스템
 -------------
