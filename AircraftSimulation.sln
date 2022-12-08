@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ATS", "ATS\ATS.vcxproj", "{
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MSS", "MSS\MSS.vcxproj", "{072D5ED5-61B3-496F-83CD-9AACF45E0E63}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "기존 예제 코드", "기존 예제 코드\기존 예제 코드.vcxproj", "{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -41,6 +43,14 @@ Global
 		{072D5ED5-61B3-496F-83CD-9AACF45E0E63}.Release|x64.Build.0 = Release|x64
 		{072D5ED5-61B3-496F-83CD-9AACF45E0E63}.Release|x86.ActiveCfg = Release|Win32
 		{072D5ED5-61B3-496F-83CD-9AACF45E0E63}.Release|x86.Build.0 = Release|Win32
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Debug|x64.ActiveCfg = Debug|x64
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Debug|x64.Build.0 = Debug|x64
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Debug|x86.ActiveCfg = Debug|Win32
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Debug|x86.Build.0 = Debug|Win32
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Release|x64.ActiveCfg = Release|x64
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Release|x64.Build.0 = Release|x64
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Release|x86.ActiveCfg = Release|Win32
+		{26A4BDD9-7C35-43A6-BE7A-FE127E80826F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
