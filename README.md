@@ -4,15 +4,15 @@
 -------------
 👏 만든이들
 -------------
-👏 조장 : 강준희 연구원<https://github.com/jhkang> 🤷‍♂️ : King of Mid Laner (Mid)
+👏 조장 : 강준희 연구원(<https://github.com/jhkang>) 🤷‍♂️ : King of Mid Laner (Mid)
 
-👏 조원 : 하태민 연구원<https://github.com/jhkang> 🤷‍♂️ : Predator of jungle (Jungle)
+👏 조원 : 하태민 연구원(<https://github.com/jhkang>) 🤷‍♂️ : Predator of jungle (Jungle)
 
-👏 조원 : 이채현 연구원<https://github.com/xmfxhddl> 🤷‍♂️ : Sungnam Neom Amumu (Support)
+👏 조원 : 이채현 연구원(<https://github.com/xmfxhddl>) 🤷‍♂️ : Sungnam Neom Amumu (Support)
 
-👏 조원 : 장우진 연구원<https://github.com/W00JIN> 🤷‍♀️ : The Jungle Challenger (Top, Jungle)
+👏 조원 : 장우진 연구원(<https://github.com/W00JIN>) 🤷‍♀️ : The Jungle Challenger (Top, Jungle)
 
-👏 조원 : 우용안 연구원<https://github.com/wya002> 🤷‍♂️ : Science Master (AD Carry)
+👏 조원 : 우용안 연구원(<https://github.com/wya002>) 🤷‍♂️ : Science Master (AD Carry)
 
 -------------
 
