@@ -1,2 +1,2 @@
 # SAMS
-Surfacec to Air Missile System
+Surface to Air Missile System
