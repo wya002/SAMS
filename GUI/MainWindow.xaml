@@ -1,12 +1,19 @@
 ﻿<Window x:Class="GUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize" 
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+    <Border Background="#cfd5e5" CornerRadius="40"  BorderThickness="2" BorderBrush="#ebedf3"
+            Padding="20" MouseDown="Border_MouseDown">
 
-    </Grid>
+        <Border CornerRadius="40">
+            <Border.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="#fefefe" Offset="0"/>
+                    <GradientStop Color="#ededef" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+    </Border>
 </Window>
