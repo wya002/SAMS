@@ -8,7 +8,7 @@
 |---|---|---|---|
 |조장|강준희🤷‍♂️|<https://github.com/jhkang>|King of Mid Laner (Mid)|
 |조원|하태민🤷‍♂️|<https://github.com/TaeMin15>|Predator of jungle (Jungle)|
-|조원|이채현🤷‍♂️|<https://github.com/xmfxhddl>|Sungnam Neom Amumu (Support)|
+|조원|이채현🤷‍♂️|<https://github.com/xmfxhddl>|ダイナマイト()|
 |조원|장우진🤷‍♀️|<https://github.com/W00JIN>|The Jungle Challenger (Top, Jungle)|
 |조원|우용안🤷‍♂️|<https://github.com/wya002>|Science Master (AD Carry)|
 
