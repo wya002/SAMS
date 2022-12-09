@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\Downloads\AircraftSimulation\main.cpp">
+    <ClCompile Include="SAMS.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
