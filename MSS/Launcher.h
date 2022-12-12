@@ -4,5 +4,6 @@
 
 class Launcher
 {
-
+public:
+private:
 };
