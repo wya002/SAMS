@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="GUI.Country"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUI" xmlns:Icon="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+             x:Name="country">
+
+    <ListViewItem Style="{DynamicResource ListViewItemStyle1}" BorderThickness="0 1 0 0" BorderBrush="#2c3a54" Padding="0 10">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="170"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="{Binding ElementName=country,Path=Flag}" Height="10" Stretch="Fill" Margin="2 0 0 0"/>
+            <TextBlock Text="{Binding ElementName=country,Path=CountryName}" Grid.Column="1" Foreground="#efefef" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            <TextBlock Text="{Binding ElementName=country,Path=Price}" Grid.Column="2" Foreground="#b1b6bd" VerticalAlignment="Center" Margin="10 0 0 0"/>
+
+            <Icon:PackIconMaterial Height="15" Width="15" Margin="40 0 0 0" Grid.Column="3">
+                <Icon:PackIconMaterial.Style>
+                    <Style TargetType="Icon:PackIconMaterial">
+                        <Setter Property="Kind" Value="ChevronUpCircle"/>
+                        <Setter Property="Foreground" Value="#19dc2d"/>
+
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=country,Path=IsLevelUp}" Value="True">
+                                <Setter Property="Kind" Value="ArrowRightTop"/>
+                                <Setter Property="Foreground" Value="#19dc2d"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding ElementName=country,Path=IsLevelUp}" Value="True">
+                                <Setter Property="Kind" Value="ArrowRightTop"/>
+                                <Setter Property="Foreground" Value="#f72353"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Icon:PackIconMaterial.Style>
+            </Icon:PackIconMaterial>
+
+            <Icon:PackIconMaterial Kind="DotsVertical" Foreground="#efefef" Height="15" Width="15" Grid.Column="4" Margin="35 0 3 0"/>
+        </Grid>
+    </ListViewItem>
+</UserControl>
