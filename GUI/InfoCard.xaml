@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="GUI.InfoCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GUI" xmlns:Icon="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
+             Name="infoCard">
+    <Border Margin="0 0 0 20">
+        <Border.Style>
+            <Style TargetType="Border" BasedOn="{StaticResource mainBorder}">
+                <Setter Property="BorderThickness" Value="1.5"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="BorderBrush" Value="#7166f9"/>
+                    </Trigger>
+
+                    <DataTrigger Binding="{Binding ElementName=infoCard,Path=IsActive}" Value="True">
+                        <Setter Property="BorderBrush" Value="#7166f9"/>
+                    </DataTrigger>
+                </Style.Triggers>
+
+            </Style>
+        </Border.Style>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding ElementName=infoCard,Path=Number}" Foreground="#f3f3f3" FontSize="26" FontWeight="Bold" VerticalAlignment="Center" Margin="10 0 40 0"/>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock FontSize="13">
+                    <TextBlock.Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="#7166f9"/>
+
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=infoCard,Path=IsTechnical}" Value="True">
+                                    <Setter Property="Foreground" Value="#7166f9"/>
+                                    <Setter Property="Text" Value="Technical Hiring"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding ElementName=infoCard,Path=IsTechnical}" Value="False">
+                                    <Setter Property="Foreground" Value="#b23157"/>
+                                    <Setter Property="Text" Value="Non-Technical Hiring"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <TextBlock Text="{Binding ElementName=infoCard,Path=Title}" Foreground="#dfe1e3" FontSize="16" Margin="0 5 0 0" FontWeight="SemiBold"/>
+            </StackPanel>
+
+            <Icon:PackIconMaterial Kind="ArrowRight" Grid.Column="2" Foreground="#dfe1e3" Height="17" Width="17" VerticalAlignment="Center" Margin="0 0 10 0"/>
+        </Grid>
+    </Border>
+</UserControl>
