@@ -1,19 +1,104 @@
 ﻿<Window x:Class="GUI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:uc="clr-namespace:GUI"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize" 
         AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVis"/>
+    </Window.Resources>
+        
     <Border Background="#cfd5e5" CornerRadius="40"  BorderThickness="2" BorderBrush="#ebedf3"
             Padding="20" MouseDown="Border_MouseDown">
 
-        <Border CornerRadius="40">
-            <Border.Background>
-                <LinearGradientBrush>
-                    <GradientStop Color="#fefefe" Offset="0"/>
-                    <GradientStop Color="#ededef" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-        </Border>
+        <Border CornerRadius="25" Background="#151f2d" MouseDown="Border_MouseDown">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--Left Menu-->
+                <Border Grid.RowSpan="3" Background="#1e2e44" CornerRadius="25 0 0 25">
+                    <Grid>
+                        <StackPanel VerticalAlignment="Top">
+                            <!--Ellipses-->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 40">
+                                <Ellipse Width="8" Height="8" Fill="#eb1700"/>
+                                <Ellipse Width="8" Height="8" Fill="#ffaf01" Margin="7 0"/>
+                                <Ellipse Width="8" Height="8" Fill="#009d00"/>
+                            </StackPanel>
+
+                            <!--Menu Button-->
+                            <uc:Menubutton Icon="HomeVariant" IsActive="True"/>
+                            <uc:Menubutton Icon="Finance"/>
+                            <uc:Menubutton Icon="CommentMultipleOutline"/>
+                            <uc:Menubutton Icon="AccountSearchOutline"/>
+                            <uc:Menubutton Icon="BookSyncOutline"/>
+                            <uc:Menubutton Icon="AlertCircleCheckOutline"/>
+                            <uc:Menubutton Icon="CogOutline"/>
+                        </StackPanel>
+
+                        <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin="0 0 0 15"/>
+
+                    </Grid>
+                </Border>
+                
+                <!--Top Menu-->
+                <Grid Grid.Column="1" Margin="30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Search TextBox-->
+                    <Grid>
+                        <TextBlock Margin="40 0 15 0" VerticalAlignment="Center" Foreground="#9ea4ad" Panel.ZIndex="1"
+                                   IsHitTestVisible="False" Text="Search here ..."
+                                   Visibility="{Binding ElementName=textBox,Path=Text.IsEmpty,Converter={StaticResource boolToVis}}"/>
+
+                        <TextBox x:Name="textBox" Style="{StaticResource searchTextBox}"/>
+
+                        <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center"  Foreground="#9ea4ad" Margin="15 0 0 0" HorizontalAlignment="Left"/>
+                        
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="20 0 0 0">
+                        <Button Style="{StaticResource topMenuButton}">
+                            <Icon:PackIconMaterial Kind="Bell" Style="{StaticResource topMenuButtonIcon}"/>
+                        </Button>
+
+                        <Button Style="{StaticResource topMenuButton}">
+                            <Icon:PackIconMaterial Kind="Bookmark" Style="{StaticResource topMenuButtonIcon}"/>
+                        </Button>
+
+                        <Button Style="{StaticResource topMenuButton}" Background="#1e2e44">
+                            <Icon:PackIconMaterial Kind="Account" Style="{StaticResource topMenuButtonIcon}"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+                
+                <!--Middle Top Section-->
+                <Grid Grid.Row="1" Grid.Column="1" Margin="20 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <!--Info Cards Left-->
+                    
+                    <!--Info Cards Right-->
+                </Grid>
+            </Grid>
+        </Border>
     </Border>
 </Window>
