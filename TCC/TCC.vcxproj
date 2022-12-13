@@ -18,6 +18,45 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="AirThreatScenario.h" />
+    <ClInclude Include="ATS.h" />
+    <ClInclude Include="IMode.h" />
+    <ClInclude Include="MissileScenario.h" />
+    <ClInclude Include="MSS.h" />
+    <ClInclude Include="M_DONE.h" />
+    <ClInclude Include="M_IDLE.h" />
+    <ClInclude Include="M_OPERATION.h" />
+    <ClInclude Include="M_PAUSE.h" />
+    <ClInclude Include="M_STBY.h" />
+    <ClInclude Include="Position.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="Scenario.h" />
+    <ClInclude Include="ScenarioManager.h" />
+    <ClInclude Include="Simulator.h" />
+    <ClInclude Include="TCC.h" />
+    <ClInclude Include="UDP.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="AirThreatScenario.cpp" />
+    <ClCompile Include="ATS.cpp" />
+    <ClCompile Include="IMode.cpp" />
+    <ClCompile Include="MissileScenario.cpp" />
+    <ClCompile Include="MSS.cpp" />
+    <ClCompile Include="M_DONE.cpp" />
+    <ClCompile Include="M_IDLE.cpp" />
+    <ClCompile Include="M_OPERATION.cpp" />
+    <ClCompile Include="M_PAUSE.cpp" />
+    <ClCompile Include="M_STBY.cpp" />
+    <ClCompile Include="Scenario.cpp" />
+    <ClCompile Include="ScenarioManager.cpp" />
+    <ClCompile Include="Simulator.cpp" />
+    <ClCompile Include="TCC.cpp" />
+    <ClCompile Include="UDP.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TCC.rc" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
