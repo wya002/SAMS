@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinystr.h" />
+    <ClInclude Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxml.h" />
     <ClInclude Include="AirThreatScenario.h" />
     <ClInclude Include="ATS.h" />
     <ClInclude Include="IMode.h" />
@@ -38,6 +40,10 @@
     <ClInclude Include="UDP.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinystr.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxmlparser.cpp" />
     <ClCompile Include="AirThreatScenario.cpp" />
     <ClCompile Include="ATS.cpp" />
     <ClCompile Include="IMode.cpp" />

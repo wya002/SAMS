@@ -66,6 +66,12 @@
     <ClInclude Include="Position.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinystr.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxml.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TCC.cpp">
@@ -112,6 +118,18 @@
     </ClCompile>
     <ClCompile Include="M_PAUSE.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxml.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxmlerror.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxmlparser.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinystr.cpp">
+      <Filter>헤더 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

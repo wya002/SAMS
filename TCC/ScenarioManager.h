@@ -4,6 +4,7 @@
 class ScenarioManager
 {
 public :
+	ScenarioManager() {};
 	void save();
 	void load();
 	void getAirThreatScenario();
