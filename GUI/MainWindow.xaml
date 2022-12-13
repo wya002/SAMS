@@ -30,7 +30,7 @@
                 <Grid>
                     <StackPanel VerticalAlignment="Top">
                         <!--Ellipses-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 40">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 20">
                             <Ellipse Width="8" Height="8" Fill="#eb1700"/>
                             <Ellipse Width="8" Height="8" Fill="#ffaf01" Margin="7 0"/>
                             <Ellipse Width="8" Height="8" Fill="#009d00"/>

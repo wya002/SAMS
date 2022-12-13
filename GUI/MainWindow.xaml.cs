@@ -14,6 +14,7 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
+            WindowState = WindowState.Maximized;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)

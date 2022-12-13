@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GUI"
       xmlns:uc="clr-namespace:GUI"
-      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+      xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material"
       mc:Ignorable="d" 
       Height="760" Width="1280" Background="Transparent"
       Title="ScenarioPage">
@@ -29,7 +29,7 @@
                 <Grid>
                     <StackPanel VerticalAlignment="Top">
                         <!--Ellipses-->
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 40">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 20">
                             <Ellipse Width="8" Height="8" Fill="#eb1700"/>
                             <Ellipse Width="8" Height="8" Fill="#ffaf01" Margin="7 0"/>
                             <Ellipse Width="8" Height="8" Fill="#009d00"/>
@@ -52,6 +52,9 @@
                         <!--시작-->
                         <uc:Menubutton Icon="Play"/>
                         <TextBlock Text="시나리오 시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--일시정지-->
+                        <uc:Menubutton Icon="Pause"/>
+                        <TextBlock Text="시나리오 일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--중지-->
                         <uc:Menubutton Icon="Stop"/>
                         <TextBlock Text="시나리오 중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
@@ -71,10 +74,9 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!--Scenario Section-->
-                <Border Style="{StaticResource mainBorder}" Margin="30 0 20 30" Grid.ColumnSpan="1" Grid.RowSpan="2">
-                    <Grid>
-                    </Grid>
+                <!--지도 칸-->
+                <Border Style="{StaticResource mainBorder}" Margin="30,0,20,0" Height="705" VerticalAlignment="Top" Grid.RowSpan="2">
+                    <Image Source="map.jpg" Stretch="UniformToFill" VerticalAlignment="Bottom" Visibility="Visible"/>
                 </Border>
 
                 <!--연동 확인 칸-->
@@ -86,25 +88,189 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <!--ATS 운용 상태-->
-                        <uc:Menubutton Icon="Circle" Foreground="Green"  Grid.Column="0" Margin="0 0 0 -10" Loaded="Menubutton_Loaded"/>
-                        <!--ATS 운용 상태-->
-                        <TextBlock Text="ATS" Grid.Column="0" TextAlignment="Center" Foreground="White"/>
+                        <StackPanel Grid.Column="0" Margin="0 0 15 0">
+                            <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
+                            <iconPacks:PackIconMaterial Kind="PowerPlug"  Foreground="ForestGreen" HorizontalAlignment="Center" 
+                                                        Height="30" Width="30" Margin="0 15 0 0"/>
+                        </StackPanel>
+
                         <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#151f2d"/>
                         <!--MSS 운용 상태-->
-                        <TextBlock Text="MSS" Grid.Column="2" TextAlignment="Center" Foreground="White"/>
-                        <uc:Menubutton Icon="Circle" Foreground="Red" Grid.Column="2" Margin="0 0 0 -10"/>
+                        <StackPanel Grid.Column="2" Margin="15 0 0 0">
+                            <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
+                            <iconPacks:PackIconMaterial Kind="PowerPlugOff"  Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        Height="30" Width="30" Margin="0 15 0 0"/>
+                        </StackPanel>
                     </Grid>
                 </Border>
 
-                <!--Country Section-->
+                <!--정보 칸-->
                 <Border Style="{StaticResource mainBorder}" Margin="15,15,30,325" Grid.Column="1" Grid.Row="1">
-                    <Grid Margin="0,0,0,62">
+                    <Grid Grid.Row="6" Grid.Column="2" Background="#151f2d">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1">
+                            <TextBlock Text="Attribute" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                            <TextBlock Text="Content" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                            <TextBlock Text="ATS information" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                            <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border BorderBrush="#1e2e44" BorderThickness="1">
+                                    <TextBlock Text="X" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                                    <TextBlock Text="Y" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                                    <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                    <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="2">
+                            <TextBlock Text="MSS information" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="2" Grid.Column="2">
+                            <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1">
+                                        <TextBlock Text="X" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                                        <TextBlock Text="Y" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3">
+                            <TextBlock Text="Mode" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3" Grid.Column="3">
+                            <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4">
+                            <TextBlock Text="Scenario Information" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="4">
+                            <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1">
+                                        <TextBlock Text="X" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                                        <TextBlock Text="Y" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="5">
+                            <TextBlock Text="Radar Performance" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="5" Grid.Column="5">
+                            <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
                     </Grid>
                 </Border>
 
-                <!--Country Section-->
+                <!--안내 메시지 및 발사 버튼-->
                 <Border Style="{StaticResource mainBorder}" Margin="15,325,30,30" Grid.Column="1" Grid.Row="1">
-                    <Grid>
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="#151f2d"/>
+                        <Button Grid.Row="1" Background="Green">
+                            <TextBlock Text="LAUNCH" FontSize="15" Foreground="White"/>
+                        </Button>
                     </Grid>
                 </Border>
             </Grid>
