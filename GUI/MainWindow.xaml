@@ -78,7 +78,34 @@
 
                 <!--지도 칸-->
                 <Border Style="{StaticResource mainBorder}" Margin="30,0,20,0" Height="705" VerticalAlignment="Top" Grid.RowSpan="2">
-                    <Image Source="map5.png" Stretch="Fill"/>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="600"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Image x:Name="mapImage" Source="map5.png" Stretch="Fill" MouseDown="mapImage_MouseDown" 
+                               Margin="0 0 0 -20" Grid.Row="0" Grid.ColumnSpan="3"/>
+                        <!--시나리오 좌표 조정 버튼 1-->
+                        <uc:Menubutton Icon="RadioboxBlank" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                       Margin="0,12,0,0"/>
+                        <TextBlock Text="ATS Start Point" Grid.Row="1"  Foreground="White" HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top" Margin="145,35,0,0"/>
+                        <!--시나리오 좌표 조정 버튼 2-->
+                        <uc:Menubutton Icon="RadioboxBlank" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"
+                                       Margin="0,12,0,0" Grid.Column="1"/>
+                        <TextBlock Text="ATS End Point" Grid.Row="1"  Foreground="White" HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top" Margin="25,35,0,0" Grid.Column="1"/>
+                        <!--시나리오 좌표 조정 버튼 3-->
+                        <uc:Menubutton Icon="RadioboxBlank" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                       Margin="0,12,0,0" Grid.Column="2"/>
+                        <TextBlock Text="MSS Point" Grid.Row="1" Foreground="White" HorizontalAlignment="Left" 
+                                   VerticalAlignment="Top" Margin="-70,35,0,0" Grid.Column="2"/>
+                    </Grid>
                 </Border>
 
                 <!--연동 확인 칸-->
@@ -163,7 +190,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                                    <TextBlock Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSY1" Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
 
@@ -176,11 +203,11 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="2" Grid.Row="1">
-                                    <TextBlock Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSX2" Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="3" Grid.Row="1">
-                                    <TextBlock Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSY2" Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
 
@@ -213,11 +240,11 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                     <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
-                                        <TextBlock Text="-" Foreground="White"
+                                        <TextBlock x:Name="MSSX" Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                     <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                                        <TextBlock Text="-" Foreground="White"
+                                        <TextBlock x:Name="MSSY" Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </Grid>
@@ -291,7 +318,7 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Background="#151f2d" Margin="0 0 0 20">
                             <Border BorderBrush="#1e2e44" BorderThickness="20" CornerRadius="5 5 5 5">
-                                
+
                             </Border>
                         </Grid>
 

@@ -84,10 +84,16 @@ namespace GUI
                 }
             }
         }
-
-        private void XmlParse()
+        private void mapImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
+            Point ClickPos = e.GetPosition((IInputElement)sender);
+
+            int ClickX = (int)ClickPos.X;
+            int ClickY = (int)ClickPos.Y;
+
+            string beforeX1 = ATSX1.Text;
+            string beforeY1 = ATSY1.Text;
         }
     }
 }

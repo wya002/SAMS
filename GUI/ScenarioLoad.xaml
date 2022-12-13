@@ -50,7 +50,7 @@
                                 <Setter Property="Background" Value="#1e2e44"/>
                                 <Style.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="#FF055D05"/>
+                                        <Setter Property="Background" Value="#151f2d"/>
                                     </Trigger>
                                 </Style.Triggers>
                             </Style>
@@ -67,7 +67,7 @@
                     </DataGrid>
 
                     <Grid Grid.Row="1" Margin="20 0 20 20" Background="#151f2d">
-                        <TextBlock x:Name="previewFile" Text="-" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10"/>
+                        <TextBlock x:Name="previewFile" Text="" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10"/>
                     </Grid>
                 </Grid>
             </Border>
