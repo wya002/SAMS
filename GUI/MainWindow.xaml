@@ -1,16 +1,17 @@
-﻿<Window x:Class="GUI.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:uc="clr-namespace:GUI"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="GUI.MainWindow"
         Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize" 
         AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVis"/>
     </Window.Resources>
-    
+
     <Border CornerRadius="25" Background="#151f2d" MouseDown="Border_MouseDown">
         <Grid>
             <Grid.ColumnDefinitions>
@@ -23,7 +24,7 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            
+
             <!--Left Menu-->
             <Border Grid.RowSpan="3" Background="#1e2e44" CornerRadius="25 0 0 25">
                 <Grid>
@@ -37,18 +38,14 @@
 
                         <!--Menu button-->
                         <uc:Menubutton Icon="HomeVariant" IsActive="True"/>
-                        <uc:Menubutton Icon="Finance"/>
-                        <uc:Menubutton Icon="CommentMultipleOutline"/>
-                        <uc:Menubutton Icon="AccountSearchOutline"/>
-                        <uc:Menubutton Icon="BookSyncOutline"/>
-                        <uc:Menubutton Icon="AlertCircleCheckOutline"/>
-                        <uc:Menubutton Icon="CogOutline"/>
+                        <TextBlock Text="홈" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <uc:Menubutton Icon="File" Mouse.LostMouseCapture="Menubutton_LostMouseCapture"/>
+                        <TextBlock Text="시나리오 모의" TextAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
-
-                    <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15"/>
+                    <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" Mouse.LostMouseCapture="Menubutton_MouseEnter"/>
                 </Grid>
             </Border>
-            
+
             <!--Top Menu-->
             <Grid Grid.Column="1" Margin="30">
                 <Grid.ColumnDefinitions>
@@ -60,29 +57,29 @@
                 <Grid>
                     <TextBlock Margin="40 0 15 0" VerticalAlignment="Center" Foreground="#9ea4ad" Panel.ZIndex="1"
                                IsHitTestVisible="False" Text="Search here ..."
-                               Visibility="{Binding ElementName=textBox,Path=Text.IsEmpty,Converter={StaticResource boolToVis}}"/>
+                               Visibility="{Binding Text.IsEmpty, Converter={StaticResource boolToVis}, ElementName=textBox}"/>
 
                     <TextBox x:Name="textBox" Style="{StaticResource searchTextBox}"/>
-                    
+
                     <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Foreground="#9ea4ad" Margin="15 0 0 0"/>
                 </Grid>
-                
+
                 <!--Button-->
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="20 0 0 0">
                     <Button Style="{StaticResource topMenuButton}">
                         <Icon:PackIconMaterial Kind="Bell" Style="{StaticResource topMenuButtonIcon}"/>
                     </Button>
-                    
+
                     <Button Style="{StaticResource topMenuButton}">
                         <Icon:PackIconMaterial Kind="Bookmark" Style="{StaticResource topMenuButtonIcon}"/>
                     </Button>
-                    
+
                     <Button Style="{StaticResource topMenuButton}" Background="#1e2e44">
                         <Icon:PackIconMaterial Kind="Account" Style="{StaticResource topMenuButtonIcon}"/>
                     </Button>
                 </StackPanel>
             </Grid>
-            
+
             <!--Middle Top Section-->
             <Grid Grid.Row="1" Grid.Column="1" Margin="20 0">
                 <Grid.ColumnDefinitions>
@@ -90,32 +87,32 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!--Info Cards Left-->
                 <StackPanel Margin="10 0">
                     <uc:InfoCard Number="18" Title="Average Days to Hire" IsTechnical="True"/>
                     <uc:InfoCard Number="54" Title="Average Days to Fill" IsTechnical="True"/>
                     <uc:InfoCard Number="98" Title="Offer Acceptance Rate" IsTechnical="True"/>
                 </StackPanel>
-                
+
                 <!--Info Cards Right-->
                 <StackPanel Margin="10 0" Grid.Column="1">
                     <uc:InfoCard Number="23" Title="Average Days to Hire" IsTechnical="False"/>
                     <uc:InfoCard Number="27" Title="Average Days to Fill" IsTechnical="False"/>
                     <uc:InfoCard Number="99" Title="Offer Acceptance Rate" IsTechnical="False"/>
                 </StackPanel>
-                
+
                 <!--Cost Section-->
                 <Border Grid.Column="2" Style="{StaticResource mainBorder}" Margin="10 0 10 21.5">
                     <Grid>
                         <!--Title-->
                         <TextBlock Text="Recruitment Costs YTD" Style="{StaticResource titleText}"/>
-                        
+
                         <!--Filter Button-->
                         <Button Style="{StaticResource titleButton}" Margin="0 -3 0 0">
                             <Icon:PackIconMaterial Kind="Tune" Style="{StaticResource topMenuButtonIcon}"/>
                         </Button>
-                        
+
                         <!--Legends-->
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 45 0 0">
                             <Border Width="12" Height="12" Background="#7166f9" CornerRadius="3"/>
@@ -124,7 +121,7 @@
                             <Border Width="12" Height="12" Background="#101a28" CornerRadius="3"/>
                             <TextBlock Text="Cases Sales" VerticalAlignment="Center" Margin="7 0 20 0" Foreground="#d4d6d9"/>
                         </StackPanel>
-                        
+
                         <!--Cost Chart-->
                         <lvc:CartesianChart LegendLocation="None" Margin="0 40 0 0">
                             <lvc:CartesianChart.DataTooltip>
@@ -155,14 +152,14 @@
                     </Grid>
                 </Border>
             </Grid>
-            
+
             <!--Middle Bottom Section-->
             <Grid Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="450"/>
                 </Grid.ColumnDefinitions>
-                
+
                 <!--Hire Section-->
                 <Border Style="{StaticResource mainBorder}" Margin="30 0 20 30">
                     <Grid>
@@ -179,7 +176,7 @@
                             <Border Width="12" Height="12" Background="#7166f9" CornerRadius="3"/>
                             <TextBlock Text="Marketing" VerticalAlignment="Center" Margin="7 0 20 0" Foreground="#d4d6d9"/>
                         </StackPanel>
-                        
+
                         <!--Hire chart-->
                         <lvc:CartesianChart LegendLocation="None" Margin="0 50 0 0">
                             <lvc:CartesianChart.DataTooltip>
@@ -216,7 +213,7 @@
                         </lvc:CartesianChart>
                     </Grid>
                 </Border>
-                
+
                 <!--Country Section-->
                 <Border Style="{StaticResource mainBorder}" Margin="0 0 30 30" Grid.Column="1">
                     <Grid>
@@ -227,7 +224,7 @@
                         <Button Style="{StaticResource titleButton}" Margin="0 -3 0 0">
                             <Icon:PackIconMaterial Kind="Tune" Style="{StaticResource topMenuButtonIcon}"/>
                         </Button>
-                        
+
                         <!--Country List View-->
                         <ListView Margin="0 50 0 0" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
                             <uc:Country CountryName="Germany" Price="$27,544.89" IsLevelUp="True"/>
