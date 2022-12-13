@@ -3,6 +3,9 @@
 
 class Scenario
 {
+public :
+	void setInitPosition(Position pos);
+	Position getInitPosition();
 private :
 	Position initPosition;
 };

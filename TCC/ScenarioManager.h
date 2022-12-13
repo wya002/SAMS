@@ -1,16 +1,19 @@
 #pragma once
 #include "Scenario.h"
+#include "AirThreatScenario.h"
+#include "MissileScenario.h"
 
 class ScenarioManager
 {
 public :
+	ScenarioManager() {};
 	void save();
 	void load();
-	void getAirThreatScenario();
+	void getAirThreatScenario(Scenario airThreatScenario);
 	void getMissileScenario();
-
+	
 private :
-	Scenario airThreatScenario;
-	Scenario missileScenario;
+	AirThreatScenario airThreatScenario;
+	MissileScenario missileScenario;
 };
 
