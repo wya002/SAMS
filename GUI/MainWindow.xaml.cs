@@ -1,7 +1,9 @@
 ﻿
 using System;
+using System.Timers;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace GUI
@@ -14,7 +16,6 @@ namespace GUI
         public MainWindow()
         {
             InitializeComponent();
-            WindowState = WindowState.Maximized;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -42,8 +43,12 @@ namespace GUI
         //시나리오 페이지 이동
         private void Menubutton_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            ScenarioPage scenepage = new ScenarioPage();
-            this.Content = scenepage;
+            Window.GetWindow(this).Close();
+        }
+
+        private void PackIconMaterial_Initialized(object sender, EventArgs e)
+        {
+
         }
     }
 }

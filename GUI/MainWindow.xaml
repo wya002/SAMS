@@ -4,8 +4,8 @@
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:uc="clr-namespace:GUI"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
-        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="GUI.MainWindow"
-        Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize" 
+        xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" mc:Ignorable="av" x:Class="GUI.MainWindow"
+        Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize"
         AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -16,7 +16,8 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="843*"/>
+                <ColumnDefinition Width="337*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -37,202 +38,239 @@
                         </StackPanel>
 
                         <!--Menu button-->
-                        <uc:Menubutton Icon="HomeVariant" IsActive="True"/>
-                        <TextBlock Text="홈" TextAlignment="Center" Foreground="White" FontSize="10"/>
-                        <uc:Menubutton Icon="File" Mouse.LostMouseCapture="Menubutton_LostMouseCapture"/>
+                        <uc:Menubutton Icon="File" IsActive="True" />
                         <TextBlock Text="시나리오 모의" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--파일 저장-->
+                        <uc:Menubutton Icon="FileCheck"/>
+                        <TextBlock Text="시나리오 저장" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--불러 오기-->
+                        <uc:Menubutton Icon="FileDownload"/>
+                        <TextBlock Text="시나리오 불러오기" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--배포-->
+                        <uc:Menubutton Icon="Share"/>
+                        <TextBlock Text="시나리오 배포" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--시작-->
+                        <uc:Menubutton Icon="Play"/>
+                        <TextBlock Text="시나리오 시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--일시정지-->
+                        <uc:Menubutton Icon="Pause"/>
+                        <TextBlock Text="시나리오 일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--중지-->
+                        <uc:Menubutton Icon="Stop"/>
+                        <TextBlock Text="시나리오 중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
-                    <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" Mouse.LostMouseCapture="Menubutton_MouseEnter"/>
+                    <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" LostMouseCapture="Menubutton_LostMouseCapture" />
                 </Grid>
             </Border>
 
-            <!--Top Menu-->
-            <Grid Grid.Column="1" Margin="30">
+            <!--Middle Section-->
+            <Grid Grid.Row="2" Grid.Column="1" Margin="0 30 0 0" Grid.ColumnSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52*"/>
+                    <RowDefinition Height="313*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-
-                <!--Search Textbox-->
-                <Grid>
-                    <TextBlock Margin="40 0 15 0" VerticalAlignment="Center" Foreground="#9ea4ad" Panel.ZIndex="1"
-                               IsHitTestVisible="False" Text="Search here ..."
-                               Visibility="{Binding Text.IsEmpty, Converter={StaticResource boolToVis}, ElementName=textBox}"/>
-
-                    <TextBox x:Name="textBox" Style="{StaticResource searchTextBox}"/>
-
-                    <Icon:PackIconMaterial Kind="Magnify" Width="15" Height="15" VerticalAlignment="Center" Foreground="#9ea4ad" Margin="15 0 0 0"/>
-                </Grid>
-
-                <!--Button-->
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Margin="20 0 0 0">
-                    <Button Style="{StaticResource topMenuButton}">
-                        <Icon:PackIconMaterial Kind="Bell" Style="{StaticResource topMenuButtonIcon}"/>
-                    </Button>
-
-                    <Button Style="{StaticResource topMenuButton}">
-                        <Icon:PackIconMaterial Kind="Bookmark" Style="{StaticResource topMenuButtonIcon}"/>
-                    </Button>
-
-                    <Button Style="{StaticResource topMenuButton}" Background="#1e2e44">
-                        <Icon:PackIconMaterial Kind="Account" Style="{StaticResource topMenuButtonIcon}"/>
-                    </Button>
-                </StackPanel>
-            </Grid>
-
-            <!--Middle Top Section-->
-            <Grid Grid.Row="1" Grid.Column="1" Margin="20 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="850"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <!--Info Cards Left-->
-                <StackPanel Margin="10 0">
-                    <uc:InfoCard Number="18" Title="Average Days to Hire" IsTechnical="True"/>
-                    <uc:InfoCard Number="54" Title="Average Days to Fill" IsTechnical="True"/>
-                    <uc:InfoCard Number="98" Title="Offer Acceptance Rate" IsTechnical="True"/>
-                </StackPanel>
-
-                <!--Info Cards Right-->
-                <StackPanel Margin="10 0" Grid.Column="1">
-                    <uc:InfoCard Number="23" Title="Average Days to Hire" IsTechnical="False"/>
-                    <uc:InfoCard Number="27" Title="Average Days to Fill" IsTechnical="False"/>
-                    <uc:InfoCard Number="99" Title="Offer Acceptance Rate" IsTechnical="False"/>
-                </StackPanel>
-
-                <!--Cost Section-->
-                <Border Grid.Column="2" Style="{StaticResource mainBorder}" Margin="10 0 10 21.5">
-                    <Grid>
-                        <!--Title-->
-                        <TextBlock Text="Recruitment Costs YTD" Style="{StaticResource titleText}"/>
-
-                        <!--Filter Button-->
-                        <Button Style="{StaticResource titleButton}" Margin="0 -3 0 0">
-                            <Icon:PackIconMaterial Kind="Tune" Style="{StaticResource topMenuButtonIcon}"/>
-                        </Button>
-
-                        <!--Legends-->
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 45 0 0">
-                            <Border Width="12" Height="12" Background="#7166f9" CornerRadius="3"/>
-                            <TextBlock Text="Marketing" VerticalAlignment="Center" Margin="7 0 20 0" Foreground="#d4d6d9"/>
-
-                            <Border Width="12" Height="12" Background="#101a28" CornerRadius="3"/>
-                            <TextBlock Text="Cases Sales" VerticalAlignment="Center" Margin="7 0 20 0" Foreground="#d4d6d9"/>
-                        </StackPanel>
-
-                        <!--Cost Chart-->
-                        <lvc:CartesianChart LegendLocation="None" Margin="0 40 0 0">
-                            <lvc:CartesianChart.DataTooltip>
-                                <lvc:DefaultTooltip Background="#24336a" Foreground="#d5e2ff"/>
-                            </lvc:CartesianChart.DataTooltip>
-
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Foreground="#bcc0c6" ShowLabels="True" Labels="Jan,Feb,Mar,Apr,May,Jun,Jul,Aug">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator StrokeThickness="0"/>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Foreground="#bcc0c6" ShowLabels="True" MinValue="0" MaxValue="30">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator StrokeThickness="0"/>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-
-                            <lvc:CartesianChart.Series>
-                                <lvc:StackedColumnSeries Fill="#7166f9" MaxColumnWidth="15" Values="11,13,17,20,17,15,16,13"/>
-                                <lvc:StackedColumnSeries Fill="#101a28" MaxColumnWidth="15" Values="6,5,6,4,6,6,7,6"/>
-                            </lvc:CartesianChart.Series>
-                        </lvc:CartesianChart>
-                    </Grid>
+                <!--지도 칸-->
+                <Border Style="{StaticResource mainBorder}" Margin="30,0,20,0" Height="705" VerticalAlignment="Top" Grid.RowSpan="2">
+                    <Image Source="map.jpg" Stretch="UniformToFill" VerticalAlignment="Bottom" Visibility="Visible"/>
                 </Border>
-            </Grid>
 
-            <!--Middle Bottom Section-->
-            <Grid Grid.Row="2" Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="450"/>
-                </Grid.ColumnDefinitions>
-
-                <!--Hire Section-->
-                <Border Style="{StaticResource mainBorder}" Margin="30 0 20 30">
-                    <Grid>
-                        <!--Title-->
-                        <TextBlock Text="Top Hiring Sources" Style="{StaticResource titleText}"/>
-
-                        <!--Filter Button-->
-                        <Button Style="{StaticResource titleButton}">
-                            <Icon:PackIconMaterial Kind="Tune" Style="{StaticResource topMenuButtonIcon}"/>
-                        </Button>
-
-                        <!--Legends-->
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 8 40 0">
-                            <Border Width="12" Height="12" Background="#7166f9" CornerRadius="3"/>
-                            <TextBlock Text="Marketing" VerticalAlignment="Center" Margin="7 0 20 0" Foreground="#d4d6d9"/>
+                <!--연동 확인 칸-->
+                <Border Style="{StaticResource mainBorder}" Margin="15,0,30,6" Grid.Column="1">
+                    <Grid Grid.Column = "3" Margin="0,-11,0,-11">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <!--ATS 운용 상태-->
+                        <StackPanel Grid.Column="0" Margin="0 0 15 0">
+                            <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
+                            <iconPacks:PackIconMaterial Kind="PowerPlug"  Foreground="ForestGreen" HorizontalAlignment="Center" 
+                                                        Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized"/>
                         </StackPanel>
 
-                        <!--Hire chart-->
-                        <lvc:CartesianChart LegendLocation="None" Margin="0 50 0 0">
-                            <lvc:CartesianChart.DataTooltip>
-                                <lvc:DefaultTooltip Background="#101a28" Foreground="#d5e2ff"/>
-                            </lvc:CartesianChart.DataTooltip>
-
-                            <lvc:CartesianChart.AxisX>
-                                <lvc:Axis Foreground="#bcc0c6" ShowLabels="True" Labels="Direct, , , ,We War..., , , ,Linkedin, , , ,Hired, , , ,WorkIn..., , , ,Instagram, , , ,Referral...">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator StrokeThickness="0" Step="4"/>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisX>
-
-                            <lvc:CartesianChart.AxisY>
-                                <lvc:Axis Foreground="#bcc0c6" ShowLabels="True" MinValue="0" MaxValue="100">
-                                    <lvc:Axis.Separator>
-                                        <lvc:Separator StrokeThickness="1" Stroke="#2c3a54"/>
-                                    </lvc:Axis.Separator>
-                                </lvc:Axis>
-                            </lvc:CartesianChart.AxisY>
-
-                            <lvc:CartesianChart.Series>
-                                <lvc:LineSeries StrokeThickness="2" Stroke="#6860e6" PointGeometrySize= "0"
-                                                Values="60,50,65,66,70,40,43,40,50,45,75,70,85,70,73,80,55,83,75,35,55,60,65,70,60,65,40,42">
-                                    <lvc:LineSeries.Fill>
-                                        <LinearGradientBrush>
-                                            <GradientStop Color="#2e3966" Offset="0.4"/>
-                                            <GradientStop Color="#2e3966" Offset="1.2"/>
-                                        </LinearGradientBrush>
-                                    </lvc:LineSeries.Fill>
-                                </lvc:LineSeries>
-                            </lvc:CartesianChart.Series>
-                        </lvc:CartesianChart>
+                        <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#151f2d"/>
+                        <!--MSS 운용 상태-->
+                        <StackPanel Grid.Column="2" Margin="15 0 0 0">
+                            <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
+                            <iconPacks:PackIconMaterial Kind="PowerPlugOff"  Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                        Height="30" Width="30" Margin="0 15 0 0"/>
+                        </StackPanel>
                     </Grid>
                 </Border>
 
-                <!--Country Section-->
-                <Border Style="{StaticResource mainBorder}" Margin="0 0 30 30" Grid.Column="1">
-                    <Grid>
-                        <!--Title-->
-                        <TextBlock Text="Top Countries" Style="{StaticResource titleText}"/>
+                <!--정보 칸-->
+                <Border Style="{StaticResource mainBorder}" Margin="15,15,30,325" Grid.Column="1" Grid.Row="1">
+                    <Grid Grid.Row="6" Grid.Column="2" Background="#151f2d">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
 
-                        <!--Filter Button-->
-                        <Button Style="{StaticResource titleButton}" Margin="0 -3 0 0">
-                            <Icon:PackIconMaterial Kind="Tune" Style="{StaticResource topMenuButtonIcon}"/>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1">
+                            <TextBlock Text="Attribute" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                            <TextBlock Text="Content" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                            <TextBlock Text="ATS information" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                            <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border BorderBrush="#1e2e44" BorderThickness="1">
+                                    <TextBlock Text="X" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                                    <TextBlock Text="Y" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                                    <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                    <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="2">
+                            <TextBlock Text="MSS information" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="2" Grid.Column="2">
+                            <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1">
+                                        <TextBlock Text="X" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                                        <TextBlock Text="Y" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3">
+                            <TextBlock Text="Mode" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3" Grid.Column="3">
+                            <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4">
+                            <TextBlock Text="Scenario Information" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="4">
+                            <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1">
+                                        <TextBlock Text="X" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
+                                        <TextBlock Text="Y" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
+                                        <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </Border>
+
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="5">
+                            <TextBlock Text="Radar Performance" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="5" Grid.Column="5">
+                            <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+
+                    </Grid>
+                </Border>
+
+                <!--안내 메시지 및 발사 버튼-->
+                <Border Style="{StaticResource mainBorder}" Margin="15,325,30,30" Grid.Column="1" Grid.Row="1">
+                    <Grid Grid.Row="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="60"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" Background="#151f2d"/>
+                        <Button Grid.Row="1" Background="Green">
+                            <TextBlock Text="LAUNCH" FontSize="15" Foreground="White"/>
                         </Button>
-
-                        <!--Country List View-->
-                        <ListView Margin="0 50 0 0" Background="Transparent" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-                            <uc:Country CountryName="Germany" Price="$27,544.89" IsLevelUp="True"/>
-                            <uc:Country CountryName="Russia"  Price="$19,548.23" IsLevelUp="True"/>
-                            <uc:Country CountryName="United States"  Price="$18,650.69" IsLevelUp="True"/>
-                            <uc:Country CountryName="India"  Price="$17,965.39" IsLevelUp="False"/>
-                            <uc:Country CountryName="Iran"  Price="$14,509.71" IsLevelUp="True"/>
-                        </ListView>
                     </Grid>
                 </Border>
             </Grid>
