@@ -1,14 +1,13 @@
 #include <iostream>
 #include "ATS.h"
+#include "tracking.h"
+#include "Missile.h"
 
-using namespace std;
+#include <chrono>
+#include <typeinfo>
 
 int main()
 {
-	ATS ats;
-	ats.setCurPos(3.23, 5.42);
-	double x = ats.getCurPos().x;
-	double y = ats.getCurPos().y;
-	cout << x << " " << y << endl;
+	
 	return 0;
 }
