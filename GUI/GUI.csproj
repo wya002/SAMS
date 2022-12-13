@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="map4.png" />
     <None Remove="map5.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,7 +21,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="map4.png" />
     <Resource Include="map5.png" />
   </ItemGroup>
 

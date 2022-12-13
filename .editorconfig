@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# CS2001: 'C:\Users\User\Source\Repos\wya002\SAMS\GUI\obj\Debug\net5.0-windows\ScenarioLoad.g.cs' 소스 파일을 찾을 수 없습니다.
+dotnet_diagnostic.CS2001.severity = error

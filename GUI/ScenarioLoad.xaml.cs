@@ -1,4 +1,5 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Data;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
@@ -28,12 +29,16 @@ namespace GUI
 
         private void Button_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            DirectoryInfo di = new DirectoryInfo("/C:Document/");
+            DirectoryInfo di = new DirectoryInfo("C:/Users/User/Scenario");
 
-            foreach (FileInfo File in di.GetFiles())
+            DataTable dataTable = new DataTable();
+            dataTable.Columns.Add("ScenarioName", typeof(string));
+
+            foreach (FileInfo File in di.GetFiles("*.xml"))
             {
-                
+                dataTable.Rows.Add(new string[] { File.Name.Substring(0, File.Name.Length-4)}) ;
             }
+            datagrid1.ItemsSource = dataTable.DefaultView;
         }
     }
 }

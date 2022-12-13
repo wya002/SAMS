@@ -37,9 +37,29 @@
 
             <!--시나리오 목록 출력-->
             <Border Background="#1e2e44" Grid.Row="1" Margin="20 20 20 30 " CornerRadius="25 25 25 25" Grid.ColumnSpan="2">
-                <Grid Background="#151f2d" Margin="20 20 20 20">
-
-                </Grid>
+                <DataGrid x:Name="datagrid1" Background="#151f2d" Margin="20 20 20 20" 
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnWidth="*" HeadersVisibility="None"
+                          AutoGenerateColumns="False" CanUserAddRows="False">
+                    <DataGrid.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background" Value="#1e2e44"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="Green"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.CellStyle>
+                    
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ScenarioName" Binding="{Binding Path=ScenarioName}" 
+                                            CanUserResize="False" IsReadOnly="True" Foreground="White">
+                            <DataGridTextColumn.HeaderStyle>
+                                <Style/>
+                            </DataGridTextColumn.HeaderStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
             </Border>
 
             <!--시나리오 정보 입력-->
