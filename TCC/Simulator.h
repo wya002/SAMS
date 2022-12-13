@@ -1,20 +1,23 @@
 #pragma once
 #include "Position.h"
+#include <string>
+
+using namespace std;
 
 class Simulator
 {
 public :
 	Simulator();
-	~Simulator();
 
-	int getIp();
-	void setCurPosition(Position pos);
+	string getIp();
 	void setInitPosition(Position pos);
-	Position getCurPosition();
+	void setCurPosition(Position pos);
 	Position getInitPosition();
+	Position getCurPosition();
 
-private :
-	int ip;
+protected :
+	string ip;
+	string port;
 	Position initPos;
 	Position curPos;
 };

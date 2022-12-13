@@ -1,12 +1,15 @@
 #pragma once
 #include "Simulator.h"
 
-class ATS : public Simulator
+class ATS : private Simulator
 {
 public :
-	Position getTargetPosition;
+	ATS();
+	ATS(string addr);
+	void setTargetPosition(Position pos);
+	Position getTargetPosition();
 
 private :
-	Position targetPosition;
+	Position targetPos;
 };
 

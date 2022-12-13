@@ -1,12 +1,13 @@
 #pragma once
 #include "ScenarioManager.h"
-//#include "ATS.h"
-//#include "MSS.h"
+#include "ATS.h"
+#include "MSS.h"
 #include "IMode.h"
 
 class TCC
 {
 public:
+	TCC();
 	static void setMode(IMode& mode);
 	void start();
 	void deploy();
@@ -18,7 +19,7 @@ public:
 private:
 	static IMode* mode;
 	ScenarioManager senarioManager;
-	//ATS ats;
-	//MSS mss;
+	ATS ats;
+	MSS mss;
 };
 

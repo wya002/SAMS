@@ -7,6 +7,12 @@ using namespace std;
 
 IMode* TCC::mode = &M_IDLE::getInstance();
 
+TCC::TCC()
+{
+	ats = ATS("192.168.0.100");
+	mss = MSS("192.168.0.200");
+}
+
 
 void TCC::setMode(IMode& m)
 { 
