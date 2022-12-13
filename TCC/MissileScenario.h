@@ -4,4 +4,3 @@
 class MissileScenario : public Scenario
 {
 };
-
