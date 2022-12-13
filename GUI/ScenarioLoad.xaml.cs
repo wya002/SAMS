@@ -40,5 +40,17 @@ namespace GUI
             }
             datagrid1.ItemsSource = dataTable.DefaultView;
         }
+
+        private void Button_LostMouseCapture_1(object sender, MouseEventArgs e)
+        {
+            Window.GetWindow(this).Close();
+        }
+
+        private void datagrid1_SelectedCellsChanged(object sender, System.Windows.Controls.SelectedCellsChangedEventArgs e)
+        {
+            DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
+            string path = @"C:\Users\User\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml";
+            previewFile.Text = File.ReadAllText(path);
+        }
     }
 }

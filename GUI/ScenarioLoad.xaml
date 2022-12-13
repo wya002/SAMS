@@ -37,35 +37,45 @@
 
             <!--시나리오 목록 출력-->
             <Border Background="#1e2e44" Grid.Row="1" Margin="20 20 20 30 " CornerRadius="0" Grid.ColumnSpan="2">
-                <DataGrid x:Name="datagrid1" Background="#151f2d" Margin="20 20 20 20" 
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="300"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="datagrid1" Background="#151f2d" Margin="20 20 20 20" 
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnWidth="*" HeadersVisibility="None"
-                          AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
-                    <DataGrid.CellStyle>
-                        <Style TargetType="DataGridCell">
-                            <Setter Property="Background" Value="#1e2e44"/>
-                            <Style.Triggers>
-                                <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#FF055D05"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.CellStyle>
-                    
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ScenarioName" Binding="{Binding Path=ScenarioName}" 
+                          AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single" SelectedCellsChanged="datagrid1_SelectedCellsChanged">
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Background" Value="#1e2e44"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#FF055D05"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="ScenarioName" Binding="{Binding Path=ScenarioName}" 
                                             CanUserResize="False" IsReadOnly="True" Foreground="White">
-                            <DataGridTextColumn.HeaderStyle>
-                                <Style/>
-                            </DataGridTextColumn.HeaderStyle>
-                        </DataGridTextColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
+                                <DataGridTextColumn.HeaderStyle>
+                                    <Style/>
+                                </DataGridTextColumn.HeaderStyle>
+                            </DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Grid Grid.Row="1" Margin="20 0 20 20" Background="#151f2d">
+                        <TextBlock x:Name="previewFile" Text="-" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="10"/>
+                    </Grid>
+                </Grid>
             </Border>
 
             <!--시나리오 정보 입력-->
             <Border Background="#1e2e44" Grid.Row="2" Grid.Column="0" Margin="20 10 10 40" CornerRadius="15">
                 <Grid>
-                    <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent">
+                    <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" LostMouseCapture="Button_LostMouseCapture_1">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -95,8 +105,6 @@
                     </Button>
                 </Grid>
             </Border>
-
-
         </Grid>
     </Border>
 </Window>
