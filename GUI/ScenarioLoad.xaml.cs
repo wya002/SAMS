@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Diagnostics;
+using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GUI
 {
@@ -22,6 +14,26 @@ namespace GUI
         public ScenarioLoad()
         {
             InitializeComponent();
+        }
+
+        private void Menubutton_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            Window.GetWindow(this).Close();
+        }
+
+        private void Button_MouseEnter(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void Button_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            DirectoryInfo di = new DirectoryInfo("/C:Document/");
+
+            foreach (FileInfo File in di.GetFiles())
+            {
+                
+            }
         }
     }
 }

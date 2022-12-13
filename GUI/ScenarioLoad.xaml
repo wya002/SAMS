@@ -3,10 +3,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:GUI"
+        xmlns:uc="clr-namespace:GUI"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         mc:Ignorable="d"
-        Title="ScenarioLoad" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Height="600" Width="640" Background="Transparent" ResizeMode="NoResize"
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+
+    <Border CornerRadius="25" Background="#151f2d">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="442*"/>
+                <RowDefinition Height="100"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!--상단 바-->
+            <Border Grid.ColumnSpan="2" Background="#1e2e44" CornerRadius="25 25 0 0" Grid.Row="0">
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="30 30 0 20">
+                    <Ellipse Width="8" Height="8" Fill="#eb1700"/>
+                    <Ellipse Width="8" Height="8" Fill="#ffaf01" Margin="7 0"/>
+                    <Ellipse Width="8" Height="8" Fill="#009d00"/>
+                </StackPanel>
+            </Border>
+            <TextBlock Text="시나리오 불러오기" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+            <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 50 0" LostMouseCapture="Menubutton_LostMouseCapture" 
+                           HorizontalAlignment="Right" Grid.ColumnSpan="2"/>
+
+            <!--시나리오 목록 출력-->
+            <Border Background="#1e2e44" Grid.Row="1" Margin="20 20 20 30 " CornerRadius="25 25 25 25" Grid.ColumnSpan="2">
+                <Grid Background="#151f2d" Margin="20 20 20 20">
+
+                </Grid>
+            </Border>
+
+            <!--시나리오 정보 입력-->
+            <Border Background="#1e2e44" Grid.Row="2" Grid.Column="0" Margin="20 10 10 40" CornerRadius="25 25 25 25">
+                <Grid>
+                    <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <uc:Menubutton Icon="Download" HorizontalAlignment="Center" Margin="0 -7 15 0"/>
+                            <TextBlock Text="시나리오 입력" HorizontalAlignment="left" VerticalAlignment="Center" Foreground="white"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!--시나리오 불러오기-->
+            <Border Background="#1e2e44" Grid.Row="2" Grid.Column="1" Margin="10 10 20 40" CornerRadius="25 25 25 25">
+                <Grid>
+                    <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" MouseEnter="Button_MouseEnter" LostMouseCapture="Button_LostMouseCapture">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="25"/>
+                            </Style>
+                        </Button.Resources>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <uc:Menubutton Icon="FileDownload" HorizontalAlignment="Center" Margin="0 -7 15 0"/>
+                            <TextBlock Text="시나리오 불러오기" HorizontalAlignment="left" VerticalAlignment="Center" Foreground="white"/>
+                        </StackPanel>
+                    </Button>
+                </Grid>
+            </Border>
+
+
+        </Grid>
+    </Border>
 </Window>

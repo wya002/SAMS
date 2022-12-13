@@ -39,25 +39,25 @@
 
                         <!--Menu button-->
                         <uc:Menubutton Icon="File" IsActive="True" />
-                        <TextBlock Text="시나리오 모의" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <TextBlock Text="메인" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--파일 저장-->
                         <uc:Menubutton Icon="FileCheck"/>
                         <TextBlock Text="시나리오 저장" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--불러 오기-->
-                        <uc:Menubutton Icon="FileDownload"/>
+                        <uc:Menubutton Icon="FileDownload" LostMouseCapture="Menubutton_LostMouseCapture_1"/>
                         <TextBlock Text="시나리오 불러오기" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--배포-->
                         <uc:Menubutton Icon="Share"/>
-                        <TextBlock Text="시나리오 배포" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <TextBlock Text="배포" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--시작-->
                         <uc:Menubutton Icon="Play"/>
-                        <TextBlock Text="시나리오 시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <TextBlock Text="시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--일시정지-->
                         <uc:Menubutton Icon="Pause"/>
-                        <TextBlock Text="시나리오 일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <TextBlock Text="일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--중지-->
                         <uc:Menubutton Icon="Stop"/>
-                        <TextBlock Text="시나리오 중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <TextBlock Text="중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                     <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" LostMouseCapture="Menubutton_LostMouseCapture" />
                 </Grid>
@@ -76,7 +76,7 @@
 
                 <!--지도 칸-->
                 <Border Style="{StaticResource mainBorder}" Margin="30,0,20,0" Height="705" VerticalAlignment="Top" Grid.RowSpan="2">
-                    <Image Source="map.jpg" Stretch="UniformToFill" VerticalAlignment="Bottom" Visibility="Visible"/>
+                    <Image Source="map5.png" Stretch="Fill"/>
                 </Border>
 
                 <!--연동 확인 칸-->
@@ -97,7 +97,7 @@
                         <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#151f2d"/>
                         <!--MSS 운용 상태-->
                         <StackPanel Grid.Column="2" Margin="15 0 0 0">
-                            <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
+                            <TextBlock Text="MSS" TextAlignment="Center" Foreground="White"/>
                             <iconPacks:PackIconMaterial Kind="PowerPlugOff"  Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                         Height="30" Width="30" Margin="0 15 0 0"/>
                         </StackPanel>
@@ -135,7 +135,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                            <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
+                            <Grid Grid.Row="2" Grid.Column="4" Background="#151f2d">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
@@ -144,14 +144,16 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                                 </Grid.ColumnDefinitions>
 
                                 <Border BorderBrush="#1e2e44" BorderThickness="1">
-                                    <TextBlock Text="X" Foreground="White"
+                                    <TextBlock Text="X1" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
-                                    <TextBlock Text="Y" Foreground="White"
+                                    <TextBlock Text="Y1" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
@@ -162,6 +164,24 @@
                                     <TextBlock Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
+
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="2">
+                                    <TextBlock Text="X2" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="3">
+                                    <TextBlock Text="Y2" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="2" Grid.Row="1">
+                                    <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="3" Grid.Row="1">
+                                    <TextBlock Text="-" Foreground="White"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
                             </Grid>
                         </Border>
 
@@ -261,16 +281,27 @@
                 </Border>
 
                 <!--안내 메시지 및 발사 버튼-->
-                <Border Style="{StaticResource mainBorder}" Margin="15,325,30,30" Grid.Column="1" Grid.Row="1">
+                <Border Margin="15,325,30,25" Grid.Column="1" Grid.Row="1">
                     <Grid Grid.Row="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="60"/>
                         </Grid.RowDefinitions>
-                        <Grid Grid.Row="0" Background="#151f2d"/>
-                        <Button Grid.Row="1" Background="Green">
+                        <Grid Grid.Row="0" Background="#151f2d" Margin="0 0 0 20">
+                            <Border BorderBrush="#1e2e44" BorderThickness="20" CornerRadius="5 5 5 5">
+                                
+                            </Border>
+                        </Grid>
+
+                        <Button Grid.Row="1" Background="Green" Visibility="Hidden">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="15"/>
+                                </Style>
+                            </Button.Resources>
                             <TextBlock Text="LAUNCH" FontSize="15" Foreground="White"/>
                         </Button>
+                        <TextBlock Text="탐지 대기중.." Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="White"/>
                     </Grid>
                 </Border>
             </Grid>

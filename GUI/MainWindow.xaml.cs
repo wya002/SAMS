@@ -50,5 +50,11 @@ namespace GUI
         {
 
         }
+
+        private void Menubutton_LostMouseCapture_1(object sender, MouseEventArgs e)
+        {
+            ScenarioLoad load = new ScenarioLoad();
+            load.ShowDialog();
+        }
     }
 }
