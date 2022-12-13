@@ -31,21 +31,21 @@
                     <Ellipse Width="8" Height="8" Fill="#009d00"/>
                 </StackPanel>
             </Border>
-            <TextBlock Text="시나리오 불러오기" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"/>
+            <TextBlock Text="시나리오 매니저" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="15"/>
             <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 50 0" LostMouseCapture="Menubutton_LostMouseCapture" 
                            HorizontalAlignment="Right" Grid.ColumnSpan="2"/>
 
             <!--시나리오 목록 출력-->
-            <Border Background="#1e2e44" Grid.Row="1" Margin="20 20 20 30 " CornerRadius="25 25 25 25" Grid.ColumnSpan="2">
+            <Border Background="#1e2e44" Grid.Row="1" Margin="20 20 20 30 " CornerRadius="0" Grid.ColumnSpan="2">
                 <DataGrid x:Name="datagrid1" Background="#151f2d" Margin="20 20 20 20" 
                           HorizontalAlignment="Stretch" VerticalAlignment="Stretch" ColumnWidth="*" HeadersVisibility="None"
-                          AutoGenerateColumns="False" CanUserAddRows="False">
+                          AutoGenerateColumns="False" CanUserAddRows="False" SelectionMode="Single">
                     <DataGrid.CellStyle>
                         <Style TargetType="DataGridCell">
                             <Setter Property="Background" Value="#1e2e44"/>
                             <Style.Triggers>
                                 <Trigger Property="IsSelected" Value="True">
-                                    <Setter Property="Background" Value="Green"/>
+                                    <Setter Property="Background" Value="#FF055D05"/>
                                 </Trigger>
                             </Style.Triggers>
                         </Style>
@@ -63,12 +63,12 @@
             </Border>
 
             <!--시나리오 정보 입력-->
-            <Border Background="#1e2e44" Grid.Row="2" Grid.Column="0" Margin="20 10 10 40" CornerRadius="25 25 25 25">
+            <Border Background="#1e2e44" Grid.Row="2" Grid.Column="0" Margin="20 10 10 40" CornerRadius="15">
                 <Grid>
                     <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent">
                         <Button.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="25"/>
+                                <Setter Property="CornerRadius" Value="15"/>
                             </Style>
                         </Button.Resources>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -80,12 +80,12 @@
             </Border>
 
             <!--시나리오 불러오기-->
-            <Border Background="#1e2e44" Grid.Row="2" Grid.Column="1" Margin="10 10 20 40" CornerRadius="25 25 25 25">
+            <Border Background="#1e2e44" Grid.Row="2" Grid.Column="1" Margin="10 10 20 40" CornerRadius="15">
                 <Grid>
                     <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" MouseEnter="Button_MouseEnter" LostMouseCapture="Button_LostMouseCapture">
                         <Button.Resources>
                             <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="25"/>
+                                <Setter Property="CornerRadius" Value="15"/>
                             </Style>
                         </Button.Resources>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

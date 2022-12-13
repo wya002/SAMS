@@ -6,10 +6,12 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" mc:Ignorable="av" x:Class="GUI.MainWindow"
         Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize"
-        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen">
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
 
     <Window.Resources>
+
         <BooleanToVisibilityConverter x:Key="boolToVis"/>
+
     </Window.Resources>
 
     <Border CornerRadius="25" Background="#151f2d" MouseDown="Border_MouseDown">
@@ -41,7 +43,7 @@
                         <uc:Menubutton Icon="File" IsActive="True" />
                         <TextBlock Text="메인" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--파일 저장-->
-                        <uc:Menubutton Icon="FileCheck"/>
+                        <uc:Menubutton Icon="FileCheck" LostMouseCapture="Menubutton_LostMouseCapture_2"/>
                         <TextBlock Text="시나리오 저장" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--불러 오기-->
                         <uc:Menubutton Icon="FileDownload" LostMouseCapture="Menubutton_LostMouseCapture_1"/>
@@ -90,7 +92,7 @@
                         <!--ATS 운용 상태-->
                         <StackPanel Grid.Column="0" Margin="0 0 15 0">
                             <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
-                            <iconPacks:PackIconMaterial Kind="PowerPlug"  Foreground="ForestGreen" HorizontalAlignment="Center" 
+                            <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlug"  Foreground="ForestGreen" HorizontalAlignment="Center" 
                                                         Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized"/>
                         </StackPanel>
 
@@ -157,7 +159,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
-                                    <TextBlock Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSX1"  Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
@@ -227,7 +229,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3" Grid.Column="3">
-                            <TextBlock Text="-" Foreground="White"
+                            <TextBlock x:Name="mode" Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 

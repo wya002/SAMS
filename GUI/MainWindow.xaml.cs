@@ -1,10 +1,13 @@
 ﻿
+using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 
 namespace GUI
 {
@@ -13,6 +16,7 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
@@ -55,6 +59,30 @@ namespace GUI
         {
             ScenarioLoad load = new ScenarioLoad();
             load.ShowDialog();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Menubutton_LostMouseCapture_2(object sender, MouseEventArgs e)
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.InitialDirectory = @"C:\Users\User\Scenario";
+            dlg.FileName = "UnnamedScenario.xml"; // Default file name
+            dlg.DefaultExt = ".xml"; // Default file extension
+            dlg.Filter = "Scenario File (.xml)|*.xml"; // Filter files by extension
+
+            if(dlg.ShowDialog() == true)
+            {
+                string str = dlg.FileName;
+                if (!File.Exists(str))
+                {
+                    FileStream stream = File.Create(str);
+                    stream.Close();
+                }
+            }
         }
     }
 }
