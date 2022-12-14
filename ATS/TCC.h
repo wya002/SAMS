@@ -1,4 +1,5 @@
 #pragma once
+
 class TCC
 {
 public :
@@ -10,4 +11,5 @@ public :
 private:
 	const char* ip;
 	int port;
+	
 };
