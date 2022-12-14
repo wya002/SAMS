@@ -24,12 +24,6 @@
     <ClCompile Include="ATS.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="TCC.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="UDPSocket.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Launcher.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -37,6 +31,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TypeDef.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TCC.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="UDPSocket.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,12 +47,6 @@
     <ClInclude Include="ATS.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="TCC.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="UDPSocket.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Launcher.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -60,6 +54,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TypeDef.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TCC.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="UDPSocket.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

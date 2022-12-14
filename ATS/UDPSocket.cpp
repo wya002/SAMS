@@ -2,12 +2,6 @@
 
 #define	BUFSIZE	512
 
-#include <thread>
-#include <chrono>
-#include <ws2tcpip.h> // 윈속2 확장 헤더
-#include <iostream>
-#include <string>
-
 using namespace std;
 
 UDPSocket::UDPSocket(TCC& tcc)
@@ -43,15 +37,15 @@ void UDPSocket::createSocket(TCC& tcc)
 	inet_pton(AF_INET, tcc.getIp(), &serveraddr.sin_addr);
 	serveraddr.sin_port = htons(tcc.getPort());
 
-	sendData();
-
 	thread t(&UDPSocket::receiveData, this);
 	t.join();
 }
 
-void UDPSocket::sendData()
+void UDPSocket::sendData(Position udpCurPos)
 {
-	char buf[BUFSIZE + 1] = "hello";
+	//char buf[BUFSIZE + 1] = "hello";
+	char buf[BUFSIZE + 1];
+	sprintf(buf, "AP%0.2f,%0.2f", udpCurPos.x, udpCurPos.y);
 
 	int len2 = (int)strlen(buf);
 
@@ -90,7 +84,25 @@ void UDPSocket::receiveData()
 		buf[retval] = '\0';
 
 		str = buf;
-		cout << str << endl;
+		//cout << str << endl;
+		
+		if (str.find("TCC_CONNETED") == 0)
+		{
+			sendData;
+		}
+
+		if (str.find("AI") == 0)
+		{
+			atsInitPos.x = std::stod(str.substr(2, 5));
+			atsInitPos.y = std::stod(str.substr(8, 5));
+			atsTargetPos.x = std::stod(str.substr(14, 5));
+			atsTargetPos.y = std::stod(str.substr(20, 5));
+		}
+		else if (str.find("AS") == 0)
+		{
+			atsState = str.substr(2);
+		}
+
 		this_thread::sleep_for(chrono::milliseconds(10));
 	}
 }
@@ -121,10 +133,20 @@ void UDPSocket::err_display(const char* msg)
 	LocalFree(lpMsgBuf);
 }
 
+void UDPSocket::setATSCurPos(Position atsCurPos)
+{
+	udpCurPos = atsCurPos;
+}
+
+void UDPSocket::getATSState(string atsStatus)
+{
+	atsState = atsStatus;
+}
 
 int main()
 {
-	TCC tcc = TCC("192.168.0.3", 5000);
+	TCC tcc = TCC("127.0.0.1", 5000);
 	UDPSocket udp = UDPSocket(tcc);
 
+	//udp.sendData({ 10.22, 20.40 });
 }
