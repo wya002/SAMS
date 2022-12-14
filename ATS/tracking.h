@@ -11,7 +11,6 @@ private:
 	const double atsVel = 200;		// ATS ¼Óµµ
 	const double timeStep = 0.1;	// °É¸° ½Ã°£
 	Position atsCurPos;
-
 };
 
 struct Velocity
