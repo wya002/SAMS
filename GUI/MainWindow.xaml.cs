@@ -156,8 +156,9 @@ namespace GUI
         private void WriteLogToTextBox(string log)
         {
             TbLog.Dispatcher.BeginInvoke(new Action(() => {
-                TbLog.Text += string.Format("\n{0}", log);
+                TbLog.AppendText(string.Format("\n{0}", log));
             }));
+            TbLog.ScrollToEnd();
         }
     }
 }

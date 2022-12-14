@@ -249,7 +249,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="5">
-                            <TextBlock Text="-" Foreground="White"
+                            <TextBlock Text="200px" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
@@ -267,7 +267,7 @@
                             <Border BorderBrush="#1e2e44" BorderThickness="20" CornerRadius="5 5 5 5">
                                 <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
                                               >
-                                    <TextBlock x:Name="TbLog" Foreground="White" FontSize="9"/>
+                                    <TextBox x:Name="TbLog" Foreground="White" FontSize="9" Background="#151f2d" IsEnabled="False"/>
                                 </ScrollViewer>
                             </Border>
                         </Grid>
