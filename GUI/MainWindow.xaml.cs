@@ -16,10 +16,15 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        MyVisualHost mvh = new MyVisualHost();
+        MyVisualHost mvh2 = new MyVisualHost();
+        MyVisualHost mvh3 = new MyVisualHost();
         public MainWindow()
         {
             InitializeComponent();
+            ImageGrid.Children.Add(mvh);
+            ImageGrid.Children.Add(mvh2);
+            ImageGrid.Children.Add(mvh3);
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -87,13 +92,44 @@ namespace GUI
         private void mapImage_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
+        }
+
+        private void Button_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void mapImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
             Point ClickPos = e.GetPosition((IInputElement)sender);
 
             int ClickX = (int)ClickPos.X;
             int ClickY = (int)ClickPos.Y;
+            ATSX1.Text = ClickX.ToString();
+            ATSY1.Text = ClickY.ToString();
+            mvh.Drawrect(new System.Windows.Point(ClickX, ClickY));
+        }
 
-            string beforeX1 = ATSX1.Text;
-            string beforeY1 = ATSY1.Text;
+        private void mapImage_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Point ClickPos = e.GetPosition((IInputElement)sender);
+
+            int ClickX = (int)ClickPos.X;
+            int ClickY = (int)ClickPos.Y;
+            ATSX2.Text = ClickX.ToString();
+            ATSY2.Text = ClickY.ToString();
+            mvh.Drawrect2(new System.Windows.Point(ClickX, ClickY));
+        }
+
+        private void mapImage_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            Point ClickPos = e.GetPosition((IInputElement)sender);
+
+            int ClickX = (int)ClickPos.X;
+            int ClickY = (int)ClickPos.Y;
+            MSSX.Text = ClickX.ToString();
+            MSSY.Text = ClickY.ToString();
+            mvh.Drawrect3(new System.Windows.Point(ClickX, ClickY));
         }
     }
 }
