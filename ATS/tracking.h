@@ -11,7 +11,6 @@ private:
 	const double atsVel = 200;		// ATS 속도
 	const double timeStep = 0.1;	// 걸린 시간
 	Position atsCurPos;
-
 };
 
 struct Velocity

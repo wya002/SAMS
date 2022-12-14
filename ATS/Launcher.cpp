@@ -2,5 +2,8 @@
 
 void Launcher::launch()
 {
-	airThreat.track();
+	if (oder == 1)
+	{
+		airThreat.launch();
+	}
 }

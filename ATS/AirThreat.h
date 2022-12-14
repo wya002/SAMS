@@ -1,6 +1,6 @@
 #pragma once
 #include "Position.h"
-#include "tracking.h"
+#include "Tracking.h"
 
 enum class State {
 	STBY,
@@ -12,11 +12,11 @@ enum class State {
 class AirThreat
 {
 public:
-	void track();
 	Position getATSCurPos();	// 통신으로 보내는 것
+	void launch();
+	void setInitPos(Position initpos, Position targetpos);
 private:
-	State state;
-	const char* ip;
+	State ATSstate;
 	Position initPos;
 	Position targetPos;
 	Position atsCurPos;
