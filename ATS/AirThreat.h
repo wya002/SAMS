@@ -1,6 +1,8 @@
 #pragma once
 #include "Position.h"
 #include "Tracking.h"
+#include "UDPSocket.h"
+#include "Launcher.h"
 
 enum class State {
 	STBY,
@@ -12,11 +14,13 @@ enum class State {
 class AirThreat
 {
 public:
-	Position getATSCurPos();	// 통신으로 보내는 것
 	void launch();
 	void setInitPos(Position initpos, Position targetpos);
 private:
-	State ATSstate;
+	UDPSocket udpSend;
+	Launcher launcher;
+
+	State atsState;
 	Position initPos;
 	Position targetPos;
 	Position atsCurPos;
