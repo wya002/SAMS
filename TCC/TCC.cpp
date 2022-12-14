@@ -2,18 +2,29 @@
 #include "TCC.h"
 #include "M_IDLE.h"
 #include <typeinfo>
+#include "UDP.h"
 
 using namespace std;
-
 
 IMode* TCC::mode = &M_IDLE::getInstance();
 
 TCC::TCC()
 {
-	ats = ATS("192.168.0.3", 5000);
+	queue<string> tmp({ "helllloooooo", "I am", "Woojin", "how are you?", "i wanna go home" });
+	mQueue = tmp;
+	ats = ATS("127.0.0.1", 5000);
 	mss = MSS("192.168.0.200", 9000);
 }
 
+ATS TCC::getATS() 
+{
+	return ats;
+}
+
+MSS TCC::getMSS()
+{
+	return mss;
+}
 
 void TCC::setMode(IMode& m)
 { 
@@ -25,39 +36,43 @@ IMode& TCC::getMode()
 	return *mode;
 }
 
+queue<string>& TCC::getMsgQueue()
+{
+	return mQueue;
+}
+
 void TCC::start() 
 { 
-	mode->start(); 
+	mode->start(mQueue);
 }
 
 void TCC::deploy()
 {
-	mode->deploy();
+	mode->deploy(mQueue);
 }
 
 void TCC::pause() 
 {
-	mode->pause();
+	mode->pause(mQueue);
 }
 
 void TCC::restart()
 {
-	mode->restart();
+	mode->restart(mQueue);
 }
 
 void TCC::done()
 {
-	mode->done();
+	mode->done(mQueue);
 }
-/*
 
 int main()
 {
 	TCC tcc;
-
+	UDP udp = UDP(tcc.getATS().getPort(), &tcc.getMsgQueue());
 	
 
-
+	/*
 	while (true) {
 		int number;
 
@@ -85,6 +100,6 @@ int main()
 
 		}
 	}
+	*/
 	
 }
-*/

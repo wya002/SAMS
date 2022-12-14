@@ -1,9 +1,8 @@
-#include "UDP.h"
+ #include "UDP.h"
 #include <thread>
 #include <chrono>
 #include <ws2tcpip.h> // 윈속2 확장 헤더
 #include <iostream>
-#include <string>
 #include "Simulator.h"
 #include "ATS.h"
 
@@ -11,16 +10,20 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS // 구형 소켓 API 사용 시 경고 끄기
 #define	BUFSIZE	512
 
-using namespace std;
-
-UDP::UDP(Simulator& simulator)
+UDP::UDP(int simulatorPort, queue<string>* msgQueue)
 {
+	port = simulatorPort;
+	mQueue = msgQueue;
+	received = false;
+
 	// 시작 시간 측정
 	auto start = std::chrono::steady_clock::now();
+
 	// 윈속 초기화
 	WSADATA wsa;
 	while (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {};
-	createSocket(simulator);
+
+	createSocket();
 }
 
 UDP::~UDP()
@@ -32,7 +35,7 @@ UDP::~UDP()
 	WSACleanup();
 }
 
-void UDP::createSocket(Simulator& simulator)
+void UDP::createSocket()
 {
 	// 소켓 생성
 	udpSocket = socket(AF_INET, SOCK_DGRAM, 0);
@@ -43,40 +46,54 @@ void UDP::createSocket(Simulator& simulator)
 	memset(&simulatorAddr, 0, sizeof(simulatorAddr));
 	simulatorAddr.sin_family = AF_INET;
 	simulatorAddr.sin_addr.s_addr = htonl(INADDR_ANY);
-	simulatorAddr.sin_port = htons(simulator.getPort());
+	simulatorAddr.sin_port = htons(port);
 	int retval = bind(udpSocket, (struct sockaddr*)&simulatorAddr, sizeof(simulatorAddr));
 	if (retval == SOCKET_ERROR) err_quit("bind()");
 
-	thread t(&UDP::receiveData, this);
+	thread t([&]() { receiveData(); });
+	thread t2;
+	bool fin = false;
+	while (!fin)
+		if (received)
+		{
+			t2 = thread([&]() { sendData(); });
+			fin = true;
+		};
 	
-	//sendData();
-
 	t.join();
+	t2.join();
 }
 
 void UDP::sendData()
 {
-	struct sockaddr_in simulatorAddr;
-	char buf[BUFSIZE + 1] = "hello";
+	while (1) {
+		//struct sockaddr_in sendAddr;
 
-	// '\n' 문자 제거
-	int len = (int)strlen(buf);
-	if (buf[len - 1] == '\n')
-		buf[len - 1] = '\0';
+		int addrlen = sizeof(simulatorAddr);
+		char buf[BUFSIZE + 1];
+		if (mQueue->size() > 0) {
+			cout << "\nSend Message : ";
+			strcpy_s(buf, mQueue->front().c_str());
+			cout << buf << endl;
+			mQueue->pop();
 
-	// 데이터 보내기
-	int retval2 = sendto(udpSocket, buf, (int)strlen(buf), 0, (struct sockaddr*)&simulatorAddr, sizeof(simulatorAddr));
-	if (retval2 == SOCKET_ERROR) {
-		err_display("sendto()");
+			// '\n' 문자 제거
+			int len = (int)strlen(buf);
+			if (buf[len - 1] == '\n')
+				buf[len - 1] = '\0';
+
+			// 데이터 보내기
+			int retval = sendto(udpSocket, buf, (int)strlen(buf), 0, (struct sockaddr*)&simulatorAddr, addrlen);
+			if (retval == SOCKET_ERROR) {
+				err_display("sendto()");
+			}
+		}
 	}
 }
 
 void UDP::receiveData()
 {
-	struct sockaddr_in simulatorAddr;
-	char sendBuf[BUFSIZE + 1] = "Hello World";
 	char receiveBuf[BUFSIZE + 1];
-
 	while (1) {
 		// 데이터 받기
 		int addrlen = sizeof(simulatorAddr);
@@ -94,17 +111,7 @@ void UDP::receiveData()
 		receiveBuf[retval] = '\0';
 		printf("[UDP/%s:%d] %s\n", addr, ntohs(simulatorAddr.sin_port), receiveBuf);
 
-		// '\n' 문자 제거
-		int len = (int)strlen(sendBuf);
-		if (sendBuf[len - 1] == '\n')
-			sendBuf[len - 1] = '\0';
-
-		// 데이터 보내기
-		int retval1 = sendto(udpSocket, sendBuf, (int)strlen(sendBuf), 0, (struct sockaddr*)&simulatorAddr, sizeof(simulatorAddr));
-		if (retval1 == SOCKET_ERROR) {
-			err_display("sendto()");
-			break;
-		}
+		received = true;
 	}
 }
 
@@ -145,11 +152,4 @@ void UDP::err_display(const char* msg)
 		(char*)&lpMsgBuf, 0, NULL);
 	printf("[%s] %s\n", msg, (char*)lpMsgBuf);
 	LocalFree(lpMsgBuf);
-}
-
-int main()
-{
-	ATS ats = ATS("127.0.0.1", 5000);
-	UDP udp = UDP(ats);
-
 }
