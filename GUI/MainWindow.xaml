@@ -52,7 +52,7 @@
                         <uc:Menubutton Icon="Share"/>
                         <TextBlock Text="배포" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--시작-->
-                        <uc:Menubutton Icon="Play"/>
+                        <uc:Menubutton x:Name="ScenarioStart" Icon="Play" LostMouseCapture="ScenarioStart_LostMouseCapture"/>
                         <TextBlock Text="시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--일시정지-->
                         <uc:Menubutton Icon="Pause"/>
@@ -88,8 +88,8 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Image x:Name="mapImage" Source="map5.png" Stretch="Fill" MouseDown="mapImage_MouseDown" 
-                               Margin="0 0 0 -20" Grid.Row="0" Grid.ColumnSpan="3" MouseLeftButtonDown="mapImage_MouseLeftButtonDown" MouseRightButtonDown="mapImage_MouseRightButtonDown" MouseWheel="mapImage_MouseWheel"/>
+                        <Image x:Name="mapImage" Source="map5.png" Stretch="None" MouseDown="mapImage_MouseDown" 
+                               Margin="0 0 0 -20" Grid.Row="0" Grid.ColumnSpan="3" MouseLeftButtonDown="mapImage_MouseLeftButtonDown" MouseRightButtonDown="mapImage_MouseRightButtonDown" MouseWheel="mapImage_MouseWheel" Initialized="mapImage_Initialized"/>
                     </Grid>
                 </Border>
 
@@ -272,7 +272,7 @@
                             </Border>
                         </Grid>
 
-                        <Button Grid.Row="1" Background="Green" Visibility="Hidden">
+                        <Button x:Name="Launch_button" Grid.Row="1" Background="Green" Visibility="Visible" LostMouseCapture="Launch_button_LostMouseCapture">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="15"/>
@@ -280,7 +280,7 @@
                             </Button.Resources>
                             <TextBlock Text="LAUNCH" FontSize="15" Foreground="White"/>
                         </Button>
-                        <TextBlock Text="탐지 대기중.." Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15" Foreground="White"/>
+                        
                     </Grid>
                 </Border>
             </Grid>

@@ -131,7 +131,7 @@ namespace GUI
             // Retreive the coordinates of the mouse button event.
             System.Windows.Point pt = e.GetPosition((UIElement)sender);
 
-            Point newpt = new Point(pt.X + 20, pt.Y + 20);
+            Point newpt = new Point(pt.X, pt.Y);
             Drawrect(newpt);
 
             // Initiate the hit test by setting up a hit test result callback method.

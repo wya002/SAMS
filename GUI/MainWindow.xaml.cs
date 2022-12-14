@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
@@ -9,13 +10,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Navigation;
 using System.Windows.Threading;
+using OpenCvSharp;
+using Point = System.Windows.Point;
+using System.Drawing;
+using System.Windows.Media.Imaging;
 
 namespace GUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
@@ -32,7 +37,7 @@ namespace GUI
             Task.Run(async () => {
                 for (int i = 0; ; i++)
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(3)).ConfigureAwait(false);
+                    await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
                     Logger.Debug("Log {0}", i);
                 }
             });
@@ -63,7 +68,7 @@ namespace GUI
         //시나리오 페이지 이동
         private void Menubutton_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            Window.GetWindow(this).Close();
+            System.Windows.Window.GetWindow(this).Close();
         }
 
         private void PackIconMaterial_Initialized(object sender, EventArgs e)
@@ -122,7 +127,7 @@ namespace GUI
 
         private void mapImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Point ClickPos = e.GetPosition((IInputElement)sender);
+            System.Windows.Point ClickPos = e.GetPosition((IInputElement)sender);
 
             int ClickX = (int)ClickPos.X;
             int ClickY = (int)ClickPos.Y;
@@ -156,9 +161,67 @@ namespace GUI
         private void WriteLogToTextBox(string log)
         {
             TbLog.Dispatcher.BeginInvoke(new Action(() => {
+                TbLog.ScrollToEnd();
                 TbLog.AppendText(string.Format("\n{0}", log));
             }));
-            TbLog.ScrollToEnd();
+        }
+
+        private void mapImage_Initialized(object sender, EventArgs e)
+        {
+          
+        }
+
+        private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        public static Bitmap MatToBitmap(Mat image)
+        {
+            return OpenCvSharp.Extensions.BitmapConverter.ToBitmap(image);
+        }
+
+        BitmapImage BitmapToImageSource(Bitmap bitmap)
+        {
+            using (MemoryStream memory = new MemoryStream())
+            {
+                bitmap.Save(memory, System.Drawing.Imaging.ImageFormat.Bmp);
+                memory.Position = 0;
+                BitmapImage bitmapimage = new BitmapImage();
+                bitmapimage.BeginInit();
+                bitmapimage.StreamSource = memory;
+                bitmapimage.CacheOption = BitmapCacheOption.OnLoad;
+                bitmapimage.EndInit();
+
+                return bitmapimage;
+            }
+        }
+
+        private void ScenarioStart_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                Mat mat = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map5.png", ImreadModes.Color);
+                //mapImage.Visibility = Visibility.Hidden;
+                double ATSX = Convert.ToInt64(ATSX1.Text);
+                double ATSY = Convert.ToInt64(ATSY1.Text);
+                /*while (true)
+                {*/
+                    //Cv2.Line(mat, new OpenCvSharp.Point(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text)), new OpenCvSharp.Point(Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text)), Scalar.Red, 3);
+                    Cv2.Line(mat, new OpenCvSharp.Point(495,411), new OpenCvSharp.Point(495,411), Scalar.Red, 3);
+                    Bitmap bitimg = MatToBitmap(mat);
+                    mapImage.Source = BitmapToImageSource(bitimg);
+                    //ATSX += 1;
+                    /*if (Cv2.WaitKey(10) == 27)
+                    {
+                        break;
+                    }
+                }*/
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
     }
 }
