@@ -2,8 +2,8 @@
 
 void Launcher::launch()
 {
-	if (status == "START")
-	{
+	//if (status == "START")
+	//{
 		airThreat.launch();
-	}
+	//}
 }

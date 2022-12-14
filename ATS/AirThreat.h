@@ -1,8 +1,10 @@
 #pragma once
 #include "Position.h"
 #include "Tracking.h"
-#include "UDPSocket.h"
-#include "Launcher.h"
+#include <queue>
+#include <string>
+
+using namespace std;
 
 enum class State {
 	STBY,
@@ -14,11 +16,14 @@ enum class State {
 class AirThreat
 {
 public:
+	AirThreat() {};
+	~AirThreat() {};
+	queue<string>& getMsgQueue();
 	void launch();
 	void setInitPos(Position initpos, Position targetpos);
+
 private:
-	UDPSocket udpSend;
-	Launcher launcher;
+	queue<string> mQueue;
 
 	State atsState;
 	Position initPos;
