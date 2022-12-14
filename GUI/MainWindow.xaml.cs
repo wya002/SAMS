@@ -37,13 +37,14 @@ namespace GUI
             ImageGrid.Children.Add(mvh2);
             ImageGrid.Children.Add(mvh3);
 
-            Task.Run(async () => {
+            //로그 찍는 메서드
+            /*Task.Run(async () => {
                 for (int i = 0; ; i++)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
                     Logger.Debug("Log {0}", i);
                 }
-            });
+            });*/
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -87,7 +88,8 @@ namespace GUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var config = new NLog.Config.LoggingConfiguration();
+            //로그 찍는 메서드
+            /*var config = new NLog.Config.LoggingConfiguration();
 
             // Targets where to log to: custom target
             var wpfLogger = new NLogCustomTarget();
@@ -97,7 +99,7 @@ namespace GUI
             config.AddRule(NLog.LogLevel.Debug, NLog.LogLevel.Fatal, wpfLogger);
 
             // Apply config           
-            NLog.LogManager.Configuration = config;
+            NLog.LogManager.Configuration = config;*/
         }
 
         private void Menubutton_LostMouseCapture_2(object sender, MouseEventArgs e)
@@ -166,10 +168,11 @@ namespace GUI
 
         private void WriteLogToTextBox(string log)
         {
-            TbLog.Dispatcher.BeginInvoke(new Action(() => {
+            //로그 찍는 메서드
+            /*TbLog.Dispatcher.BeginInvoke(new Action(() => {
                 TbLog.ScrollToEnd();
                 TbLog.AppendText(string.Format("\n{0}", log));
-            }));
+            }));*/
         }
 
         private void mapImage_Initialized(object sender, EventArgs e)
@@ -205,102 +208,7 @@ namespace GUI
 
         private void ScenarioStart_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            try
-            {
-                Mat mat1 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
-                Mat mat2 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
-
-                double ATS_init_x = Convert.ToInt64(ATSX1.Text); // 시나리오 초기 발사 x 위치
-                double ATS_init_y = Convert.ToInt64(ATSY1.Text); // 시나리오 초기 발사 y 위치
-
-                double ATS_target_x = Convert.ToInt64(ATSX2.Text); // 시나리오 목표 발사 x 위치
-                double ATS_target_y = Convert.ToInt64(ATSY2.Text); // 시나리오 목표 발사 y 위치
-
-                double ATS_cur_x = Convert.ToInt64(ATSX1.Text); // ATS 현재 x 위치
-                double ATS_cur_y = Convert.ToInt64(ATSY1.Text); // ATS 현재 y 위치
-
-                double MSS_init_x = Convert.ToInt64(MSSX.Text);
-                double MSS_init_y = Convert.ToInt64(MSSY.Text);
-
-                double MSS_cur_x = MSS_init_x;
-                double MSS_cur_y = MSS_init_y;
-
-                int RaderRange = 200;
-
-                double diss = 2; // ATS와 MSS 사이 pixel
-
-                double v_x =0; // MSS x 방향 속도
-                double v_y; // MSS y 방향 속도
-
-                Cv2.Line(mat1, new OpenCvSharp.Point(ATS_init_x, ATS_init_y), new OpenCvSharp.Point(ATS_target_x, ATS_target_y), new OpenCvSharp.Scalar(0, 255, 0), 3);
-                Cv2.Circle(mat1, Convert.ToInt32(MSS_init_x), Convert.ToInt32(MSS_init_y), RaderRange, Scalar.Red, 3);
-
-                while (Cv2.WaitKey(20) != 'q')
-                {
-                    Tuple<double, double> result = linear_equ(ATS_init_x, ATS_init_y, ATS_target_x, ATS_target_y, ATS_cur_x);
-
-                    ATS_cur_x = result.Item1;
-                    ATS_cur_y = result.Item2;
-                    ATS_current_x.Text = Convert.ToInt32(ATS_cur_x).ToString();
-                    ATS_current_y.Text = Convert.ToInt32(ATS_cur_y).ToString();
-
-                    if (ATS_cur_x >= ATS_target_x) break;
-
-                    Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Scalar(0, 0, 0), 5); 
-                    double dis = distance(MSS_init_x, MSS_init_y, ATS_cur_x, ATS_cur_y);
-                    if (dis <= RaderRange)
-                    {
-                        Launch_button.IsEnabled = true;
-                        Cv2.Line(mat1, new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), Scalar.White, 5);
-
-                        Tuple<double, double> result2 = get_velocity(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y);
-                        v_x = result2.Item1;
-                        v_y = result2.Item2;
-
-                        Tuple<double, double> result3 = get_MSS_Pos(MSS_cur_x, MSS_cur_y, v_x, v_y);
-                        MSS_cur_x = result3.Item1;
-                        MSS_cur_y = result3.Item2;
-                        MSS_current_x.Text = Convert.ToInt32(MSS_cur_x).ToString();
-                        MSS_current_y.Text = Convert.ToInt32(MSS_cur_y).ToString();
-
-                        double dis2 = distance(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y);
-                        target_distance.Text = Convert.ToInt32(dis2).ToString();
-
-                        double dis2_x = MSS_cur_x - ATS_cur_x;
-                        double dis2_y = MSS_cur_y - ATS_cur_y;
-
-                        if (dis2 < 1) break;
-                        else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss) break;
-
-                    }
-
-                    Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1000, 800));
-                    Bitmap bitimg = MatToBitmap(mat2);
-                    mapImage.Source = BitmapToImageSource(bitimg);
-
-                    ATS_cur_x += 1;
-                }
-
-
-                /*                while (true)
-                                {
-                                    Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), Scalar.Red, 3);
-                                    ATS_cur_x += 1;
-                                    ATS_cur_y += 1;
-
-                                    Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1000, 800));
-                                    Bitmap bitimg = MatToBitmap(mat2);
-                                    mapImage.Source = BitmapToImageSource(bitimg);
-                                    if (Cv2.WaitKey(20) == 27 || ATS_cur_x == Convert.ToInt64(ATSX2.Text))
-                                    {
-                                        break;
-                                    }
-                                }*/
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
+            startScenario();
         }
         private Tuple<double, double> linear_equ(double x1, double y1, double x2, double y2, double X)
         {
@@ -351,36 +259,118 @@ namespace GUI
 
         private void Menubutton_LostMouseCapture_3(object sender, MouseEventArgs e)
         {
-            /*System.Windows.Forms.Application.Restart();
-            System.Windows.Application.Current.Shutdown();*/
-
-            mapImage.Source = new BitmapImage(new Uri("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png"));
-            Launch_button.IsEnabled = false;
-            mvh.Clear();
-            mvh2.Clear();
-            mvh3.Clear();
-            ATS_current_x.Text = "";
-            ATS_current_y.Text = "";
-            MSS_current_x.Text = "";
-            MSS_current_y.Text = "";
-            ATSX1.Text = "";
-            ATSY1.Text = "";
-            ATSX2.Text = "";
-            ATSY2.Text = "";
-            MSSX.Text = "";
-            MSSY.Text = "";
-            target_distance.Text = "";
+            try
+            {
+                //System.Windows.Forms.Application.Restart();
+                mapImage.Source = new BitmapImage(new Uri("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png"));
+                Launch_button.IsEnabled = false;
+                mvh.Clear();
+                mvh2.Clear();
+                mvh3.Clear();
+                ATS_current_x.Text = "";
+                ATS_current_y.Text = "";
+                MSS_current_x.Text = "";
+                MSS_current_y.Text = "";
+                ATSX1.Text = "";
+                ATSY1.Text = "";
+                ATSX2.Text = "";
+                ATSY2.Text = "";
+                MSSX.Text = "";
+                MSSY.Text = "";
+                target_distance.Text = "";
+                //System.Windows.Application.Current.Shutdown();
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
         }
 
-        private void RemoveClickEvent(GUI.Menubutton b)
+        private void startScenario()
         {
-            FieldInfo f1 = typeof(Control).GetField("EventClick",
-               BindingFlags.Static | BindingFlags.NonPublic);
-            object obj = f1.GetValue(b);
-            PropertyInfo pi = b.GetType().GetProperty("Events",
-                BindingFlags.NonPublic | BindingFlags.Instance);
-            EventHandlerList list = (EventHandlerList)pi.GetValue(b, null);
-            list.RemoveHandler(obj, list[obj]);
+            Mat mat1 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
+            Mat mat2 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
+
+            double ATS_init_x = Convert.ToInt64(ATSX1.Text); // 시나리오 초기 발사 x 위치
+            double ATS_init_y = Convert.ToInt64(ATSY1.Text); // 시나리오 초기 발사 y 위치
+
+            double ATS_target_x = Convert.ToInt64(ATSX2.Text); // 시나리오 목표 발사 x 위치
+            double ATS_target_y = Convert.ToInt64(ATSY2.Text); // 시나리오 목표 발사 y 위치
+
+            double ATS_cur_x = Convert.ToInt64(ATSX1.Text); // ATS 현재 x 위치
+            double ATS_cur_y = Convert.ToInt64(ATSY1.Text); // ATS 현재 y 위치
+
+            double MSS_init_x = Convert.ToInt64(MSSX.Text);
+            double MSS_init_y = Convert.ToInt64(MSSY.Text);
+
+            double MSS_cur_x = MSS_init_x;
+            double MSS_cur_y = MSS_init_y;
+
+            int RaderRange = 200;
+
+            double diss = 2; // ATS와 MSS 사이 pixel
+
+            double v_x = 0; // MSS x 방향 속도
+            double v_y; // MSS y 방향 속도
+
+            Cv2.Line(mat1, new OpenCvSharp.Point(ATS_init_x, ATS_init_y), new OpenCvSharp.Point(ATS_target_x, ATS_target_y), new OpenCvSharp.Scalar(0, 255, 0), 3);
+            Cv2.Circle(mat1, Convert.ToInt32(MSS_init_x), Convert.ToInt32(MSS_init_y), RaderRange, Scalar.Red, 3);
+
+            while (Cv2.WaitKey(20) != 'q')
+            {
+                Tuple<double, double> result = linear_equ(ATS_init_x, ATS_init_y, ATS_target_x, ATS_target_y, ATS_cur_x);
+
+                ATS_cur_x = result.Item1;
+                ATS_cur_y = result.Item2;
+                ATS_current_x.Text = Convert.ToInt32(ATS_cur_x).ToString();
+                ATS_current_y.Text = Convert.ToInt32(ATS_cur_y).ToString();
+                if (ATSX1.Text == "")
+                {
+                    ATS_current_x.Text = "";
+                    ATS_current_y.Text = "";
+                    break;
+                }
+                if (ATS_cur_x >= ATS_target_x) break;
+
+                Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Scalar(0, 0, 0), 5);
+                double dis = distance(MSS_init_x, MSS_init_y, ATS_cur_x, ATS_cur_y);
+                if (dis <= RaderRange)
+                {
+                    Launch_button.IsEnabled = true;
+                    Cv2.Line(mat1, new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), Scalar.White, 5);
+
+                    Tuple<double, double> result2 = get_velocity(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y);
+                    v_x = result2.Item1;
+                    v_y = result2.Item2;
+
+                    Tuple<double, double> result3 = get_MSS_Pos(MSS_cur_x, MSS_cur_y, v_x, v_y);
+                    MSS_cur_x = result3.Item1;
+                    MSS_cur_y = result3.Item2;
+                    MSS_current_x.Text = Convert.ToInt32(MSS_cur_x).ToString();
+                    MSS_current_y.Text = Convert.ToInt32(MSS_cur_y).ToString();
+
+                    double dis2 = distance(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y);
+                    target_distance.Text = Convert.ToInt32(dis2).ToString();
+
+                    double dis2_x = MSS_cur_x - ATS_cur_x;
+                    double dis2_y = MSS_cur_y - ATS_cur_y;
+
+                    if (dis2 < 1) break;
+                    else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss) break;
+                    if (ATSX1.Text == "")
+                    {
+                        ATS_current_x.Text = "";
+                        ATS_current_y.Text = "";
+                        break;
+                    }
+                }
+
+                Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1000, 800));
+                Bitmap bitimg = MatToBitmap(mat2);
+                mapImage.Source = BitmapToImageSource(bitimg);
+
+                ATS_cur_x += 1;
+            }
         }
     }
 }

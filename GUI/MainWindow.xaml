@@ -56,7 +56,7 @@
                         <uc:Menubutton Icon="Pause"/>
                         <TextBlock Text="일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--중지-->
-                        <uc:Menubutton Icon="Stop" LostMouseCapture="Menubutton_LostMouseCapture_3"/>
+                        <uc:Menubutton x:Name="Stop" Icon="Stop" LostMouseCapture="Menubutton_LostMouseCapture_3"/>
                         <TextBlock Text="중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                     <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" LostMouseCapture="Menubutton_LostMouseCapture" />
