@@ -33,7 +33,7 @@
     <ClCompile Include="Launcher.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="tracking.cpp">
+    <ClCompile Include="Tracking.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="TypeDef.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="Launcher.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="tracking.h">
+    <ClInclude Include="Tracking.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="TypeDef.h">
