@@ -1,10 +1,10 @@
 #pragma once
 #include "Simulator.h"
 
-class MSS : private Simulator
+class MSS : public Simulator
 {
 public :
 	MSS() {};
-	MSS(string addr);
+	MSS(const char* addr, int portNo);
 };
 
