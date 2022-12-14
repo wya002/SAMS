@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Typedef.h"
 #include <cmath>
 

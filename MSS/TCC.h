@@ -1,9 +1,15 @@
 #pragma once
 
-
 class TCC
 {
+public:
+	TCC() {};
+	TCC(const char* addr, int portNumber);
+	const char* getIp();
+	int getPort();
+
 private:
-	int IP;
+	const char* ip;
+	int port;
 };
 
