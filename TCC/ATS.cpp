@@ -5,9 +5,10 @@ ATS::ATS()
 	targetPos = { 0,0 };
 }
 
-ATS::ATS(string addr) 
+ATS::ATS(const char * addr, int portNo)
 {
 	ip = addr;
+	port = portNo;
 	targetPos = { 0,0 };
 }
 
