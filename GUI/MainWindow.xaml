@@ -18,18 +18,16 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="843*"/>
-                <ColumnDefinition Width="337*"/>
+                <ColumnDefinition Width="843"/>
+                <ColumnDefinition Width="337"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="760"/>
             </Grid.RowDefinitions>
 
             <!--Left Menu-->
-            <Border Grid.RowSpan="3" Background="#1e2e44" CornerRadius="25 0 0 25">
+            <Border Background="#1e2e44" CornerRadius="25 0 0 25">
                 <Grid>
                     <StackPanel VerticalAlignment="Top">
                         <!--Ellipses-->
@@ -58,7 +56,7 @@
                         <uc:Menubutton Icon="Pause"/>
                         <TextBlock Text="일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--중지-->
-                        <uc:Menubutton Icon="Stop"/>
+                        <uc:Menubutton Icon="Stop" LostMouseCapture="Menubutton_LostMouseCapture_3"/>
                         <TextBlock Text="중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                     <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" LostMouseCapture="Menubutton_LostMouseCapture" />
@@ -66,9 +64,9 @@
             </Border>
 
             <!--Middle Section-->
-            <Grid Grid.Row="2" Grid.Column="1" Margin="0 30 0 0" Grid.ColumnSpan="2">
+            <Grid Grid.Row="3" Grid.Column="1" Margin="0 30 0 0" Grid.ColumnSpan="2">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="52*"/>
+                    <RowDefinition Height="52"/>
                     <RowDefinition Height="313*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -82,19 +80,28 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="680"/>
                             <RowDefinition Height="*"/>
+                            <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Image x:Name="mapImage" Source="map5.png" Stretch="None" MouseDown="mapImage_MouseDown" 
-                               Margin="0 0 0 -20" Grid.Row="0" Grid.ColumnSpan="3" MouseLeftButtonDown="mapImage_MouseLeftButtonDown" MouseRightButtonDown="mapImage_MouseRightButtonDown" MouseWheel="mapImage_MouseWheel" Initialized="mapImage_Initialized"/>
+                        <Image x:Name="mapImage" Source="map6.png" Stretch="None" MouseDown="mapImage_MouseDown" 
+                               Margin="0 0 0 0" MouseLeftButtonDown="mapImage_MouseLeftButtonDown" 
+                               MouseRightButtonDown="mapImage_MouseRightButtonDown" MouseWheel="mapImage_MouseWheel" Initialized="mapImage_Initialized" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,640,0,1">
+                            <TextBlock Text="공중위협 현재 좌표 : X=" Foreground ="White" FontSize="14"/>
+                            <TextBlock x:Name="ATS_current_x" Foreground ="White" FontSize="14"/>
+                            <TextBlock Text="Y =" Foreground ="White" Margin="20 0 0 0" FontSize="14"/>
+                            <TextBlock x:Name="ATS_current_y" Foreground ="White" FontSize="14"/>
+                            <TextBlock Text="대공유도탄 현재 좌표 : X=" Foreground ="White" Margin="50 0 0 0" FontSize="14"/>
+                            <TextBlock x:Name="MSS_current_x" Foreground ="White" FontSize="14"/>
+                            <TextBlock Text="Y =" Foreground ="White" Margin="20 0 0 0" FontSize="14"/>
+                            <TextBlock x:Name="MSS_current_y" Foreground ="White" FontSize="14"/>
+                            <TextBlock Text="표적과의 거리 : " Foreground ="White" Margin="50 0 0 0" FontSize="14"/>
+                            <TextBlock x:Name="target_distance" Foreground ="White" FontSize="14"/>
+                        </StackPanel>
                     </Grid>
                 </Border>
 
                 <!--연동 확인 칸-->
-                <Border Style="{StaticResource mainBorder}" Margin="15,0,30,6" Grid.Column="1">
+                <Border Style="{StaticResource mainBorder}" Margin="15,0,30,644" Grid.Column="1" Grid.RowSpan="2">
                     <Grid Grid.Column = "3" Margin="0,-11,0,-11">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -104,7 +111,7 @@
                         <!--ATS 운용 상태-->
                         <StackPanel Grid.Column="0" Margin="0 0 15 0">
                             <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
-                            <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlug"  Foreground="ForestGreen" HorizontalAlignment="Center" 
+                            <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlugOff"  Foreground="Red" HorizontalAlignment="Center" 
                                                         Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized"/>
                         </StackPanel>
 
@@ -119,7 +126,7 @@
                 </Border>
 
                 <!--정보 칸-->
-                <Border Style="{StaticResource mainBorder}" Margin="15,15,30,325" Grid.Column="1" Grid.Row="1">
+                <Border Style="{StaticResource mainBorder}" Margin="15,45,30,315" Grid.Column="1" Grid.Row="1">
                     <Grid Grid.Row="5" Grid.Column="2" Background="#151f2d">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -170,11 +177,11 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
-                                    <TextBlock x:Name="ATSX1"  Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSX1" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                                    <TextBlock x:Name="ATSY1" Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSY1" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
 
@@ -187,11 +194,11 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="2" Grid.Row="1">
-                                    <TextBlock x:Name="ATSX2" Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSX2" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
                                 <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="3" Grid.Row="1">
-                                    <TextBlock x:Name="ATSY2" Text="-" Foreground="White"
+                                    <TextBlock x:Name="ATSY2" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                 </Border>
 
@@ -224,11 +231,11 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                     <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
-                                        <TextBlock x:Name="MSSX" Text="-" Foreground="White"
+                                        <TextBlock x:Name="MSSX" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                     <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                                        <TextBlock x:Name="MSSY" Text="-" Foreground="White"
+                                        <TextBlock x:Name="MSSY" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                     </Border>
                                 </Grid>
@@ -240,7 +247,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3" Grid.Column="3">
-                            <TextBlock x:Name="mode" Text="-" Foreground="White"
+                            <TextBlock x:Name="mode" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
@@ -249,7 +256,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="5">
-                            <TextBlock Text="200px" Foreground="White"
+                            <TextBlock x:Name="radarPerformance" Text="200px" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 
@@ -257,7 +264,7 @@
                 </Border>
 
                 <!--안내 메시지 및 발사 버튼-->
-                <Border Margin="15,325,30,25" Grid.Column="1" Grid.Row="1">
+                <Border Margin="15,375,30,25" Grid.Column="1" Grid.Row="1">
                     <Grid Grid.Row="2">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -272,7 +279,7 @@
                             </Border>
                         </Grid>
 
-                        <Button x:Name="Launch_button" Grid.Row="1" Background="Green" Visibility="Visible" LostMouseCapture="Launch_button_LostMouseCapture">
+                        <Button x:Name="Launch_button" Grid.Row="1" Background="Green" Visibility="Visible" LostMouseCapture="Launch_button_LostMouseCapture" IsEnabled="False">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="15"/>
@@ -280,7 +287,7 @@
                             </Button.Resources>
                             <TextBlock Text="LAUNCH" FontSize="15" Foreground="White"/>
                         </Button>
-                        
+
                     </Grid>
                 </Border>
             </Grid>

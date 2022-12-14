@@ -58,6 +58,19 @@ namespace GUI
             //_children.Add(CreateDrawingVisualEllipses());
         }
 
+        public void isExist()
+        {
+            if(this._children.Count != 0)
+            {
+                this._children.Clear();
+            }
+        }
+
+        public void Clear()
+        {
+            _children.Clear();
+        }
+
         private DrawingVisual CreateDrawingVisualRectangle(Point pp)
         {
             DrawingVisual drawingVisual = new DrawingVisual();
@@ -131,7 +144,7 @@ namespace GUI
             // Retreive the coordinates of the mouse button event.
             System.Windows.Point pt = e.GetPosition((UIElement)sender);
 
-            Point newpt = new Point(pt.X, pt.Y);
+            Point newpt = new Point(pt.X +20, pt.Y + 20);
             Drawrect(newpt);
 
             // Initiate the hit test by setting up a hit test result callback method.
