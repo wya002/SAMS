@@ -27,3 +27,7 @@
 ## 🚀중요한 건 꺽이지 않는 마음!
 
 ![KakaoTalk_20221209_122051390](https://user-images.githubusercontent.com/75249093/206950444-41766009-8842-4322-9810-17c2aa207c4e.png)
+--------------
+## 🚀메인 화면 (TCC)
+
+![image](https://user-images.githubusercontent.com/75249093/207483335-a3401590-2013-4498-a4bd-142e7b0c8ded.png)
