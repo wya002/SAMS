@@ -8,8 +8,8 @@ public:
 	void setATSCurPos(Position pos);
 	Position track(Position targetPos);
 private:
-	const double atsVel = 200;		// ATS �ӵ�
-	const double timeStep = 0.1;	// �ɸ� �ð�
+	const double atsVel = 200;		// ATS ¼Óµµ
+	const double timeStep = 0.1;	// °É¸° ½Ã°£
 	Position atsCurPos;
 
 };
