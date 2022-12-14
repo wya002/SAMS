@@ -261,6 +261,8 @@ namespace GUI
         {
             try
             {
+                TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 중지 \n";
+                TbLog.Text += "--------------------------------------------  \n";
                 //System.Windows.Forms.Application.Restart();
                 mapImage.Source = new BitmapImage(new Uri("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png"));
                 Launch_button.IsEnabled = false;
@@ -313,6 +315,8 @@ namespace GUI
             double v_x = 0; // MSS x 방향 속도
             double v_y; // MSS y 방향 속도
 
+            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 시작 \n";
+
             Cv2.Line(mat1, new OpenCvSharp.Point(ATS_init_x, ATS_init_y), new OpenCvSharp.Point(ATS_target_x, ATS_target_y), new OpenCvSharp.Scalar(0, 255, 0), 3);
             Cv2.Circle(mat1, Convert.ToInt32(MSS_init_x), Convert.ToInt32(MSS_init_y), RaderRange, Scalar.Red, 3);
 
@@ -330,7 +334,13 @@ namespace GUI
                     ATS_current_y.Text = "";
                     break;
                 }
-                if (ATS_cur_x >= ATS_target_x) break;
+                if (ATS_cur_x >= ATS_target_x)
+                {
+                    TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
+                    TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 실패 \n";
+                    //TbLog.Text += "--------------------------------------------  \n";
+                    break;
+                }
 
                 Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Scalar(0, 0, 0), 5);
                 double dis = distance(MSS_init_x, MSS_init_y, ATS_cur_x, ATS_cur_y);
@@ -355,8 +365,20 @@ namespace GUI
                     double dis2_x = MSS_cur_x - ATS_cur_x;
                     double dis2_y = MSS_cur_y - ATS_cur_y;
 
-                    if (dis2 < 1) break;
-                    else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss) break;
+                    if (dis2 < 1)
+                    {
+                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
+                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 성공! \n";
+                        //TbLog.Text += "--------------------------------------------  \n";
+                        break;
+                    }
+                    else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss)
+                    {
+                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
+                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 성공! \n";
+                        //TbLog.Text += "--------------------------------------------  \n";
+                        break;
+                    }
                     if (ATSX1.Text == "")
                     {
                         ATS_current_x.Text = "";

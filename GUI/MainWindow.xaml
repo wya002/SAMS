@@ -274,7 +274,7 @@
                             <Border BorderBrush="#1e2e44" BorderThickness="20" CornerRadius="5 5 5 5">
                                 <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
                                               >
-                                    <TextBox x:Name="TbLog" Foreground="White" FontSize="9" Background="#151f2d" IsEnabled="False"/>
+                                    <TextBox x:Name="TbLog" Foreground="White" FontSize="11" Background="#151f2d" IsEnabled="False" TextWrapping="Wrap"/>
                                 </ScrollViewer>
                             </Border>
                         </Grid>
