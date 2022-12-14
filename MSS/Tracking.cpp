@@ -4,9 +4,9 @@ void Tracking::setMcurPos(Position McurPos_set)
 {
 	McurPos = McurPos_set;
 }
-void Tracking::track(Position AcurPos)															// ´ë°øÀ¯µµÅºÀÇ À§Ä¡¸¦ ´ÙÀ½ timestepÀÇ À§Ä¡·Î ÀÌµ¿
+void Tracking::track(Position AcurPos)															// ëŒ€ê³µìœ ë„íƒ„ì˜ ìœ„ì¹˜ë¥¼ ë‹¤ìŒ timestepì˜ ìœ„ì¹˜ë¡œ ì´ë™
 {
-	// Missile ¼Óµµ °è»ê
+	// Missile ì†ë„ ê³„ì‚°
 	McurVel.velX = (AcurPos.x - McurPos.x) / sqrt(pow(AcurPos.x - McurPos.x, 2) + pow(AcurPos.y - McurPos.y, 2));
 	McurVel.velY = (AcurPos.y - McurPos.y) / sqrt(pow(AcurPos.x - McurPos.x, 2) + pow(AcurPos.y - McurPos.y, 2));
 
@@ -16,8 +16,8 @@ void Tracking::track(Position AcurPos)															// ´ë°øÀ¯µµÅºÀÇ À§Ä¡¸¦ ´ÙÀ½
 		McurVel.velY = 0;
 	}
 
-	// °è»êµÈ Missile ¼Óµµ¸¦ ±â¹İÀ¸·Î ´ÙÀ½ timestep ¿¡¼­ÀÇ À§Ä¡¸¦ MnextPos¿¡ ÀúÀå
-	// ´ÙÀ½ À§Ä¡ = ÇöÀç À§Ä¡ + timestep * ÇöÀç ¼Óµµ
+	// ê³„ì‚°ëœ Missile ì†ë„ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë‹¤ìŒ timestep ì—ì„œì˜ ìœ„ì¹˜ë¥¼ MnextPosì— ì €ì¥
+	// ë‹¤ìŒ ìœ„ì¹˜ = í˜„ì¬ ìœ„ì¹˜ + timestep * í˜„ì¬ ì†ë„
 	MnextPos.x = McurPos.x + timestep * McurVel.velX;
 	MnextPos.y = McurPos.y + timestep * McurVel.velY;
 }
