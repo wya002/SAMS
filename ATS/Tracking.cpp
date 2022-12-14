@@ -7,7 +7,7 @@ void Tracking::setATSCurPos(Position pos)
 
 Position Tracking::track(Position targetPos)
 {
-	Velocity atsCurVel;		// ATS ¼Óµµ °è»ê
+	Velocity atsCurVel;		// ATS ì†ë„ ê³„ì‚°
 	atsCurVel.velX = (targetPos.x - atsCurPos.x) / sqrt(pow(targetPos.x - atsCurPos.x, 2) + pow(targetPos.y - atsCurPos.y, 2));
 	atsCurVel.velY = (targetPos.y - atsCurPos.y) / sqrt(pow(targetPos.x - atsCurPos.x, 2) + pow(targetPos.y - atsCurPos.y, 2));
 
@@ -17,8 +17,8 @@ Position Tracking::track(Position targetPos)
 		atsCurVel.velY = 0;
 	}
 
-	// °è»êµÈ ATS ¼Óµµ¸¦ ±â¹İÀ¸·Î ´ÙÀ½ timeStep ¿¡¼­ÀÇ À§Ä¡¸¦ atsNextPos¿¡ ÀúÀå
-	// ´ÙÀ½ À§Ä¡ = ÇöÀç À§Ä¡ + timeStep * ÇöÀç ¼Óµµ
+	// ê³„ì‚°ëœ ATS ì†ë„ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë‹¤ìŒ timeStep ì—ì„œì˜ ìœ„ì¹˜ë¥¼ atsNextPosì— ì €ì¥
+	// ë‹¤ìŒ ìœ„ì¹˜ = í˜„ì¬ ìœ„ì¹˜ + timeStep * í˜„ì¬ ì†ë„
 	Position atsNextPos;
 	atsNextPos.x = atsCurPos.x + timeStep * atsCurVel.velX;
 	atsNextPos.y = atsCurPos.y + timeStep * atsCurVel.velY;
