@@ -180,11 +180,6 @@ namespace GUI
           
         }
 
-        private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)
-        {
-
-        }
-
         public static Bitmap MatToBitmap(Mat image)
         {
             return OpenCvSharp.Extensions.BitmapConverter.ToBitmap(image);
@@ -280,6 +275,7 @@ namespace GUI
                 MSSX.Text = "";
                 MSSY.Text = "";
                 target_distance.Text = "";
+                command = "";
                 //System.Windows.Application.Current.Shutdown();
             }
             catch (Exception exc)
@@ -315,12 +311,16 @@ namespace GUI
             double v_x = 0; // MSS x 방향 속도
             double v_y; // MSS y 방향 속도
 
+            double l = 0; // 0 : 발사 불가, 1 : 발사 가능
+            double p = 0; // 0 : 운용 상태, 1 : 일시정지 상태
+
+
             TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 시작 \n";
 
             Cv2.Line(mat1, new OpenCvSharp.Point(ATS_init_x, ATS_init_y), new OpenCvSharp.Point(ATS_target_x, ATS_target_y), new OpenCvSharp.Scalar(0, 255, 0), 3);
             Cv2.Circle(mat1, Convert.ToInt32(MSS_init_x), Convert.ToInt32(MSS_init_y), RaderRange, Scalar.Red, 3);
 
-            while (Cv2.WaitKey(20) != 'q')
+            while (true)
             {
                 Tuple<double, double> result = linear_equ(ATS_init_x, ATS_init_y, ATS_target_x, ATS_target_y, ATS_cur_x);
 
@@ -345,6 +345,11 @@ namespace GUI
                 Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Scalar(0, 0, 0), 5);
                 double dis = distance(MSS_init_x, MSS_init_y, ATS_cur_x, ATS_cur_y);
                 if (dis <= RaderRange)
+                {
+                    Launch_button.IsEnabled = true;
+                }
+
+                if (command == "launch" || command == "restart")
                 {
                     Launch_button.IsEnabled = true;
                     Cv2.Line(mat1, new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), Scalar.White, 5);
@@ -392,7 +397,40 @@ namespace GUI
                 mapImage.Source = BitmapToImageSource(bitimg);
 
                 ATS_cur_x += 1;
+
+                Cv2.WaitKey(30);
+
+                if (command == "pause")
+                {
+                    while (Cv2.WaitKey(1) != 27)
+                    {
+                        if (command == "restart") break;
+                    }
+                }
+
             }
+        }
+
+        private void restart_LostMouseCapture(object sender, MouseEventArgs e) //재시작 버튼
+        {
+            command = "restart";
+        }
+
+        private void pause_LostMouseCapture(object sender, MouseEventArgs e) //일시정지 버튼
+        {
+            command = "pause";
+        }
+
+        private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)//발사 버튼
+        {
+            command = "launch";
+        }
+
+        private string command; // openCV 명령어
+
+        private void deploy_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            command = 'deploy';
         }
     }
 }

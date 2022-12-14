@@ -47,17 +47,20 @@
                         <uc:Menubutton Icon="FileDownload" LostMouseCapture="Menubutton_LostMouseCapture_1"/>
                         <TextBlock Text="시나리오 불러오기" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--배포-->
-                        <uc:Menubutton Icon="Share"/>
+                        <uc:Menubutton x:Name="deploy" Icon="Share" LostMouseCapture="deploy_LostMouseCapture"/>
                         <TextBlock Text="배포" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--시작-->
                         <uc:Menubutton x:Name="ScenarioStart" Icon="Play" LostMouseCapture="ScenarioStart_LostMouseCapture"/>
                         <TextBlock Text="시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--일시정지-->
-                        <uc:Menubutton Icon="Pause"/>
+                        <uc:Menubutton x:Name="pause" Icon="Pause" LostMouseCapture="pause_LostMouseCapture"/>
                         <TextBlock Text="일시정지" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--중지-->
                         <uc:Menubutton x:Name="Stop" Icon="Stop" LostMouseCapture="Menubutton_LostMouseCapture_3"/>
                         <TextBlock Text="중지" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--재시작-->
+                        <uc:Menubutton x:Name="restart" Icon="Restart" LostMouseCapture="restart_LostMouseCapture"/>
+                        <TextBlock Text="재시작" TextAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                     <uc:Menubutton Icon="Power" VerticalAlignment="Bottom" Margin ="0 0 0 15" LostMouseCapture="Menubutton_LostMouseCapture" />
                 </Grid>
