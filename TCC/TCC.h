@@ -9,6 +9,7 @@ class TCC
 public:
 	TCC();
 	static void setMode(IMode& mode);
+	IMode& getMode();
 	void start();
 	void deploy();
 	void pause();

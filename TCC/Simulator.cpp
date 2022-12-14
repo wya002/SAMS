@@ -5,16 +5,20 @@ using namespace std;
 
 Simulator::Simulator()
 {
-	ip = "127.0.0.0";
-	port = "8080";
 	initPos = { 0,0 };
 	curPos = { 0,0 };
 }
 
-string Simulator::getIp()
+const char* Simulator::getIp()
 {
 	return ip;
 }
+
+int Simulator::getPort()
+{
+	return port;
+}
+
 
 void Simulator::setInitPosition(Position pos)
 {

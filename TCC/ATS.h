@@ -1,11 +1,11 @@
 #pragma once
 #include "Simulator.h"
 
-class ATS : private Simulator
+class ATS : public Simulator
 {
 public :
 	ATS();
-	ATS(string addr);
+	ATS(const char* addr, int portNo);
 	void setTargetPosition(Position pos);
 	Position getTargetPosition();
 
