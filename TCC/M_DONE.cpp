@@ -10,23 +10,23 @@ M_DONE& M_DONE::getInstance() {
 	return mode_done;
 }
 
-void M_DONE::deploy() {
+void M_DONE::deploy(queue<string>& mQueue) {
 
 }
 
-void M_DONE::start() {
+void M_DONE::start(queue<string>& mQueue) {
 
 }
 
-void M_DONE::pause() {
+void M_DONE::pause(queue<string>& mQueue) {
 
 }
 
-void M_DONE::restart() {
+void M_DONE::restart(queue<string>& mQueue) {
 
 }
 
-void M_DONE::done() {
+void M_DONE::done(queue<string>& mQueue) {
 	//종료 조건 처리
 	TCC::setMode(M_IDLE::getInstance());
 	cout << "Done -> Idle" << endl;

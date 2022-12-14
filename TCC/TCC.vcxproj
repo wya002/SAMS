@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinystr.h" />
-    <ClInclude Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxml.h" />
     <ClInclude Include="AirThreatScenario.h" />
     <ClInclude Include="ATS.h" />
     <ClInclude Include="IMode.h" />
@@ -37,13 +35,10 @@
     <ClInclude Include="ScenarioManager.h" />
     <ClInclude Include="Simulator.h" />
     <ClInclude Include="TCC.h" />
+    <ClInclude Include="tinystr.h" />
     <ClInclude Include="UDP.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinystr.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxml.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxmlerror.cpp" />
-    <ClCompile Include="..\..\..\..\Desktop\UDP_TCC\UDP_Client2\tinyxmlparser.cpp" />
     <ClCompile Include="AirThreatScenario.cpp" />
     <ClCompile Include="ATS.cpp" />
     <ClCompile Include="IMode.cpp" />
@@ -58,6 +53,10 @@
     <ClCompile Include="ScenarioManager.cpp" />
     <ClCompile Include="Simulator.cpp" />
     <ClCompile Include="TCC.cpp" />
+    <ClCompile Include="tinystr.cpp" />
+    <ClCompile Include="tinyxml.cpp" />
+    <ClCompile Include="tinyxmlerror.cpp" />
+    <ClCompile Include="tinyxmlparser.cpp" />
     <ClCompile Include="UDP.cpp" />
   </ItemGroup>
   <ItemGroup>

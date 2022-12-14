@@ -11,25 +11,25 @@ M_OPERATION& M_OPERATION::getInstance() {
 	return mode_operation;
 }
 
-void M_OPERATION::deploy() {
+void M_OPERATION::deploy(queue<string>& mQueue) {
 	cout << "모의 프로그램이 종료된 후 배포 가능합니다." << endl;
 }
 
-void M_OPERATION::start() {
+void M_OPERATION::start(queue<string>& mQueue) {
 	cout << "모의 프로그램이 현재 진행 중입니다." << endl;
 }
 
-void M_OPERATION::pause() {
+void M_OPERATION::pause(queue<string>& mQueue) {
 	//중단 처리
 	TCC::setMode(M_PAUSE::getInstance());
 	cout << "Operation -> Pause" << endl;
 }
 
-void M_OPERATION::restart() {
+void M_OPERATION::restart(queue<string>& mQueue) {
 	cout << "모의 프로그램이 현재 진행 중입니다." << endl;
 }
 
-void M_OPERATION::done() {
+void M_OPERATION::done(queue<string>& mQueue) {
 	//종료상태로 시나리오 결과 전달
 	
 	//종료조건 만족 못하면 Cancle 이벤트 실행해야함!!!

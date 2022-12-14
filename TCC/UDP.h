@@ -1,15 +1,19 @@
 #pragma once
+#pragma comment(lib, "ws2_32") // ws2_32.lib 링크
 #include "Simulator.h"
 #include <winsock2.h> // 윈속2 메인 헤더
-#pragma comment(lib, "ws2_32") // ws2_32.lib 링크
+#include <queue>
+#include <string>
+
+using namespace std;
 
 class UDP
 {
 public :
 	UDP() {};
-	UDP(Simulator& simulator);
+	UDP(int simulatorPort, queue<string>* msgQueue);
 	~UDP();
-	void createSocket(Simulator& simulator);
+	void createSocket();
 	void sendData();
 	void receiveData();
 	void err_quit(const char* msg);
@@ -17,7 +21,11 @@ public :
 	void err_display(int errcode);
 
 private :
-	SOCKET udpSocket;
-	struct sockaddr_in simulatorAddr;
-};
 
+	struct sockaddr_in simulatorAddr;
+	SOCKET udpSocket;
+	int port;
+	queue<string>* mQueue;
+	bool received;
+
+};
