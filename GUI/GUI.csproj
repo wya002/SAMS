@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <None Remove="map5.png" />
+    <None Remove="Material-RocketLaunchOutline.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,11 +18,13 @@
   <ItemGroup>
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="NLog" Version="5.1.0" />
     <PackageReference Include="WindowsAPICodePack" Version="7.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Resource Include="map5.png" />
+    <Resource Include="Material-RocketLaunchOutline.png" />
   </ItemGroup>
 
 </Project>

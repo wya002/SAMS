@@ -38,7 +38,7 @@ namespace GUI
         {
             //_children.Clear();
             if (_children.Count == 3)
-            {
+            {   
                 _children.Clear();
             }
             _children.Add(CreateDrawingVisualRectangle2(pt));
@@ -67,7 +67,7 @@ namespace GUI
 
             // Create a rectangle and draw it in the DrawingContext.
             //Rect rect = new Rect(new System.Windows.Point(160, 100), new System.Windows.Size(320, 80));
-            Rect rect = new Rect(pp, new System.Windows.Size(5, 5));
+            Rect rect = new Rect(pp, new System.Windows.Size(10, 10));
             drawingContext.DrawRectangle(System.Windows.Media.Brushes.Red, (System.Windows.Media.Pen)null, rect);
 
             // Persist the drawing content.
@@ -84,7 +84,7 @@ namespace GUI
 
             // Create a rectangle and draw it in the DrawingContext.
             //Rect rect = new Rect(new System.Windows.Point(160, 100), new System.Windows.Size(320, 80));
-            Rect rect = new Rect(pp, new System.Windows.Size(5, 5));
+            Rect rect = new Rect(pp, new System.Windows.Size(10, 10));
             drawingContext.DrawRectangle(System.Windows.Media.Brushes.Yellow, (System.Windows.Media.Pen)null, rect);
 
             // Persist the drawing content.
@@ -101,7 +101,7 @@ namespace GUI
 
             // Create a rectangle and draw it in the DrawingContext.
             //Rect rect = new Rect(new System.Windows.Point(160, 100), new System.Windows.Size(320, 80));
-            Rect rect = new Rect(pp, new System.Windows.Size(5, 5));
+            Rect rect = new Rect(pp, new System.Windows.Size(10, 10));
             drawingContext.DrawRectangle(System.Windows.Media.Brushes.Black, (System.Windows.Media.Pen)null, rect);
 
             // Persist the drawing content.

@@ -2,6 +2,7 @@
 using Microsoft.Win32;
 using System;
 using System.IO;
+using System.Threading.Tasks;
 using System.Timers;
 using System.Windows;
 using System.Windows.Input;
@@ -16,6 +17,8 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
+
         MyVisualHost mvh = new MyVisualHost();
         MyVisualHost mvh2 = new MyVisualHost();
         MyVisualHost mvh3 = new MyVisualHost();
@@ -25,6 +28,14 @@ namespace GUI
             ImageGrid.Children.Add(mvh);
             ImageGrid.Children.Add(mvh2);
             ImageGrid.Children.Add(mvh3);
+
+            Task.Run(async () => {
+                for (int i = 0; ; i++)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(3)).ConfigureAwait(false);
+                    Logger.Debug("Log {0}", i);
+                }
+            });
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -68,7 +79,17 @@ namespace GUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            var config = new NLog.Config.LoggingConfiguration();
 
+            // Targets where to log to: custom target
+            var wpfLogger = new NLogCustomTarget();
+            wpfLogger.LogEventListener += WriteLogToTextBox;
+
+            // Rules for mapping loggers to targets
+            config.AddRule(NLog.LogLevel.Debug, NLog.LogLevel.Fatal, wpfLogger);
+
+            // Apply config           
+            NLog.LogManager.Configuration = config;
         }
 
         private void Menubutton_LostMouseCapture_2(object sender, MouseEventArgs e)
@@ -130,6 +151,13 @@ namespace GUI
             MSSX.Text = ClickX.ToString();
             MSSY.Text = ClickY.ToString();
             mvh.Drawrect3(new System.Windows.Point(ClickX, ClickY));
+        }
+
+        private void WriteLogToTextBox(string log)
+        {
+            TbLog.Dispatcher.BeginInvoke(new Action(() => {
+                TbLog.Text += string.Format("\n{0}", log);
+            }));
         }
     }
 }

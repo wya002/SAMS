@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" mc:Ignorable="av" x:Class="GUI.MainWindow"
         Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize"
-        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" WindowState="Normal" Icon="/Material-RocketLaunchOutline.png">
 
     <Window.Resources>
 
@@ -120,9 +120,8 @@
 
                 <!--정보 칸-->
                 <Border Style="{StaticResource mainBorder}" Margin="15,15,30,325" Grid.Column="1" Grid.Row="1">
-                    <Grid Grid.Row="6" Grid.Column="2" Background="#151f2d">
+                    <Grid Grid.Row="5" Grid.Column="2" Background="#151f2d">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="*"/>
@@ -246,47 +245,10 @@
                         </Border>
 
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4">
-                            <TextBlock Text="Scenario Information" Foreground="White"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="4">
-                            <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                                <Grid Grid.Row="2" Grid.Column="2" Background="#151f2d">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="*"/>
-                                        <RowDefinition Height="*"/>
-                                    </Grid.RowDefinitions>
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Border BorderBrush="#1e2e44" BorderThickness="1">
-                                        <TextBlock Text="X" Foreground="White"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Column="1">
-                                        <TextBlock Text="Y" Foreground="White"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1">
-                                        <TextBlock Text="-" Foreground="White"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                    <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="1" Grid.Column="1">
-                                        <TextBlock Text="-" Foreground="White"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Border>
-                                </Grid>
-                            </Border>
-                        </Border>
-
-                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="5">
                             <TextBlock Text="Radar Performance" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
-                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="5" Grid.Column="5">
+                        <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="5">
                             <TextBlock Text="-" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -303,7 +265,10 @@
                         </Grid.RowDefinitions>
                         <Grid Grid.Row="0" Background="#151f2d" Margin="0 0 0 20">
                             <Border BorderBrush="#1e2e44" BorderThickness="20" CornerRadius="5 5 5 5">
-
+                                <ScrollViewer CanContentScroll="True" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"
+                                              >
+                                    <TextBlock x:Name="TbLog" Foreground="White" FontSize="9"/>
+                                </ScrollViewer>
                             </Border>
                         </Grid>
 
