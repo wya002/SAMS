@@ -83,6 +83,7 @@ void UDPSocket::receiveData()
     char buf[BUFSIZE + 1];
 
     while (1) {
+        cout << "데이터 받는 중" << endl;
         // 데이터 받기
         int addrlen = sizeof(peeraddr);
 

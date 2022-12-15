@@ -1,14 +1,16 @@
 #pragma once
+
 #include "Typedef.h"
 #include <cmath>
 
-// Missile.h에서 수행하는 기능 : setMcurPos() -> track() -> getMnextPos()
+// Tracking.h에서 수행하는 기능 : setMcurPos() -> track() -> getMnextPos()
 class Tracking
 {
 public:
 	void setMcurPos(Position McurPos_set);						// 대공유도탄의 현재 위치를 설정
 	void track(Position AcurPos);								// 대공유도탄의 위치를 다음 timestep의 위치로 이동
-	Position getMnextPos();										// 대공유도탄의 다음 위치 가져오기
+	Position getMnextPos();										// 대공유도탄의 다음 위치 계산 후 반환
+	Position getMcurPos();
 
 private:
 	const double Mvel = 200;									// 미사일 속도(고정) TBD (단위 : m/s)

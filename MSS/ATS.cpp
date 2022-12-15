@@ -1,12 +1,10 @@
 #include "ATS.h"
 
-void ATS::setCurPos(double setX, double setY)			// 공중위협 현재 위치를 설정하는 함수
+void ATS::setACurPos(Position setAPos)					// 공중위협 현재 위치를 설정하는 함수
 {
-	curPos.x = setX;
-	curPos.y = setY;
+	AcurPos = setAPos;
 }
-
-Position ATS::getCurPos()								// 공중위협 현재 위치를 가져오는 함수
+Position ATS::getACurPos()								// 공중위협 현재 위치를 가져오는 함수
 {
-	return curPos;
+	return AcurPos;
 }
