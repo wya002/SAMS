@@ -53,8 +53,12 @@ void TCC::start()
 	mode->start(&atsMsgQueue, &mssMsgQueue);
 }
 
-void TCC::deploy()
+void TCC::deploy(double ats_Init_x, double ats_Init_y, double ats_target_x, double ats_target_y, double mss_Init_x, double mss_Init_y)
 {
+	ats.setInitPosition({ ats_Init_x ,ats_Init_y });
+	ats.setTargetPosition({ ats_target_x ,ats_target_y }); 
+	mss.setInitPosition({ mss_Init_x ,mss_Init_y });
+
 	mode->deploy(&atsMsgQueue, &mssMsgQueue, ats.getInitPosition(), ats.getTargetPosition(), mss.getInitPosition());
 }
 
@@ -73,8 +77,7 @@ void TCC::done()
 	mode->done(&atsMsgQueue, &mssMsgQueue);
 }
 
-
-int main()
+void TCC::initTcc()
 {
 	TCC tcc;
 
@@ -82,57 +85,30 @@ int main()
 	UDP tccUdp = UDP(tcc.getATS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
 	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
 
-	//thread t([&]() { tccUdp.receiveData(); });
-	thread t2([&]() { mssUdp.receiveData(); });
+	thread t([&]() { tccUdp.receiveData(); });
+	//thread t2([&]() { mssUdp.receiveData(); });
 
-	//thread t3;
-	//bool finishedATSConnect = false;
-	//while (!finishedATSConnect)
-	//	if (tccUdp.getReceived())
-	//	{
-	//		finishedATSConnect = true;
-	//		t3 = thread([&]() { tccUdp.sendData(); });
-	//	};
-
-	thread t4;
-	bool finishedMSSConnect = false;
-	while (!finishedMSSConnect)
-		if (mssUdp.getReceived())
+	thread t3;
+	bool finishedATSConnect = false;
+	while (!finishedATSConnect)
+		if (tccUdp.getReceived())
 		{
-			t4 = thread([&]() { mssUdp.sendData(); });
-			finishedMSSConnect = true;
+			finishedATSConnect = true;
+			t3 = thread([&]() { tccUdp.sendData(); });
 		};
 
-	while (true) {
-		int number;
+	//thread t4;
+	//bool finishedMSSConnect = false;
+	//while (!finishedMSSConnect)
+	//	if (mssUdp.getReceived())
+	//	{
+	//		t4 = thread([&]() { mssUdp.sendData(); });
+	//		finishedMSSConnect = true;
+	//	};
 
-		cout << "\n1 : 배포\n2 : 시작\n3 : 중지\n4 : 재시작\n5:종료" << endl;
-		cin >> number;
 
-		cout << typeid(tcc.getMode()).name() << endl;
-
-		switch (number) {
-		case 1:
-			tcc.deploy();
-			break;
-		case 2:
-			tcc.start();
-			break;
-		case 3:
-			tcc.pause();
-			break;
-		case 4:
-			tcc.restart();
-			break;
-		case 5:
-			tcc.done();
-			break;
-
-		}
-	}
-	//t.join();
-	t2.join();
-	//t3.join();
-	t4.join();
-
+	t.join();
+	//t2.join();
+	t3.join();
+	//t4.join();
 }

@@ -19,8 +19,9 @@ public:
 	MSS& getMSS();
 	queue<string>& getTccMsgQueue();
 	queue<string>& getMssMsgQueue();
+	void initTcc();
 	void start();
-	void deploy();
+	void deploy(double ats_Init_x, double ats_Init_y, double ats_target_x, double ats_target_y, double mss_Init_x, double mss_Init_y);
 	void pause();
 	void restart();
 	void done();
