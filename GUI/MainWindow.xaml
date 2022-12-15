@@ -42,7 +42,7 @@
                         <uc:Menubutton Icon="FileDownload" LostMouseCapture="Menubutton_LostMouseCapture_1"/>
                         <TextBlock Text="시나리오 불러오기" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--파일 저장-->
-                        <uc:Menubutton Icon="FileCheck" LostMouseCapture="Menubutton_LostMouseCapture_2"/>
+                        <uc:Menubutton x:Name="fileSave" Icon="FileCheck" LostMouseCapture="Menubutton_LostMouseCapture_2"/>
                         <TextBlock Text="시나리오 저장" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--배포-->
                         <uc:Menubutton x:Name="deploy" Icon="Share" LostMouseCapture="deploy_LostMouseCapture"/>
@@ -112,7 +112,7 @@
                         <!--ATS 운용 상태-->
                         <StackPanel Grid.Column="0" Margin="0 0 15 0">
                             <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
-                            <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlugOff"  Foreground="Red" HorizontalAlignment="Center" 
+                            <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlug"  Foreground="LawnGreen" HorizontalAlignment="Center" 
                                                         Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized"/>
                         </StackPanel>
 
@@ -120,7 +120,7 @@
                         <!--MSS 운용 상태-->
                         <StackPanel Grid.Column="2" Margin="15 0 0 0">
                             <TextBlock Text="MSS" TextAlignment="Center" Foreground="White"/>
-                            <iconPacks:PackIconMaterial Kind="PowerPlugOff"  Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center"
+                            <iconPacks:PackIconMaterial Kind="PowerPlug"  Foreground="LawnGreen" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                         Height="30" Width="30" Margin="0 15 0 0"/>
                         </StackPanel>
                     </Grid>
@@ -249,7 +249,7 @@
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="3" Grid.Column="3">
                             <TextBlock x:Name="mode" Foreground="White"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                   HorizontalAlignment="Center" Text="Operation" VerticalAlignment="Center"/>
                         </Border>
 
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4">

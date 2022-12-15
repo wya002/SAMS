@@ -11,8 +11,6 @@ IMode* TCC::mode = &M_IDLE::getInstance();
 
 TCC::TCC()
 {
-	mssMsgQueue.push("TCC_CONNECTED");
-	atsMsgQueue.push("TCC_CONNECTED");
 	ats = ATS("192.168.0.150", 9000);
 	mss = MSS("127.0.0.1", 5000);
 }

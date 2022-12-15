@@ -8,6 +8,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using OpenCvSharp;
 using Point = System.Windows.Point;
+using TCCLibrary;
 
 namespace GUI
 {
@@ -93,6 +94,17 @@ namespace GUI
             NLog.LogManager.Configuration = config;*/
         }
 
+        private string xmlParse()
+        {
+            string parse =
+                "<?xml version=\"1.0\" ?>\n" +
+                "<DB>\n" + "   <Synario>\n" + "        <SynarioStart Position=\"Value\"" + " Start=\"" + ATSX1.Text + "\" End=\"" + ATSY1.Text + "\" />\n" +
+                "        <SynarioDestination Position=\"Value\"" + " Start=\"" + ATSX2.Text + "\" End=\"" + ATSY2.Text + "\" />\n" +
+                "        <SynarioMSS Position=\"Value\"" + " Start=\"" + MSSX.Text + "\" End=\"" + MSSY.Text + "\" />\n" +
+                "   </Synario>\n" + "</DB>\n";
+            return parse;
+        }
+
         private void Menubutton_LostMouseCapture_2(object sender, MouseEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
@@ -101,9 +113,10 @@ namespace GUI
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "Scenario File (.xml)|*.xml"; // Filter files by extension
 
-            if(dlg.ShowDialog() == true)
+            if (dlg.ShowDialog() == true)
             {
                 string str = dlg.FileName;
+                System.IO.File.WriteAllText(str, xmlParse());
                 if (!File.Exists(str))
                 {
                     FileStream stream = File.Create(str);
@@ -463,6 +476,10 @@ namespace GUI
         private void deploy_LostMouseCapture(object sender, MouseEventArgs e)
         {
             command = "deploy";
+            TCCLibrary.WrapperClass wc = new WrapperClass();
+            wc.deploy(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text),
+                Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text)
+                Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text));
         }
     }
 }

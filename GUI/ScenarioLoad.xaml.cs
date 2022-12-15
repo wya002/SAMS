@@ -1,9 +1,13 @@
 ﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using System;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
+using System.Xml;
+//using TCCLibrary;
 
 namespace GUI
 {
@@ -43,7 +47,8 @@ namespace GUI
 
         private void Button_LostMouseCapture_1(object sender, MouseEventArgs e)
         {
-            Window.GetWindow(this).Close();
+            //xmlRead();
+            //Window.GetWindow(this).Close();
         }
 
         private void datagrid1_SelectedCellsChanged(object sender, System.Windows.Controls.SelectedCellsChangedEventArgs e)
@@ -52,5 +57,30 @@ namespace GUI
             string path = @"C:\Users\User\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml";
             previewFile.Text = File.ReadAllText(path);
         }
+
+        /*private void xmlRead()
+        {
+            string temp = "";
+            XmlDocument xml = new XmlDocument();
+            DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
+            try
+            {
+                xml.Load(@"C:\Users\User\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml");
+                XmlNodeList xmlList = xml.SelectNodes("/Synario/SynarioStart");
+
+                foreach (XmlNode xnl in xmlList)
+                {
+                    temp += xnl["SynarioStart"].InnerText;
+                    temp += xnl["SynarioDestination"].InnerText;
+                    temp += xnl["SynarioMSS"].InnerText;
+                    //temp += xml.SelectSingleNode(Synari)
+                }
+                MessageBox.Show(temp);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+        }*/
     }
 }

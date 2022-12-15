@@ -7,6 +7,14 @@
     <AssemblyName>GUI</AssemblyName>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
   <ItemGroup>
     <None Remove="map5.png" />
     <None Remove="map6.png" />
@@ -28,6 +36,16 @@
     <PackageReference Include="OpenCvSharp4.Windows" Version="4.6.0.20220608" />
     <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.6.0.20220608" />
     <PackageReference Include="WindowsAPICodePack" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TCCLibrary\TCCLibrary.vcxproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="TCCLibrary">
+      <HintPath>..\x64\Debug\TCCLibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

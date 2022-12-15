@@ -48,7 +48,7 @@ void  ScenarioManager::save()
 	doc.SaveFile("C:/Users/User/Desktop/Test.xml");		// 저장 파일 위치
 }
 
-void ScenarioManager::load()
+void ScenarioManager::load(int x1, int tx)
 {
 	TiXmlDocument ReadDoc;
 	ReadDoc.LoadFile("C:/Users/User/Desktop/Test.xml");

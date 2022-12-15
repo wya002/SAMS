@@ -44,7 +44,6 @@ void UDP::createSocket()
 {
 	// 家南 积己
 	udpSocket = socket(AF_INET, SOCK_DGRAM, 0);
-	if (udpSocket == INVALID_SOCKET) err_quit("socket()");
 
 	// bind()
 	struct sockaddr_in simulatorAddr;
@@ -53,7 +52,6 @@ void UDP::createSocket()
 	simulatorAddr.sin_addr.s_addr = htonl(INADDR_ANY);
 	simulatorAddr.sin_port = htons(port);
 	int retval = bind(udpSocket, (struct sockaddr*)&simulatorAddr, sizeof(simulatorAddr));
-	if (retval == SOCKET_ERROR) err_quit("bind()");
 
 
 }
@@ -110,19 +108,6 @@ void UDP::receiveData()
 
 		received = true;
 	}
-}
-
-void UDP::err_quit(const char* msg)
-{
-	LPVOID lpMsgBuf;
-	FormatMessageA(
-		FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM,
-		NULL, WSAGetLastError(),
-		MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
-		(char*)&lpMsgBuf, 0, NULL);
-	MessageBoxA(NULL, (const char*)lpMsgBuf, msg, MB_ICONERROR);
-	LocalFree(lpMsgBuf);
-	exit(1);
 }
 
 // 家南 窃荐 坷幅 免仿

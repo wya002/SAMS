@@ -75,7 +75,7 @@
             <!--시나리오 정보 입력-->
             <Border Background="#1e2e44" Grid.Row="2" Grid.Column="0" Margin="20 10 10 40" CornerRadius="15">
                 <Grid>
-                    <Button Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" LostMouseCapture="Button_LostMouseCapture_1">
+                    <Button x:Name="scenarioInsert" Background="Transparent" Foreground="Transparent" BorderBrush="Transparent" LostMouseCapture="Button_LostMouseCapture_1">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="15"/>
@@ -100,7 +100,7 @@
                         </Button.Resources>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                             <uc:Menubutton Icon="FileDownload" HorizontalAlignment="Center" Margin="0 -7 15 0"/>
-                            <TextBlock Text="시나리오 불러오기" HorizontalAlignment="left" VerticalAlignment="Center" Foreground="white"/>
+                            <TextBlock x:Name="loadScenario" Text="시나리오 불러오기" HorizontalAlignment="left" VerticalAlignment="Center" Foreground="white"/>
                         </StackPanel>
                     </Button>
                 </Grid>
