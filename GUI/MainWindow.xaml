@@ -38,14 +38,12 @@
                         </StackPanel>
 
                         <!--Menu button-->
-                        <uc:Menubutton Icon="File" IsActive="True" />
-                        <TextBlock Text="메인" TextAlignment="Center" Foreground="White" FontSize="10"/>
-                        <!--파일 저장-->
-                        <uc:Menubutton Icon="FileCheck" LostMouseCapture="Menubutton_LostMouseCapture_2"/>
-                        <TextBlock Text="시나리오 저장" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--불러 오기-->
                         <uc:Menubutton Icon="FileDownload" LostMouseCapture="Menubutton_LostMouseCapture_1"/>
                         <TextBlock Text="시나리오 불러오기" TextAlignment="Center" Foreground="White" FontSize="10"/>
+                        <!--파일 저장-->
+                        <uc:Menubutton Icon="FileCheck" LostMouseCapture="Menubutton_LostMouseCapture_2"/>
+                        <TextBlock Text="시나리오 저장" TextAlignment="Center" Foreground="White" FontSize="10"/>
                         <!--배포-->
                         <uc:Menubutton x:Name="deploy" Icon="Share" LostMouseCapture="deploy_LostMouseCapture"/>
                         <TextBlock Text="배포" TextAlignment="Center" Foreground="White" FontSize="10"/>

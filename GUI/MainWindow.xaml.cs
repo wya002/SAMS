@@ -222,7 +222,7 @@ namespace GUI
         private Tuple<double, double> get_velocity(double x1, double y1, double x2, double y2)
         {
                 
-            double vel = 250; // 대공 유도탄 미사일의 속도
+            double vel = 350; // 대공 유도탄 미사일의 속도
 
             double v_x;
             double v_y;
@@ -247,10 +247,14 @@ namespace GUI
         {
             try
             {
-                TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 중지 \n";
+                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 중지 \n";
                 TbLog.Text += "--------------------------------------------  \n";
                 //System.Windows.Forms.Application.Restart();
                 mapImage.Source = new BitmapImage(new Uri("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png"));
+                ScenarioStart.IsActive = false;
+                ScenarioStart.IsEnabled = true;
+                pause.IsActive = false;
+                pause.IsEnabled = true;
                 Launch_button.IsEnabled = false;
                 mvh.Clear();
                 mvh2.Clear();
@@ -274,150 +278,184 @@ namespace GUI
                 MessageBox.Show(exc.Message);
             }
         }
-
+        
         private void startScenario()
         {
-            Mat mat1 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
-            Mat mat2 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
-
-            double ATS_init_x = Convert.ToInt64(ATSX1.Text); // 시나리오 초기 발사 x 위치
-            double ATS_init_y = Convert.ToInt64(ATSY1.Text); // 시나리오 초기 발사 y 위치
-
-            double ATS_target_x = Convert.ToInt64(ATSX2.Text); // 시나리오 목표 발사 x 위치
-            double ATS_target_y = Convert.ToInt64(ATSY2.Text); // 시나리오 목표 발사 y 위치
-
-            double ATS_cur_x = Convert.ToInt64(ATSX1.Text); // ATS 현재 x 위치
-            double ATS_cur_y = Convert.ToInt64(ATSY1.Text); // ATS 현재 y 위치
-
-            double MSS_init_x = Convert.ToInt64(MSSX.Text);
-            double MSS_init_y = Convert.ToInt64(MSSY.Text);
-
-            double MSS_cur_x = MSS_init_x;
-            double MSS_cur_y = MSS_init_y;
-
-            int RaderRange = 200;
-
-            double diss = 2; // ATS와 MSS 사이 pixel
-
-            double v_x = 0; // MSS x 방향 속도
-            double v_y; // MSS y 방향 속도
-
-            double l = 0; // 0 : 발사 불가, 1 : 발사 가능
-            double p = 0; // 0 : 운용 상태, 1 : 일시정지 상태
-
-
-            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 시작 \n";
-
-            Cv2.Line(mat1, new OpenCvSharp.Point(ATS_init_x, ATS_init_y), new OpenCvSharp.Point(ATS_target_x, ATS_target_y), new OpenCvSharp.Scalar(0, 255, 0), 3);
-            Cv2.Circle(mat1, Convert.ToInt32(MSS_init_x), Convert.ToInt32(MSS_init_y), RaderRange, Scalar.Red, 3);
-
-            while (true)
+            //시나리오가 입력되어 있지 않으면, 시작 버튼을 눌러도 반응 없음
+            if (ATSX1.Text != "" && ATSX2.Text != "" && ATSY1.Text != "" && ATSY2.Text != "" && MSSX.Text != "" && MSSY.Text != "")
             {
-                Tuple<double, double> result = linear_equ(ATS_init_x, ATS_init_y, ATS_target_x, ATS_target_y, ATS_cur_x);
+                ScenarioStart.IsActive = true;
+                Mat mat1 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
+                Mat mat2 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
 
-                ATS_cur_x = result.Item1;
-                ATS_cur_y = result.Item2;
-                ATS_current_x.Text = Convert.ToInt32(ATS_cur_x).ToString();
-                ATS_current_y.Text = Convert.ToInt32(ATS_cur_y).ToString();
-                if (ATSX1.Text == "")
+                double ATS_init_x = Convert.ToInt64(ATSX1.Text); // 시나리오 ATS 초기 발사 x 위치
+                double ATS_init_y = Convert.ToInt64(ATSY1.Text); // 시나리오 ATS 초기 발사 y 위치
+
+                double ATS_target_x = Convert.ToInt64(ATSX2.Text); // 시나리오 ATS 목표 발사 x 위치
+                double ATS_target_y = Convert.ToInt64(ATSY2.Text); // 시나리오 ATS 목표 발사 y 위치
+
+                double ATS_cur_x = Convert.ToInt64(ATSX1.Text); // ATS 현재 x 위치
+                double ATS_cur_y = Convert.ToInt64(ATSY1.Text); // ATS 현재 y 위치
+
+                double MSS_init_x = Convert.ToInt64(MSSX.Text); // 시나리오 MSS 초기 발사 x 위치
+                double MSS_init_y = Convert.ToInt64(MSSY.Text); // 시나리오 MSS 초기 발사 y 위치
+
+                double MSS_cur_x = MSS_init_x; // MSS 현재 x 위치
+                double MSS_cur_y = MSS_init_y; // MSS 현재 y 위치
+
+                int RaderRange = 200; // 레이더 탐지 거리
+
+                double diss = 2; // ATS와 MSS 사이 pixel
+
+                double v_x = 0; // MSS x 방향 속도
+                double v_y = 0; // MSS y 방향 속도
+
+                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 시작 \n";
+
+                Cv2.Line(mat1, new OpenCvSharp.Point(ATS_init_x, ATS_init_y), new OpenCvSharp.Point(ATS_target_x, ATS_target_y), new OpenCvSharp.Scalar(0, 255, 0), 3); // ATS 경로 생성
+                Cv2.Circle(mat1, Convert.ToInt32(MSS_init_x), Convert.ToInt32(MSS_init_y), RaderRange, Scalar.Red, 3); // 레이더 탐지 영역 생성
+
+                while (true)
                 {
-                    ATS_current_x.Text = "";
-                    ATS_current_y.Text = "";
-                    break;
-                }
-                if (ATS_cur_x >= ATS_target_x)
-                {
-                    TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
-                    TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 실패 \n";
-                    //TbLog.Text += "--------------------------------------------  \n";
-                    break;
-                }
-
-                Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Scalar(0, 0, 0), 5);
-                double dis = distance(MSS_init_x, MSS_init_y, ATS_cur_x, ATS_cur_y);
-                if (dis <= RaderRange)
-                {
-                    Launch_button.IsEnabled = true;
-                }
-
-                if (command == "launch" || command == "restart")
-                {
-                    Launch_button.IsEnabled = true;
-                    Cv2.Line(mat1, new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), Scalar.White, 5);
-
-                    Tuple<double, double> result2 = get_velocity(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y);
-                    v_x = result2.Item1;
-                    v_y = result2.Item2;
-
-                    Tuple<double, double> result3 = get_MSS_Pos(MSS_cur_x, MSS_cur_y, v_x, v_y);
-                    MSS_cur_x = result3.Item1;
-                    MSS_cur_y = result3.Item2;
-                    MSS_current_x.Text = Convert.ToInt32(MSS_cur_x).ToString();
-                    MSS_current_y.Text = Convert.ToInt32(MSS_cur_y).ToString();
-
-                    double dis2 = distance(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y);
-                    target_distance.Text = Convert.ToInt32(dis2).ToString();
-
-                    double dis2_x = MSS_cur_x - ATS_cur_x;
-                    double dis2_y = MSS_cur_y - ATS_cur_y;
-
-                    if (dis2 < 1)
+                    if (ATS_init_x != ATS_target_x)
                     {
-                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
-                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 성공! \n";
-                        //TbLog.Text += "--------------------------------------------  \n";
-                        break;
+                        Tuple<double, double> result = linear_equ(ATS_init_x, ATS_init_y, ATS_target_x, ATS_target_y, ATS_cur_x); // ATS 경로에 대한 직선의 방정식 계산
+                        ATS_cur_x = result.Item1;
+                        ATS_cur_y = result.Item2; // 직선의 방정식에 ATS 현재 x 위치 값에 따른 계산된 y 위치 값
                     }
-                    else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss)
-                    {
-                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
-                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 성공 \n";
-                        //TbLog.Text += "--------------------------------------------  \n";
-                        break;
-                    }
+
+                    ATS_current_x.Text = Convert.ToInt32(ATS_cur_x).ToString();
+                    ATS_current_y.Text = Convert.ToInt32(ATS_cur_y).ToString();
+
                     if (ATSX1.Text == "")
                     {
                         ATS_current_x.Text = "";
                         ATS_current_y.Text = "";
                         break;
                     }
-                }
-
-                Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1000, 800));
-                Bitmap bitimg = MatToBitmap(mat2);
-                mapImage.Source = BitmapToImageSource(bitimg);
-
-                ATS_cur_x += 1;
-
-                Cv2.WaitKey(30);
-
-                if (command == "pause")
-                {
-                    while (Cv2.WaitKey(1) != 27)
+                    if (ATS_cur_x == ATS_target_x)
                     {
-                        if (command == "restart") break;
+                        TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
+                        TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 실패 \n";
+                        //TbLog.Text += "--------------------------------------------  \n";
+                        break;
                     }
-                }
 
+                    Cv2.Line(mat1, new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Point(ATS_cur_x, ATS_cur_y), new OpenCvSharp.Scalar(0, 0, 0), 5); // ATS의 현재 위치 표시
+                    double dis = distance(MSS_init_x, MSS_init_y, ATS_cur_x, ATS_cur_y); // ATS와 ATTS 탐지기 사이의 거리 계산
+                    if (dis <= RaderRange) // ATS가 레이더 탐지 거리 내에 들어왔을 경우, True
+                    {
+                        Launch_button.IsEnabled = true; // launch 버튼 활성화
+                    }
+
+                    if (command == "launch" || command == "restart")
+                    {
+                        Launch_button.IsEnabled = true;
+
+                        if (command == "launch") // 발사 버튼이 누르는 경우, True
+                        {
+                            Cv2.Line(mat1, new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), Scalar.White, 5); // MSS의 이전 위치 표시
+
+                            Tuple<double, double> result2 = get_velocity(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y); // MSS의 속도 계산
+                            v_x = result2.Item1; // MSS의 x 방향 속도
+                            v_y = result2.Item2; // MSS의 y 방향 속도
+
+                            Tuple<double, double> result3 = get_MSS_Pos(MSS_cur_x, MSS_cur_y, v_x, v_y); // MMS 속도에 따른 현재 위치 계산
+                            MSS_cur_x = result3.Item1; // MSS의 현재 x 위치
+                            MSS_cur_y = result3.Item2; // MSS의 현재 y 위치
+
+                            MSS_current_x.Text = Convert.ToInt32(MSS_cur_x).ToString();
+                            MSS_current_y.Text = Convert.ToInt32(MSS_cur_y).ToString();
+
+
+                            double dis2 = distance(MSS_cur_x, MSS_cur_y, ATS_cur_x, ATS_cur_y); // 현재 ATS 위치와 현재 MSS 위치 사이의 직선 거리
+                            target_distance.Text = Convert.ToInt32(dis2).ToString();
+
+                            double dis2_x = MSS_cur_x - ATS_cur_x; // 현재 ATS와 현재 MSS 사이의 x 거리
+                            double dis2_y = MSS_cur_y - ATS_cur_y; // 현재 ATS와 현재 MSS 사이의 y 거리
+
+                            if (dis2 < 1) // 현재 ATS와 현재 MSS 위치 사이의 직선 거리가 1 pixel 미만일 경우 → 요격 성공
+                            {
+                                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
+                                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 성공! \n";
+                                //TbLog.Text += "--------------------------------------------  \n";
+                                break;
+                            }
+                            else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss) // 현재 ATS와 현재 MSS 사이의 x 거리와 y 거리가 지정된 pixel 값 미만일 경우 → 요격 성공 (현재 2 pixel로 설정)
+                            {
+                                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
+                                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 성공 \n";
+                                //TbLog.Text += "--------------------------------------------  \n";
+                                break;
+                            }
+
+                            if (ATSX1.Text == "")
+                            {
+                                ATS_current_x.Text = "";
+                                ATS_current_y.Text = "";
+                                break;
+                            }
+                        }
+                    }
+
+                    Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1000, 800)); // 이미지 Resize
+                    Bitmap bitimg = MatToBitmap(mat2); // 이미지 bitmap 변환
+                    mapImage.Source = BitmapToImageSource(bitimg);
+
+                    if (ATS_init_x < ATS_target_x) // 좌측에서 우측으로 날아가는 경우
+                    {
+                        ATS_cur_x += 1;
+                    }
+                    else if (ATS_init_x > ATS_target_x) // 우측에서 좌측으로 날아가는 경우
+                    {
+                        ATS_cur_x -= 1;
+                    }
+
+                    Cv2.WaitKey(30);
+
+                    if (command == "pause")
+                    {
+                        while (Cv2.WaitKey(1) != 27)
+                        {
+                            if (command == "restart") break;
+                        }
+                    }
+
+                }
             }
         }
 
         private void restart_LostMouseCapture(object sender, MouseEventArgs e) //재시작 버튼
         {
-            command = "restart";
-            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 재시작 \n";
+            if (pause.IsActive == true)
+            {
+                command = "restart";
+                pause.IsActive = false;
+                pause.IsEnabled = true;
+                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 재시작 \n";
+            }
         }
 
         private void pause_LostMouseCapture(object sender, MouseEventArgs e) //일시정지 버튼
         {
-            command = "pause";
-            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 일시정지 \n";
+            if (ATSX1.Text != "" && ATSX2.Text != "" && ATSY1.Text != "" && ATSY2.Text != "" && MSSX.Text != "" && MSSY.Text != "")
+            {
+                command = "pause";
+                ScenarioStart.IsActive = true;
+                ScenarioStart.IsEnabled = false;
+                pause.IsActive = true;
+                pause.IsEnabled = false;
+                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 일시정지 \n";
+            }
         }
 
         private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)//발사 버튼
         {
-            command = "launch";
-            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 유도탄 발사 \n";
+            if (pause.IsActive != true)
+            {
+                command = "launch";
+                TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 유도탄 발사 \n";
+            }
         }
 
         private string command; // openCV 명령어

@@ -7,6 +7,12 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
+/**
+ @class MyVisualHost
+ @date 2022/12/15
+ @author 우용안(youngann.woo@lignex1.com)
+ @brief 이미지 파일에 점 찍기
+ */
 namespace GUI
 {
     class MyVisualHost : FrameworkElement
