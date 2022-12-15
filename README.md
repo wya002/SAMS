@@ -30,4 +30,4 @@
 --------------
 ## 🚀메인 화면 (TCC)
 
-![image](https://user-images.githubusercontent.com/75249093/207483335-a3401590-2013-4498-a4bd-142e7b0c8ded.png)
+![image](https://user-images.githubusercontent.com/75249093/207666324-233963c0-6a7e-4807-9fc5-2ece162a2ec9.png)

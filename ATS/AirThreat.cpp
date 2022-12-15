@@ -1,4 +1,11 @@
 #include "AirThreat.h"
+#include "TCC.h"
+#include "UDPSocket.h"
+
+queue<string>& AirThreat::getMsgQueue()
+{
+	return mQueue;
+}
 
 void AirThreat::launch()
 {
