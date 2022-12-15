@@ -13,19 +13,21 @@ class TCC
 public:
 	TCC();
 	static void setMode(IMode& mode);
+	static void sendInitPos();
 	IMode& getMode();
 	ATS getATS();
 	MSS getMSS();
-	queue<string>& getMsgQueue();
+	queue<string>& getTccMsgQueue();
+	queue<string>& getMssMsgQueue();
 	void start();
 	void deploy();
 	void pause();
 	void restart();
 	void done();
 
-
 private:
-	queue<string> mQueue;
+	queue<string> atsMsgQueue;
+	queue<string> mssMsgQueue;
 	static IMode* mode;
 	ScenarioManager senarioManager;
 	ATS ats;              

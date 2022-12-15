@@ -35,6 +35,11 @@ UDP::~UDP()
 	WSACleanup();
 }
 
+bool UDP::getReceived()
+{
+	return received;
+}
+
 void UDP::createSocket()
 {
 	// 소켓 생성
@@ -50,18 +55,7 @@ void UDP::createSocket()
 	int retval = bind(udpSocket, (struct sockaddr*)&simulatorAddr, sizeof(simulatorAddr));
 	if (retval == SOCKET_ERROR) err_quit("bind()");
 
-	thread t([&]() { receiveData(); });
-	thread t2;
-	bool fin = false;
-	while (!fin)
-		if (received)
-		{
-			t2 = thread([&]() { sendData(); });
-			fin = true;
-		};
-	
-	t.join();
-	t2.join();
+
 }
 
 void UDP::sendData()
@@ -110,6 +104,9 @@ void UDP::receiveData()
 		// 문자열 형태의 주소 addr 과 받은 데이터 출력
 		receiveBuf[retval] = '\0';
 		printf("[UDP/%s:%d] %s\n", addr, ntohs(simulatorAddr.sin_port), receiveBuf);
+
+		if (receiveBuf == "MSS_CONNECTED")
+			mQueue->push("TCC_CONNECTED");
 
 		received = true;
 	}

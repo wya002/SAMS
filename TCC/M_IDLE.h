@@ -5,11 +5,11 @@ class M_IDLE : public IMode
 {
 public :
 	static M_IDLE& getInstance();
-	virtual void deploy(queue<string>&);
-	virtual void start(queue<string>&);
-	virtual void pause(queue<string>&);
-	virtual void restart(queue<string>&);
-	virtual void done(queue<string>&);
+	virtual void deploy(queue<string>* atsMsgQueue, queue<string>* mssMsgQueue, Position atsInitPos, Position atsTargetPos, Position mssInitPos);
+	virtual void start(queue<string> *atsMsgQueue, queue<string> *mssMsgQueue);
+	virtual void pause(queue<string> *atsMsgQueue, queue<string> *mssMsgQueue);
+	virtual void restart(queue<string> *atsMsgQueue, queue<string> *mssMsgQueue);
+	virtual void done(queue<string> *atsMsgQueue, queue<string> *mssMsgQueue);
 
 	//생성자, 복사생성자, 소멸자 호출 금지 (Singleton)
 	M_IDLE(const M_IDLE& ref) = delete;
