@@ -79,11 +79,8 @@ void TCC::done()
 
 void TCC::initTcc()
 {
-	TCC tcc;
-
-
-	UDP tccUdp = UDP(tcc.getATS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
-	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
+	UDP tccUdp = UDP(this->getATS().getPort(), &this->getTccMsgQueue(), &this->getMssMsgQueue());
+	UDP mssUdp = UDP(this->getMSS().getPort(), &this->getTccMsgQueue(), &this->getMssMsgQueue());
 
 	thread t([&]() { tccUdp.receiveData(); });
 	//thread t2([&]() { mssUdp.receiveData(); });
