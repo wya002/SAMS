@@ -1,17 +1,18 @@
 #include "UDPSocket.h"
+#include <thread>
+#include <chrono>
+#include <cassert>
 
 #define	BUFSIZE	512
 
 using namespace std;
 
-UDPSocket::UDPSocket(TCC& tcc, queue<string>* msgQueue)
+UDPSocket::UDPSocket(TCC& tcc, AirThreat& at) : airThreat(at)
 {
 	// 윈속 초기화
 	WSADATA wsa;
 	while (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {};
 	tccReceived = false;
-
-	mQueue = msgQueue;
 	createSocket(tcc);
 }
 
@@ -40,13 +41,8 @@ void UDPSocket::createSocket(TCC& tcc)
 	inet_pton(AF_INET, tcc.getIp(), &serveraddr.sin_addr);
 	serveraddr.sin_port = htons(tcc.getPort());
 
-	while(!tccReceived) { sendForConnecting(); }
+	while (!tccReceived) { sendForConnecting(); }
 
-	thread t([&]() { sendData(); });
-	thread t2([&]() { receiveData(); });
-
-	t.join();
-	t2.join();
 }
 
 void UDPSocket::sendForConnecting()
@@ -67,7 +63,7 @@ void UDPSocket::sendForConnecting()
 	printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
 
 	this_thread::sleep_for(1000ms);
-
+	
 	struct sockaddr_in peeraddr;
 
 	if (!tccReceived)
@@ -100,14 +96,14 @@ void UDPSocket::sendForConnecting()
 
 void UDPSocket::sendData()
 {
-	while(1){
+	while (1) {
 		char buf[BUFSIZE + 1];
 
-		if (mQueue->size() > 0) {
+		if (airThreat.getMsgQueue().size() > 0) {
 			cout << "\nSend Message : ";
-			strcpy_s(buf, mQueue->front().c_str());
+			strcpy_s(buf, airThreat.getMsgQueue().front().c_str());
 			cout << buf << endl;
-			mQueue->pop();
+			airThreat.getMsgQueue().pop();
 
 			int len2 = (int)strlen(buf);
 
@@ -121,7 +117,6 @@ void UDPSocket::sendData()
 			}
 			printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
 
-			this_thread::sleep_for(1000ms);
 		}
 	}
 }
@@ -151,24 +146,24 @@ void UDPSocket::receiveData()
 		buf[retval] = '\0';
 
 		str = buf;
-		//cout << str << endl;
-		
-		//if (str.find("TCC_CONNETED") == 0)
-		//{
-		//	sendData;
-		//}
+		cout << str << endl;
 
-		//if (str.find("AI") == 0)
-		//{
-		//	atsInitPos.x = std::stod(str.substr(2, 5));
-		//	atsInitPos.y = std::stod(str.substr(8, 5));
-		//	atsTargetPos.x = std::stod(str.substr(14, 5));
-		//	atsTargetPos.y = std::stod(str.substr(20, 5));
-		//}
-		//else if (str.find("AS") == 0)
-		//{
-		//	atsState = str.substr(2);
-		//}
+		if (str.find("AI:") != string::npos)
+		{
+			cout << "초기위치설정" << endl;
+		}
+		else if (str.find("AS:START") != string::npos)
+		{
+			airThreat.setState(State::START);
+		}
+		else if (str.find("AS:PAUSE") != string::npos)
+		{
+			airThreat.setState(State::PAUSE);
+		}
+		else if (str.find("AS:DONE") != string::npos)
+		{
+			airThreat.setState(State::DONE);
+		}
 
 		this_thread::sleep_for(chrono::milliseconds(10));
 	}
@@ -209,9 +204,3 @@ void UDPSocket::getATSState(string atsStatus)
 {
 	atsState = atsStatus;
 }
-
-void UDPSocket::setMsgQueue(queue<string>* msgQueue) 
-{
-	mQueue = msgQueue;
-}
-

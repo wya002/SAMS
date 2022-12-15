@@ -1,6 +1,6 @@
 #include "AirThreat.h"
 #include "TCC.h"
-#include "UDPSocket.h"
+#include <thread>
 
 queue<string>& AirThreat::getMsgQueue()
 {
@@ -9,14 +9,18 @@ queue<string>& AirThreat::getMsgQueue()
 
 void AirThreat::launch()
 {
-	while (atsState == State::START)
+	while (true)
 	{
-		track.track(atsState, this->atsCurPos, targetPos);
-		this->setATSCurPos(track.getATSCurPos());
-		std::cout << track.getATSCurPos().x << ", " << track.getATSCurPos().y << std::endl;
-		break;		// 계속 나오는 값을 막았다.
-		// UDP로 current position을 보내야함
-		//udpSend.setATSCurPos(atsCurPos);
+		if (atsState == State::START) 
+		{
+			track.track(atsState, this->atsCurPos, targetPos);
+			this->setATSCurPos(track.getATSCurPos());
+			//std::cout << track.getATSCurPos().x << ", " << track.getATSCurPos().y << std::endl;
+
+			mQueue.push("MP:" + to_string(track.getATSCurPos().x) + to_string(track.getATSCurPos().y));
+
+			this_thread::sleep_for(500ms);
+		}
 	}
 }
 
@@ -31,9 +35,9 @@ void AirThreat::setATSCurPos(Position pos)
 	this->atsCurPos = pos;
 }
 
-void AirThreat::setState()
+void AirThreat::setState(State state)
 {
-	atsState = State::START;
+	atsState = state;
 }
 
 State AirThreat::getState()

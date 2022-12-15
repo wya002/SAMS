@@ -13,8 +13,8 @@ M_IDLE& M_IDLE::getInstance()
 
 void M_IDLE::deploy(queue<string>* atsMsgQueue, queue<string>* mssMsgQueue, Position atsInitPos, Position atsTargetPos, Position mssInitPos) 
 {
-	atsMsgQueue->push("AI" + to_string(atsInitPos.x) + to_string(atsInitPos.y) + to_string(atsTargetPos.x) + to_string(atsTargetPos.y));
-	mssMsgQueue->push("MI" + to_string(mssInitPos.x) + to_string(mssInitPos.y));
+	atsMsgQueue->push("AI:" + to_string(atsInitPos.x) + to_string(atsInitPos.y) + to_string(atsTargetPos.x) + to_string(atsTargetPos.y));
+	mssMsgQueue->push("MI:" + to_string(mssInitPos.x) + to_string(mssInitPos.y));
 
 	TCC::setMode(M_STBY::getInstance());
 	cout << "IDLE -> STBY" << endl;

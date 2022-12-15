@@ -5,6 +5,7 @@ typedef struct {
 }Position;
 
 enum class State {
+	IDLE,
 	START,
 	PAUSE,
 	DONE

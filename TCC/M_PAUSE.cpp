@@ -30,8 +30,8 @@ void M_PAUSE::pause(queue<string>* atsMsgQueue, queue<string>* mssMsgQueue)
 void M_PAUSE::restart(queue<string>* atsMsgQueue, queue<string>* mssMsgQueue) 
 {
 	//재시작 처리
-	atsMsgQueue->push("AS:RESTART");
-	mssMsgQueue->push("MS:RESTART");
+	atsMsgQueue->push("AS:START");
+	mssMsgQueue->push("MS:START");
 
 	TCC::setMode(M_OPERATION::getInstance());
 	cout << "Pause -> Restart" << endl;

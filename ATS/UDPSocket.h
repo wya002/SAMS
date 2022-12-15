@@ -11,6 +11,7 @@
 #include <sstream>
 #include <queue>
 #include "Position.h"
+#include "AirThreat.h"
 
 using namespace std;
 
@@ -23,7 +24,7 @@ class UDPSocket
 {
 public:
 	UDPSocket();
-	UDPSocket(TCC& tcc, queue<string>* msgQueue);
+	UDPSocket(TCC& tcc, AirThreat& at);
 	~UDPSocket();
 	void createSocket(TCC& tcc);
 	void sendData();
@@ -32,11 +33,10 @@ public:
 	void err_display(const char* msg);
 	void setATSCurPos(Position atsCurPos);
 	void getATSState(string atsStatus);
-	void setMsgQueue(queue<string>* msgQueue);
 	void sendForConnecting();
 
 private:
-	queue<string>* mQueue;
+	AirThreat& airThreat;
 	SOCKET udpSocket;
 	struct sockaddr_in serveraddr;
 	Position udpCurPos;
