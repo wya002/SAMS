@@ -24,11 +24,13 @@ int main()
     TCC tcc = TCC("127.0.0.1", 9000);
 	UDPSocket udp = UDPSocket(tcc, missile);
 
+    missile.getMsgQueue().push("hello");
+
 	thread t([&]() { udp.sendData(); });
 	thread t2([&]() { udp.receiveData(); });
+
     t.join();
     t2.join();
-
 
     ATS ats;
 

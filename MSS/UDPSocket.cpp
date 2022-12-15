@@ -91,26 +91,28 @@ void UDPSocket::sendForConnecting()
 
 void UDPSocket::sendData()
 {
-    char buf[BUFSIZE + 1];
+    while (1) {
+        char buf[BUFSIZE + 1];
 
-    if (missile.getMsgQueue().size() > 0) {
-        cout << "\nSend Message : ";
-        strcpy_s(buf, missile.getMsgQueue().front().c_str());
-        cout << buf << endl;
-        missile.getMsgQueue().pop();
+        if (missile.getMsgQueue().size() > 0) {
+            cout << "\nSend Message : ";
+            strcpy_s(buf, missile.getMsgQueue().front().c_str());
+            cout << buf << endl;
+            missile.getMsgQueue().pop();
 
-        int len2 = (int)strlen(buf);
+            int len2 = (int)strlen(buf);
 
-        if (buf[len2 - 1] == '\n')
-            buf[len2 - 1] = '\0';
+            if (buf[len2 - 1] == '\n')
+                buf[len2 - 1] = '\0';
 
-        // 데이터 보내기
-        int retval = sendto(udpSocket, buf, (int)strlen(buf), 0, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
-        if (retval == SOCKET_ERROR) {
-            err_display("sendto()");
+            // 데이터 보내기
+            int retval = sendto(udpSocket, buf, (int)strlen(buf), 0, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+            if (retval == SOCKET_ERROR) {
+                err_display("sendto()");
+            }
+            printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
+
         }
-        printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
-
     }
 }
 
