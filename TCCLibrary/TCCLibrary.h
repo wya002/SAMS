@@ -11,6 +11,8 @@ namespace TCCLibrary {
 		// TODO: 여기에 이 클래스에 대한 메서드를 추가합니다.
 	public:
 		void deploy(double x1, double y1, double x2, double y2, double mx, double my);
+		void Init();
+		void start();
 
 		double getATSX1() { return ATSX1; };
 		double getATSX2() { return ATSX2; };
@@ -29,6 +31,5 @@ namespace TCCLibrary {
 
 		double ATSX1, ATSX2, ATSY1, ATSY2, MSSX, MSSY;
 		TCC* tcc = new TCC();
-
 	};
 }

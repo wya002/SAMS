@@ -76,14 +76,10 @@ void TCC::done()
 
 void TCC::initTcc()
 {
-	TCC tcc;
-
-
-	UDP tccUdp = UDP(tcc.getATS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
-	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
+	UDP tccUdp = UDP(this->getATS().getPort(), &this->getTccMsgQueue(), &this->getMssMsgQueue());
+	UDP mssUdp = UDP(this->getMSS().getPort(), &this->getTccMsgQueue(), &this->getMssMsgQueue());
 
 	thread t([&]() { tccUdp.receiveData(); });
-	//thread t2([&]() { mssUdp.receiveData(); });
 
 	thread t3;
 	bool finishedATSConnect = false;
@@ -93,19 +89,6 @@ void TCC::initTcc()
 			finishedATSConnect = true;
 			t3 = thread([&]() { tccUdp.sendData(); });
 		};
-
-	//thread t4;
-	//bool finishedMSSConnect = false;
-	//while (!finishedMSSConnect)
-	//	if (mssUdp.getReceived())
-	//	{
-	//		t4 = thread([&]() { mssUdp.sendData(); });
-	//		finishedMSSConnect = true;
-	//	};
-
-
 	t.join();
-	//t2.join();
 	t3.join();
-	//t4.join();
 }

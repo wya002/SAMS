@@ -17,6 +17,8 @@ namespace GUI
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
+        TCCLibrary.WrapperClass wc = new WrapperClass();
+
         private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
 
         MyVisualHost mvh = new MyVisualHost();
@@ -80,18 +82,7 @@ namespace GUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //로그 찍는 메서드
-            /*var config = new NLog.Config.LoggingConfiguration();
-
-            // Targets where to log to: custom target
-            var wpfLogger = new NLogCustomTarget();
-            wpfLogger.LogEventListener += WriteLogToTextBox;
-
-            // Rules for mapping loggers to targets
-            config.AddRule(NLog.LogLevel.Debug, NLog.LogLevel.Fatal, wpfLogger);
-
-            // Apply config           
-            NLog.LogManager.Configuration = config;*/
+            wc.Init();
         }
 
         private string xmlParse()
@@ -207,6 +198,7 @@ namespace GUI
 
         private void ScenarioStart_LostMouseCapture(object sender, MouseEventArgs e)
         {
+            wc.start();
             startScenario();
         }
         private Tuple<double, double> linear_equ(double x1, double y1, double x2, double y2, double X)
@@ -476,9 +468,8 @@ namespace GUI
         private void deploy_LostMouseCapture(object sender, MouseEventArgs e)
         {
             command = "deploy";
-            TCCLibrary.WrapperClass wc = new WrapperClass();
             wc.deploy(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text),
-                Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text)
+                Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text),
                 Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text));
         }
     }

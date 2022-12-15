@@ -48,7 +48,7 @@ void UDPSocket::createSocket(TCC& tcc)
 void UDPSocket::sendForConnecting()
 {
 	char buf[BUFSIZE + 1];
-	sprintf(buf, "ATS_CONNECTED");
+	sprintf_s(buf, "ATS_CONNECTED");
 
 	int len2 = (int)strlen(buf);
 
