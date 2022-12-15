@@ -13,3 +13,4 @@ private:
 	Position atsCurPos;
 	Position atsNextPos;
 };
+
