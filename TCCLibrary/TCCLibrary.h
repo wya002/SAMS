@@ -13,6 +13,9 @@ namespace TCCLibrary {
 		void deploy(double x1, double y1, double x2, double y2, double mx, double my);
 		void Init();
 		void start();
+		void pause();
+		void done();
+		void restart();
 
 		double getATSX1() { return ATSX1; };
 		double getATSX2() { return ATSX2; };

@@ -16,3 +16,17 @@ void TCCLibrary::WrapperClass::start()
 {
 	tcc->start();
 }
+
+void TCCLibrary::WrapperClass::pause()
+{
+	tcc->pause();
+}
+
+void TCCLibrary::WrapperClass::done()
+{
+	tcc->done();
+}
+void TCCLibrary::WrapperClass::restart()
+{
+	tcc->restart();
+}

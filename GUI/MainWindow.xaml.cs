@@ -9,6 +9,7 @@ using Microsoft.Win32;
 using OpenCvSharp;
 using Point = System.Windows.Point;
 using TCCLibrary;
+using System.Threading;
 
 namespace GUI
 {
@@ -30,7 +31,8 @@ namespace GUI
             ImageGrid.Children.Add(mvh);
             ImageGrid.Children.Add(mvh2);
             ImageGrid.Children.Add(mvh3);
-
+            Thread myThread = new Thread(Func);
+            myThread.Start();
             //로그 찍는 메서드
             /*Task.Run(async () => {
                 for (int i = 0; ; i++)
@@ -82,7 +84,6 @@ namespace GUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            wc.Init();
         }
 
         private string xmlParse()
@@ -432,6 +433,7 @@ namespace GUI
 
         private void restart_LostMouseCapture(object sender, MouseEventArgs e) //재시작 버튼
         {
+            wc.restart();
             if (pause.IsActive == true)
             {
                 command = "restart";
@@ -440,9 +442,15 @@ namespace GUI
                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 재시작 \n";
             }
         }
+        private void Func()
+        {
+            wc.Init();
+        }
+
 
         private void pause_LostMouseCapture(object sender, MouseEventArgs e) //일시정지 버튼
         {
+            wc.pause();
             if (ATSX1.Text != "" && ATSX2.Text != "" && ATSY1.Text != "" && ATSY2.Text != "" && MSSX.Text != "" && MSSY.Text != "")
             {
                 command = "pause";
