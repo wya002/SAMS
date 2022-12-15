@@ -1,9 +1,42 @@
 #include "UDPSocket.h"
+#include <thread>
+#include <chrono>
+#include <cassert>
+
+#define	BUFSIZE	512
 
 using namespace std;
 
+vector<string> split(string str, char Delimiter) {
+    istringstream iss(str);             // istringstream에 str을 담는다.
+    string buffer;                      // 구분자를 기준으로 절삭된 문자열이 담겨지는 버퍼
 
-UDPSocket::UDPSocket(TCC& tcc, Missile& ms) : missile(ms)
+    vector<string> result;
+
+    // istringstream은 istream을 상속받으므로 getline을 사용할 수 있다.
+    while (getline(iss, buffer, Delimiter)) {
+        result.push_back(buffer);               // 절삭된 문자열을 vector에 저장
+    }
+
+    return result;
+}
+string split_messageName(string receivedMessage)
+{
+    vector<string> result = split(receivedMessage, ':');
+
+    return result[0];
+}
+Position split_message_Pos(string receivedMessage)
+{
+    vector<string> result = split(receivedMessage, ':');
+    string message_Pos = result[1];
+
+    vector<string> result2 = split(message_Pos, ',');
+
+    Position received_Pos = { stod(result2[0]), stod(result2[1]) };
+    return received_Pos;
+}
+UDPSocket::UDPSocket(TCC& tcc, Missile& ms, Launcher& lc, ATS& at) : missile(ms), launcher(lc), ats(at)
 {
     // 윈속 초기화
     WSADATA wsa;
@@ -142,11 +175,42 @@ void UDPSocket::receiveData()
 
         in_str = buf;
 
-        //if (in_str.find("MI"))
-        //{
-        //    McurPos.x = stod(in_str.substr(2));
-        //    McurPos.y = stod(in_str.substr(2));
-        //}
+        if (in_str.find("MI") != string::npos)
+        {
+            // receivedData : 대공유도탄 초기 위치
+            Position receivedData = split_message_Pos(in_str);
+            missile.setinitMcurPos(receivedData);
+            string sendMessage = "Missile 초기 설정 완료";
+            missile.getMsgQueue().push(sendMessage);
+        }
+        else if (in_str.find("AP") != string::npos)
+        {
+            // receivedData : 현재 공중 위협 위치
+            Position receivedData = split_message_Pos(in_str);
+            ats.setACurPos(receivedData);
+            missile.setAcurPos(receivedData);
+            missile.setMcurPos();
+            Position resultData = missile.getMcurPos();
+
+            string sendMessage = "MP:"+to_string(resultData.x)+to_string(resultData.y);
+            missile.getMsgQueue().push(sendMessage);
+        }
+        else if (in_str.find("MS") != string::npos)
+        {
+            string sendMessage = split_messageName(in_str);
+            if (sendMessage.find("START") != string::npos)
+            {
+                missile.setMstateCHASE();
+            }
+            else if (sendMessage.find("STOP") != string::npos)
+            {
+                missile.setMstateSTOP();
+            }
+        }
+        else
+        {
+            missile.getMsgQueue().push("잘못된 정보");
+        }
 
         cout << in_str << endl;
         
