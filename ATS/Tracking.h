@@ -1,19 +1,15 @@
 #pragma once
 #include "Position.h"
-#include <cmath>
+#include <iostream>
 
 class Tracking
 {
 public:
 	void setATSCurPos(Position pos);
-	Position track(Position targetPos);
+	Position track(State state, Position atsNextPos, Position targetPos);
+	Position getATSCurPos();
+	Position getNextATSCurPos();
 private:
-	const double atsVel = 200;
-	const double timeStep = 0.1;
 	Position atsCurPos;
-};
-
-struct Velocity
-{
-	double velX, velY;
+	Position atsNextPos;
 };

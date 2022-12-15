@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="AirThreat.cpp" />
     <ClCompile Include="Launcher.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="TCC.cpp" />
     <ClCompile Include="Tracking.cpp" />
     <ClCompile Include="UDPSocket.cpp" />
