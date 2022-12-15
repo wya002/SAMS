@@ -11,7 +11,7 @@ class UDP
 {
 public :
 	UDP() {};
-	UDP(int simulatorPort, queue<string>* msgQueue);
+	UDP(int simulatorPort, queue<string>* aMsgQueue, queue<string>* mMsgQueue);
 	~UDP();
 	void createSocket();
 	void sendData();
@@ -23,10 +23,11 @@ public :
 
 private :
 
+	queue<string>* atsMsgQueue;
+	queue<string>* mssMsgQueue;
 	struct sockaddr_in simulatorAddr;
 	SOCKET udpSocket;
 	int port;
-	queue<string>* mQueue;
 	bool received;
 
 };

@@ -13,8 +13,9 @@ TCC::TCC()
 {
 	mssMsgQueue.push("TCC_CONNECTED");
 	atsMsgQueue.push("TCC_CONNECTED");
-	ats = ATS("192.168.0.150", 9000);
-	mss = MSS("127.0.0.1", 5000);
+
+	ats = ATS("127.0.0.1", 9000);
+	mss = MSS("192.168.0.100", 5000);
 }
 
 ATS TCC::getATS() 
@@ -77,11 +78,11 @@ int main()
 {
 	TCC tcc;
 
-	UDP tccUdp = UDP(tcc.getATS().getPort(), &tcc.getTccMsgQueue());
-	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getMssMsgQueue());
+	UDP tccUdp = UDP(tcc.getATS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
+	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
 
 	thread t([&]() { tccUdp.receiveData(); });
-	//thread t2([&]() { mssUdp.receiveData(); });
+	thread t2([&]() { mssUdp.receiveData(); });
 
 	thread t3;
 	bool finishedATSConnect = false;
@@ -92,14 +93,14 @@ int main()
 			t3 = thread([&]() { tccUdp.sendData(); });
 		};
 
-	//thread t4;
-	//bool finishedMSSConnect = false;
-	//while (!finishedMSSConnect)
-	//	if (mssUdp.getReceived())
-	//	{
-	//		t4 = thread([&]() { mssUdp.sendData(); });
-	//		finishedMSSConnect = true;
-	//	};
+	thread t4;
+	bool finishedMSSConnect = false;
+	while (!finishedMSSConnect)
+		if (mssUdp.getReceived())
+		{
+			t4 = thread([&]() { mssUdp.sendData(); });
+			finishedMSSConnect = true;
+		};
 
 	while (true) {
 		int number;

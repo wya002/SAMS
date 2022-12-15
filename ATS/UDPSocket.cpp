@@ -68,7 +68,6 @@ void UDPSocket::sendForConnecting()
 
 	if (!tccReceived)
 	{
-
 		char receiveBuf[BUFSIZE + 1];
 		// 데이터 받기
 		int addrlen = sizeof(peeraddr);
