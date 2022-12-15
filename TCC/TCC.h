@@ -15,8 +15,8 @@ public:
 	static void setMode(IMode& mode);
 	static void sendInitPos();
 	IMode& getMode();
-	ATS getATS();
-	MSS getMSS();
+	ATS& getATS();
+	MSS& getMSS();
 	queue<string>& getTccMsgQueue();
 	queue<string>& getMssMsgQueue();
 	void start();

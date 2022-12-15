@@ -18,8 +18,8 @@ int main()
     Missile& missile = launcher.getMissileinfo();
     ATS ats;
 
-    TCC tcc = TCC("127.0.0.1", 9000);
-	UDPSocket udp = UDPSocket(tcc, missile, launcher, ats);
+    TCC tcc = TCC("127.0.0.1", 5000);
+	UDPSocket udp = UDPSocket(tcc, missile);
 
     // missile.getMsgQueue().push("hello");
 

@@ -18,12 +18,12 @@ TCC::TCC()
 	mss = MSS("192.168.0.100", 5000);
 }
 
-ATS TCC::getATS() 
+ATS& TCC::getATS() 
 {
 	return ats;
 }
 
-MSS TCC::getMSS()
+MSS& TCC::getMSS()
 {
 	return mss;
 }
@@ -78,20 +78,21 @@ int main()
 {
 	TCC tcc;
 
+
 	UDP tccUdp = UDP(tcc.getATS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
 	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getTccMsgQueue(), &tcc.getMssMsgQueue());
 
-	thread t([&]() { tccUdp.receiveData(); });
+	//thread t([&]() { tccUdp.receiveData(); });
 	thread t2([&]() { mssUdp.receiveData(); });
 
-	thread t3;
-	bool finishedATSConnect = false;
-	while (!finishedATSConnect)
-		if (tccUdp.getReceived())
-		{
-			finishedATSConnect = true;
-			t3 = thread([&]() { tccUdp.sendData(); });
-		};
+	//thread t3;
+	//bool finishedATSConnect = false;
+	//while (!finishedATSConnect)
+	//	if (tccUdp.getReceived())
+	//	{
+	//		finishedATSConnect = true;
+	//		t3 = thread([&]() { tccUdp.sendData(); });
+	//	};
 
 	thread t4;
 	bool finishedMSSConnect = false;
@@ -129,9 +130,9 @@ int main()
 
 		}
 	}
-	t.join();
-	//t2.join();
-	t3.join();
-	//t4.join();
+	//t.join();
+	t2.join();
+	//t3.join();
+	t4.join();
 
 }

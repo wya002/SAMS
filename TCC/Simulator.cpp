@@ -19,7 +19,6 @@ int Simulator::getPort()
 	return port;
 }
 
-
 void Simulator::setInitPosition(Position pos)
 {
 	initPos = pos;

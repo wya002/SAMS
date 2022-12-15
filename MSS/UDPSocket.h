@@ -2,8 +2,6 @@
 
 #include "TypeDef.h"
 #include "Missile.h"
-#include "Launcher.h"
-#include "ATS.h"
 #include "TCC.h"
 #pragma comment(lib, "ws2_32") // ws2_32.lib ¸µÅ©
 #include <thread>
@@ -15,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "Missile.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #define   BUFSIZE   512
@@ -23,7 +22,7 @@ class UDPSocket
 {
 public:
 	UDPSocket();
-	UDPSocket(TCC& tcc, Missile& ms, Launcher& lc, ATS& ats);
+	UDPSocket(TCC& tcc, Missile& ms);
 	~UDPSocket();
 	void createSocket(TCC& tcc);
 	void sendForConnecting();
@@ -34,8 +33,6 @@ public:
 	Position getMinitPos();
 	Position getMcurPos();
 private:
-	Launcher& launcher;
-	ATS& ats;
 	Missile& missile;
 	bool tccReceived;
 	Position MinitPos;
@@ -44,4 +41,3 @@ private:
 	SOCKET udpSocket;
 	struct sockaddr_in serveraddr;
 };
-

@@ -110,13 +110,18 @@ void UDP::receiveData()
 		printf("[UDP/%s:%d] %s\n", addr, ntohs(simulatorAddr.sin_port), receiveBuf);
 
 		string str = receiveBuf;
-		if (str.compare("MSS_CONNECTED") == 0)
+		if (str.compare("MSS_CONNECTED") == 0) 
+		{
 			mssMsgQueue->push("TCC_CONNECTED");
+		}
 		else if (str.compare("ATS_CONNECTED") == 0)
+		{
 			atsMsgQueue->push("TCC_CONNECTED");
+		}
 		else if (str.find("AP") == string::npos)
+		{
 			mssMsgQueue->push(str);
-
+		}
 
 		received = true;
 	}
