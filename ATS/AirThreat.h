@@ -15,6 +15,7 @@ public:
 	~AirThreat() {};
 	queue<string>& getMsgQueue();
 	void launch();
+	void setInitPos(Position initpos, Position targetpos);
 	void setATSCurPos(Position pos);
 	void setState();
 	State getState();
