@@ -8,6 +8,12 @@ void Missile::setinitMcurPos(Position initMcurPos)
 {
 	McurPos = initMcurPos;
 }
+
+queue<string>  Missile::getMsgQueue()
+{
+	return mQueue;
+}
+
 void Missile::setMcurPos()													// 대공유도탄의 현재 위치 갱신 (tracking 명령에 의해서만 갱신)
 {
 	if (Mstate == MissileState::CHASE)

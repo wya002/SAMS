@@ -13,7 +13,7 @@ public:
 	AirThreat() {};
 	~AirThreat() {};
 	queue<string>& getMsgQueue();
-	void launch();
+	void launch(bool& isLaunched);
 	void setInitPos(Position initpos, Position targetpos);
 	void setATSCurPos(Position pos);
 	void setState(State state);

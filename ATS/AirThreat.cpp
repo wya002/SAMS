@@ -7,7 +7,7 @@ queue<string>& AirThreat::getMsgQueue()
 	return mQueue;
 }
 
-void AirThreat::launch()
+void AirThreat::launch(bool& isLaunched)
 {
 	while (true)
 	{
@@ -20,6 +20,10 @@ void AirThreat::launch()
 			mQueue.push("MP:" + to_string(track.getATSCurPos().x) + to_string(track.getATSCurPos().y));
 
 			this_thread::sleep_for(500ms);
+		}
+		if (atsState == State::DONE)
+		{
+			isLaunched = false;
 		}
 	}
 }

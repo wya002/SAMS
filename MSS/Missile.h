@@ -4,6 +4,10 @@
 #include "ATS.h"
 #include "Tracking.h"
 #include <cmath>
+#include <queue>
+#include <string>
+
+using namespace std;
 
 // setAcurPos -> setMcurPos -> getMcurPos
 class Missile
@@ -20,7 +24,10 @@ public:
 	void setMevent(int eventno);								// 대공유도탄 이벤트 체크 후 변경 (eventno 1은 Success, 그 외에는 Fail)
 	bool checkEvent();											// 대공유도탄 이벤트 발생 여부 체크 후 변경
 	Position getAcurPos();
+	queue<string> getMsgQueue();
+
 private:
+	queue<string> mQueue;
 	int IP;
 	Tracking trackinfo;
 	ATS airthreatinfo;

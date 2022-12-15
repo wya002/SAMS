@@ -19,7 +19,14 @@ int main()
     // 메시지 들어왔을 때 어떻게 상태를 바꿔줄 것인가?
 
     Launcher launcher;
-    Missile missile;
+    Missile& missile = launcher.getMissileinfo();
+
+    TCC tcc = TCC("127.0.0.1", 9000);
+	UDPSocket udp = UDPSocket(tcc, missile);
+
+	thread t([&]() { udp.sendData(); });
+	thread t2([&]() { udp.receiveData(); });
+
     ATS ats;
 
     Position mssInitPos;
@@ -38,8 +45,11 @@ int main()
     mssInitPos = receivedData1;
     receivedatsPos = receivedData2;
 
-    cout << "Received ats pos: " << receivedatsPos.x << ", " << receivedatsPos.y << endl;
-    cout << "Received mss pos: " << mssInitPos.x << ", " << mssInitPos.y << endl;
+    //cout << "Received ats pos: " << receivedatsPos.x << ", " << receivedatsPos.y << endl;
+    //cout << "Received mss pos: " << mssInitPos.x << ", " << mssInitPos.y << endl;
+
+
+    
 
     // TCC로 부터 받아오는 상태값
     int i = 4;

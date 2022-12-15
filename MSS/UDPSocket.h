@@ -13,6 +13,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include "Missile.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 #define   BUFSIZE   512
@@ -20,18 +21,20 @@
 class UDPSocket
 {
 public:
-	UDPSocket() {};
-	UDPSocket(TCC& tcc);
+	UDPSocket();
+	UDPSocket(TCC& tcc, Missile& ms);
 	~UDPSocket();
 	void createSocket(TCC& tcc);
-	void sendPos(Position sendpos);
-	void sendEvent(const char *sendEvent);
+	void sendForConnecting();
+	void sendData();
 	void receiveData();
 	void err_quit(const char* msg);
 	void err_display(const char* msg);
 	Position getMinitPos();
 	Position getMcurPos();
 private:
+	Missile& missile;
+	bool tccReceived;
 	Position MinitPos;
 	Position McurPos;
 	MissileState Mstate;

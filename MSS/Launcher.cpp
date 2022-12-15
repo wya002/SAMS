@@ -25,4 +25,7 @@ Position Launcher::getLinitPos()
 {
 	return LinitPos;
 }
-
+Missile& Launcher::getMissileinfo()
+{
+	return missileinfo;
+}

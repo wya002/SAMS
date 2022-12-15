@@ -81,7 +81,7 @@ int main()
 	UDP mssUdp = UDP(tcc.getMSS().getPort(), &tcc.getMssMsgQueue());
 
 	thread t([&]() { tccUdp.receiveData(); });
-	thread t2([&]() { mssUdp.receiveData(); });
+	//thread t2([&]() { mssUdp.receiveData(); });
 
 	thread t3;
 	bool finishedATSConnect = false;
@@ -92,14 +92,14 @@ int main()
 			t3 = thread([&]() { tccUdp.sendData(); });
 		};
 
-	thread t4;
-	bool finishedMSSConnect = false;
-	while (!finishedMSSConnect)
-		if (mssUdp.getReceived())
-		{
-			t4 = thread([&]() { mssUdp.sendData(); });
-			finishedMSSConnect = true;
-		};
+	//thread t4;
+	//bool finishedMSSConnect = false;
+	//while (!finishedMSSConnect)
+	//	if (mssUdp.getReceived())
+	//	{
+	//		t4 = thread([&]() { mssUdp.sendData(); });
+	//		finishedMSSConnect = true;
+	//	};
 
 	while (true) {
 		int number;
@@ -129,8 +129,8 @@ int main()
 		}
 	}
 	t.join();
-	t2.join();
+	//t2.join();
 	t3.join();
-	t4.join();
+	//t4.join();
 
 }

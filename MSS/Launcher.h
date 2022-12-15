@@ -14,6 +14,7 @@ public:
 	void setLstateSTOP();											// 발사대 상태를 STOP으로 변경
 	LauncherState getLstate();										// 발사대 상태 가져오기
 	Position getLinitPos();											// 발사대 초기 위치 반환
+	Missile& getMissileinfo();
 
 private:
 	const double RadarRange = 300;									// 탐지 가능 범위 (단위 : m)
