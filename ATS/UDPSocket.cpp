@@ -48,7 +48,7 @@ void UDPSocket::createSocket(TCC& tcc)
 void UDPSocket::sendForConnecting()
 {
 	char buf[BUFSIZE + 1];
-	sprintf(buf, "MSS_CONNECTED");
+	sprintf(buf, "ATS_CONNECTED");
 
 	int len2 = (int)strlen(buf);
 
@@ -68,7 +68,6 @@ void UDPSocket::sendForConnecting()
 
 	if (!tccReceived)
 	{
-
 		char receiveBuf[BUFSIZE + 1];
 		// 데이터 받기
 		int addrlen = sizeof(peeraddr);

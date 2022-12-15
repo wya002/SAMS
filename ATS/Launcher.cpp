@@ -12,7 +12,7 @@ Launcher::~Launcher() {}
 void Launcher::launch()
 {
 	isLaunched = true;
-	airThreat.launch();
+	airThreat.launch(isLaunched);
 }
 
 AirThreat& Launcher::getAirThreat()

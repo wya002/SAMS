@@ -1,20 +1,42 @@
 #include "UDPSocket.h"
+#include "Launcher.h"
 #include <string>
 #include <iostream>
+#include <vector>
+#include <sstream>
+#include <math.h>
+#include <ctime>
+
+using namespace std;
 
 int main()
 {
-    Position testpos = { 1.13, 2.31 };
-    const char* testevent = "START";
+    // 메시지 들어왔을 때 어떻게 Position으로 바꿔줄 것인가? 를 추가
+    // 메시지 들어왔을 때 어떻게 상태를 바꿔줄 것인가?
 
-    TCC tcc = TCC("192.168.0.100", 5000);
-    UDPSocket udp = UDPSocket(tcc);
+    Launcher launcher;
+    Missile& missile = launcher.getMissileinfo();
+    ATS ats;
 
-    udp.sendPos(testpos);
-    udp.sendEvent(testevent);
+    TCC tcc = TCC("127.0.0.1", 5000);
+	UDPSocket udp = UDPSocket(tcc, missile);
 
-    std::string str = "START";
-    std::cout << str.substr(2);
+    // missile.getMsgQueue().push("hello");
 
+	thread t([&]() { udp.sendData(); });
+	thread t2([&]() { udp.receiveData(); });
+
+    t.join();
+    t2.join();
+
+    Position mssInitPos;
+    Position receivedatsPos;
+    Position result;
+
+    TCCstate tccstate;
+
+    return 0;
 }
+
+
 

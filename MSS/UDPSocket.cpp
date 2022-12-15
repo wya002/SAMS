@@ -2,11 +2,13 @@
 
 using namespace std;
 
-UDPSocket::UDPSocket(TCC& tcc)
+
+UDPSocket::UDPSocket(TCC& tcc, Missile& ms) : missile(ms)
 {
     // 윈속 초기화
     WSADATA wsa;
     while (WSAStartup(MAKEWORD(2, 2), &wsa) != 0) {};
+    tccReceived = false;
     createSocket(tcc);
 }
 
@@ -35,15 +37,13 @@ void UDPSocket::createSocket(TCC& tcc)
     inet_pton(AF_INET, tcc.getIp(), &serveraddr.sin_addr);
     serveraddr.sin_port = htons(tcc.getPort());
 
-    thread t(&UDPSocket::receiveData, this);
-    t.join();
+    while (!tccReceived) { sendForConnecting(); }
 }
 
-void UDPSocket::sendPos(Position sendpos)
+void UDPSocket::sendForConnecting()
 {
     char buf[BUFSIZE + 1];
-
-    sprintf(buf, "MP%0.2f,%0.2f", sendpos.x, sendpos.y);
+    sprintf(buf, "MSS_CONNECTED");
 
     int len2 = (int)strlen(buf);
 
@@ -56,25 +56,64 @@ void UDPSocket::sendPos(Position sendpos)
         err_display("sendto()");
     }
     printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
+
+    this_thread::sleep_for(1000ms);
+
+    struct sockaddr_in peeraddr;
+
+    if (!tccReceived)
+    {
+
+        char receiveBuf[BUFSIZE + 1];
+        // 데이터 받기
+        int addrlen = sizeof(peeraddr);
+
+        string str;
+        int retval = recvfrom(udpSocket, receiveBuf, BUFSIZE, 0, (struct sockaddr*)&peeraddr, &addrlen);
+        if (retval == SOCKET_ERROR) {
+            err_display("recvfrom()");
+        }
+
+        // 수신된 serveraddr 값을 inet_ntop() 로 문자열 형태의 addr 로 변경함
+        char addr[INET_ADDRSTRLEN];
+        inet_ntop(AF_INET, &peeraddr.sin_addr, addr, sizeof(addr));
+
+        // 문자열 형태의 주소 addr 과 받은 데이터 출력
+        receiveBuf[retval] = '\0';
+
+        str = receiveBuf;
+        cout << "First Receive : ";
+        cout << str << endl;
+
+        tccReceived = true;
+    }
 }
 
-void UDPSocket::sendEvent(const char *sendEvent)
+void UDPSocket::sendData()
 {
-    char buf[BUFSIZE + 1];
+    while (1) {
+        char buf[BUFSIZE + 1];
 
-    sprintf(buf, "ME%s", sendEvent);
+        if (missile.getMsgQueue().size() > 0) {
+            cout << "\nSend Message : ";
+            strcpy_s(buf, missile.getMsgQueue().front().c_str());
+            cout << buf << endl;
+            missile.getMsgQueue().pop();
 
-    int len2 = (int)strlen(buf);
+            int len2 = (int)strlen(buf);
 
-    if (buf[len2 - 1] == '\n')
-        buf[len2 - 1] = '\0';
+            if (buf[len2 - 1] == '\n')
+                buf[len2 - 1] = '\0';
 
-    // 데이터 보내기
-    int retval = sendto(udpSocket, buf, (int)strlen(buf), 0, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
-    if (retval == SOCKET_ERROR) {
-        err_display("sendto()");
+            // 데이터 보내기
+            int retval = sendto(udpSocket, buf, (int)strlen(buf), 0, (struct sockaddr*)&serveraddr, sizeof(serveraddr));
+            if (retval == SOCKET_ERROR) {
+                err_display("sendto()");
+            }
+            printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
+
+        }
     }
-    printf("[UDPSocket 클라이언트] %d바이트를 보냈습니다.\n", retval);
 }
 
 void UDPSocket::receiveData()
@@ -83,6 +122,7 @@ void UDPSocket::receiveData()
     char buf[BUFSIZE + 1];
 
     while (1) {
+        cout << "데이터 받는 중" << endl;
         // 데이터 받기
         int addrlen = sizeof(peeraddr);
 
@@ -109,7 +149,7 @@ void UDPSocket::receiveData()
         //}
 
         cout << in_str << endl;
-        
+
         this_thread::sleep_for(chrono::milliseconds(10));
     }
 }

@@ -21,6 +21,10 @@ void Tracking::track(Position AcurPos)															// 대공유도탄의 위�
 	MnextPos.x = McurPos.x + timestep * McurVel.velX;
 	MnextPos.y = McurPos.y + timestep * McurVel.velY;
 }
+Position Tracking::getMcurPos()
+{
+	return McurPos;
+}
 Position Tracking::getMnextPos()
 {
 	return MnextPos;
