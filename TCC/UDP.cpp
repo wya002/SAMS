@@ -10,10 +10,11 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS // 구형 소켓 API 사용 시 경고 끄기
 #define	BUFSIZE	512
 
-UDP::UDP(int simulatorPort, queue<string>* msgQueue)
+UDP::UDP(int simulatorPort, queue<string>* aMsgQueue, queue<string>* mMsgQueue)
 {
 	port = simulatorPort;
-	mQueue = msgQueue;
+	atsMsgQueue = aMsgQueue;
+	mssMsgQueue = mMsgQueue;
 	received = false;
 
 	// 시작 시간 측정
@@ -54,12 +55,15 @@ void UDP::createSocket()
 	simulatorAddr.sin_port = htons(port);
 	int retval = bind(udpSocket, (struct sockaddr*)&simulatorAddr, sizeof(simulatorAddr));
 	if (retval == SOCKET_ERROR) err_quit("bind()");
-
-
 }
 
 void UDP::sendData()
 {
+	queue<string>* mQueue;
+
+	if (port == 9000) mQueue = atsMsgQueue;
+	else mQueue = mssMsgQueue;
+
 	while (1) {
 		//struct sockaddr_in sendAddr;
 
@@ -105,8 +109,14 @@ void UDP::receiveData()
 		receiveBuf[retval] = '\0';
 		printf("[UDP/%s:%d] %s\n", addr, ntohs(simulatorAddr.sin_port), receiveBuf);
 
-		if (receiveBuf == "MSS_CONNECTED")
-			mQueue->push("TCC_CONNECTED");
+		string str = receiveBuf;
+		if (str.compare("MSS_CONNECTED") == 0)
+			mssMsgQueue->push("TCC_CONNECTED");
+		else if (str.compare("ATS_CONNECTED") == 0)
+			atsMsgQueue->push("TCC_CONNECTED");
+		else if (str.find("AP") == string::npos)
+			mssMsgQueue->push(str);
+
 
 		received = true;
 	}

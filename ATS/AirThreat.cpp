@@ -17,7 +17,7 @@ void AirThreat::launch(bool& isLaunched)
 			this->setATSCurPos(track.getATSCurPos());
 			//std::cout << track.getATSCurPos().x << ", " << track.getATSCurPos().y << std::endl;
 
-			mQueue.push("MP:" + to_string(track.getATSCurPos().x) + to_string(track.getATSCurPos().y));
+			mQueue.push("AP:" + to_string(track.getATSCurPos().x) + to_string(track.getATSCurPos().y));
 
 			this_thread::sleep_for(500ms);
 		}

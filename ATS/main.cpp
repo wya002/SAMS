@@ -24,7 +24,7 @@ int main()
 	launcher.getAirThreat().setATSCurPos({ initX, initY });
 
 
-	TCC tcc = TCC("127.0.0.1", 9000);
+	TCC tcc = TCC("192.168.0.150", 9000);
 	UDPSocket udp = UDPSocket(tcc, launcher.getAirThreat());
 
 	thread t([&]() { udp.sendData(); });
