@@ -259,7 +259,7 @@
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <Border BorderBrush="#1e2e44" BorderThickness="1" Grid.Row="4" Grid.Column="5">
-                            <TextBlock x:Name="radarPerformance" Text="200px" Foreground="White"
+                            <TextBlock x:Name="radarPerformance" Text="200" Foreground="White"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
 

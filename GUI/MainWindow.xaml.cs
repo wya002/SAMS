@@ -1,22 +1,13 @@
 ﻿
-using Microsoft.Win32;
 using System;
+using System.Drawing;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Navigation;
-using System.Windows.Threading;
+using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using OpenCvSharp;
 using Point = System.Windows.Point;
-using System.Drawing;
-using System.Windows.Media.Imaging;
-using System.Reflection;
-using System.Windows.Controls;
-using System.ComponentModel;
 
 namespace GUI
 {
@@ -380,7 +371,7 @@ namespace GUI
                     else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss)
                     {
                         TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 종료 \n";
-                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 성공! \n";
+                        TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 공중위협 요격 성공 \n";
                         //TbLog.Text += "--------------------------------------------  \n";
                         break;
                     }
@@ -414,23 +405,26 @@ namespace GUI
         private void restart_LostMouseCapture(object sender, MouseEventArgs e) //재시작 버튼
         {
             command = "restart";
+            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 재시작 \n";
         }
 
         private void pause_LostMouseCapture(object sender, MouseEventArgs e) //일시정지 버튼
         {
             command = "pause";
+            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 시나리오 일시정지 \n";
         }
 
         private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)//발사 버튼
         {
             command = "launch";
+            TbLog.Text += System.DateTime.Now.ToString("yyyy/MM/dd hh:mm:ss") + " 유도탄 발사 \n";
         }
 
         private string command; // openCV 명령어
 
         private void deploy_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            command = 'deploy';
+            command = "deploy";
         }
     }
 }
