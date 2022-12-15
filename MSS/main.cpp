@@ -26,6 +26,9 @@ int main()
 
 	thread t([&]() { udp.sendData(); });
 	thread t2([&]() { udp.receiveData(); });
+    t.join();
+    t2.join();
+
 
     ATS ats;
 

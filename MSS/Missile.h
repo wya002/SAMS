@@ -24,7 +24,7 @@ public:
 	void setMevent(int eventno);								// 대공유도탄 이벤트 체크 후 변경 (eventno 1은 Success, 그 외에는 Fail)
 	bool checkEvent();											// 대공유도탄 이벤트 발생 여부 체크 후 변경
 	Position getAcurPos();
-	queue<string> getMsgQueue();
+	queue<string>& getMsgQueue();
 
 private:
 	queue<string> mQueue;

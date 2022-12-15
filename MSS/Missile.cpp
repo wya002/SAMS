@@ -9,7 +9,7 @@ void Missile::setinitMcurPos(Position initMcurPos)
 	McurPos = initMcurPos;
 }
 
-queue<string>  Missile::getMsgQueue()
+queue<string>&  Missile::getMsgQueue()
 {
 	return mQueue;
 }
