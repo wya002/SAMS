@@ -4,13 +4,13 @@
 -------------
 👏 만든이들
 -------------
-|역할|이름|GitHub|닉네임|
-|---|---|---|---|
-|조장|강준희🤷‍♂️|<https://github.com/jhkang>|King of Mid Laner (Mid)|
-|조원|하태민🤷‍♂️|<https://github.com/TaeMin15>|Predator of jungle (Jungle)|
-|조원|이채현🤷‍♂️|<https://github.com/xmfxhddl>|ダイナマイト(traitor)|
-|조원|장우진🤷‍♀️|<https://github.com/W00JIN>|The Jungle Challenger (Top, Jungle)|
-|조원|우용안🤷‍♂️|<https://github.com/wya002>|Science Master (AD Carry)|
+|역할|이름|GitHub|닉네임|역할|
+|---|---|---|---|---|
+|조장|강준희🤷‍♂️|<https://github.com/jhkang>|King of Mid Laner (Mid)|MSS|
+|조원|하태민🤷‍♂️|<https://github.com/TaeMin15>|Predator of jungle (Jungle)|ATS|
+|조원|이채현🤷‍♂️|<https://github.com/xmfxhddl>|ダイナマイト(traitor)|UDP|
+|조원|장우진🤷‍♀️|<https://github.com/W00JIN>|The Jungle Challenger (Top, Jungle)|TCC|
+|조원|우용안🤷‍♂️|<https://github.com/wya002>|Science Master (AD Carry)|GUI|
 
 -------------
 ## 🚀시스템 개요
@@ -24,4 +24,14 @@
 <그림 1 운용개념도>
 
 -------------
-중요한 건 꺽이지 않는 마음!
+## 🚀중요한 건 꺽이지 않는 마음!
+
+![KakaoTalk_20221209_122051390](https://user-images.githubusercontent.com/75249093/206950444-41766009-8842-4322-9810-17c2aa207c4e.png)
+--------------
+## 🚀메인 화면 (TCC)
+
+![image](https://user-images.githubusercontent.com/75249093/207766901-d5613473-e2b6-4f2c-a804-fa16cbf2585d.png)
+---------------
+## 🚀시나리오 시연 화면
+
+![_2022-12-15_12-43-20_AdobeExpress (2)](https://user-images.githubusercontent.com/75249093/207768313-c2c9eddf-90b5-4ba0-89b4-c0896dcd39b7.gif)
