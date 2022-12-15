@@ -138,22 +138,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="AirThreat.h" />
-    <ClInclude Include="Launcher.h" />
-    <ClInclude Include="Position.h" />
-    <ClInclude Include="TCC.h" />
-    <ClInclude Include="Tracking.h" />
-    <ClInclude Include="UDPSocket.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="AirThreat.cpp" />
-    <ClCompile Include="Launcher.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="TCC.cpp" />
-    <ClCompile Include="Tracking.cpp" />
-    <ClCompile Include="UDPSocket.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
