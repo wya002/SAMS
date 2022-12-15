@@ -30,4 +30,8 @@
 --------------
 ## 🚀메인 화면 (TCC)
 
-![image](https://user-images.githubusercontent.com/75249093/207666324-233963c0-6a7e-4807-9fc5-2ece162a2ec9.png)
+![image](https://user-images.githubusercontent.com/75249093/207766901-d5613473-e2b6-4f2c-a804-fa16cbf2585d.png)
+---------------
+## 🚀시나리오 시연 화면
+
+![_2022-12-15_12-43-20_AdobeExpress (2)](https://user-images.githubusercontent.com/75249093/207768313-c2c9eddf-90b5-4ba0-89b4-c0896dcd39b7.gif)

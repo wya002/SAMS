@@ -4,6 +4,43 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <AssemblyName>GUI</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="map5.png" />
+    <None Remove="map6.png" />
+    <None Remove="Material-RocketLaunchOutline.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LiveCharts" Version="0.9.7" />
+    <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
+    <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
+    <PackageReference Include="NLog" Version="5.1.0" />
+    <PackageReference Include="OpenCvSharp4" Version="4.6.0.20220608" />
+    <PackageReference Include="OpenCvSharp4.Extensions" Version="4.6.0.20220608" />
+    <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.6.0.20220608" />
+    <PackageReference Include="OpenCvSharp4.Windows" Version="4.6.0.20220608" />
+    <PackageReference Include="OpenCvSharp4.WpfExtensions" Version="4.6.0.20220608" />
+    <PackageReference Include="WindowsAPICodePack" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="map6.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Material-RocketLaunchOutline.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="OpenCvSharpExtern.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 
 </Project>
