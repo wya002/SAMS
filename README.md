@@ -34,5 +34,4 @@ https://github.com/xmfxhddl/SAMS_opencv
 ## 🚀시나리오 시연 화면
 
 ![_2022-12-15_12-43-20_AdobeExpress (2)](https://user-images.githubusercontent.com/75249093/207768313-c2c9eddf-90b5-4ba0-89b4-c0896dcd39b7.gif)
-<성공시나리오>
 ----------------
