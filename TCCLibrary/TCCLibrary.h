@@ -16,6 +16,7 @@ namespace TCCLibrary {
 		void pause();
 		void done();
 		void restart();
+		void launch();
 
 		double getATSX1() { return ATSX1; };
 		double getATSX2() { return ATSX2; };
@@ -23,6 +24,9 @@ namespace TCCLibrary {
 		double getATSY2() { return ATSY2; };
 		double getMSSX() { return MSSX; };
 		double getMSSY() { return MSSY; };
+		void getConnect();
+		bool atsConnect;
+		bool mssConnect;
 
 	private:
 		void setATSX1(double a) { ATSX1 = a; };

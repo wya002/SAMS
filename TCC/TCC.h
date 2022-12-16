@@ -25,8 +25,18 @@ public:
 	void pause();
 	void restart();
 	void done();
+	void launch();
+	pair<bool&, bool&> getConnect();
+	bool getAtsConnect() {
+		return atsConnect;
+	}
+	bool getMssConnect() {
+		return mssConnect;
+	}
 
 private:
+	bool atsConnect;
+	bool mssConnect;
 	queue<string> atsMsgQueue;
 	queue<string> mssMsgQueue;
 	static IMode* mode;

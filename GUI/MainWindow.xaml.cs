@@ -15,7 +15,7 @@ namespace GUI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
-    /// </summary>
+    /// </summary>s
     public partial class MainWindow : System.Windows.Window
     {
         TCCLibrary.WrapperClass wc = new WrapperClass();
@@ -114,6 +114,7 @@ namespace GUI
                     FileStream stream = File.Create(str);
                     stream.Close();
                 }
+                
             }
         }
         private void mapImage_MouseDown(object sender, MouseButtonEventArgs e)
@@ -277,6 +278,7 @@ namespace GUI
                 MSSY.Text = "";
                 target_distance.Text = "";
                 command = "";
+                command2 = "";
                 //System.Windows.Application.Current.Shutdown();
             }
             catch (Exception exc)
@@ -343,6 +345,7 @@ namespace GUI
                     {
                         TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
                         TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 실패 \n";
+                        wc.done();
                         //TbLog.Text += "--------------------------------------------  \n";
                         break;
                     }
@@ -354,11 +357,11 @@ namespace GUI
                         Launch_button.IsEnabled = true; // launch 버튼 활성화
                     }
 
-                    if (command == "launch" || command == "restart")
+                    if (command2 == "launch" || command == "restart")
                     {
                         Launch_button.IsEnabled = true;
 
-                        if (command == "launch") // 발사 버튼이 누르는 경우, True
+                        if (command2 == "launch") // 발사 버튼이 누르는 경우, True
                         {
                             Cv2.Line(mat1, new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), new OpenCvSharp.Point(MSS_cur_x, MSS_cur_y), Scalar.White, 5); // MSS의 이전 위치 표시
 
@@ -384,6 +387,7 @@ namespace GUI
                             {
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 성공! \n";
+                                wc.done();
                                 //TbLog.Text += "--------------------------------------------  \n";
                                 break;
                             }
@@ -391,6 +395,7 @@ namespace GUI
                             {
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 성공 \n";
+                                wc.done();
                                 //TbLog.Text += "--------------------------------------------  \n";
                                 break;
                             }
@@ -464,14 +469,16 @@ namespace GUI
 
         private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)//발사 버튼
         {
+            wc.launch();
             if (pause.IsActive != true)
             {
-                command = "launch";
+                command2 = "launch";
                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 유도탄 발사 \n";
             }
         }
 
         private string command; // openCV 명령어
+        private string command2;
 
         private void deploy_LostMouseCapture(object sender, MouseEventArgs e)
         {
@@ -479,6 +486,16 @@ namespace GUI
             wc.deploy(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text),
                 Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text),
                 Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text));
+            TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + "시나리오 배포\n";
+        }
+
+        private void connectionCheck_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+        }
+
+        private void ATS_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+
         }
     }
 }

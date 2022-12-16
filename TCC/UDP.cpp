@@ -10,7 +10,7 @@
 #define _WINSOCK_DEPRECATED_NO_WARNINGS // 구형 소켓 API 사용 시 경고 끄기
 #define	BUFSIZE	512
 
-UDP::UDP(int simulatorPort, queue<string>* aMsgQueue, queue<string>* mMsgQueue)
+UDP::UDP(int simulatorPort, queue<string>* aMsgQueue, queue<string>* mMsgQueue, pair<bool&, bool&> c) : connect(c)
 {
 	port = simulatorPort;
 	atsMsgQueue = aMsgQueue;
@@ -113,12 +113,14 @@ void UDP::receiveData()
 		if (str.compare("MSS_CONNECTED") == 0) 
 		{
 			mssMsgQueue->push("TCC_CONNECTED");
+			connect.second = true;
 		}
 		else if (str.compare("ATS_CONNECTED") == 0)
 		{
+			connect.first = true;
 			atsMsgQueue->push("TCC_CONNECTED");
 		}
-		else if (str.find("AP") == string::npos)
+		else if (str.find("AP") != string::npos)
 		{
 			mssMsgQueue->push(str);
 		}

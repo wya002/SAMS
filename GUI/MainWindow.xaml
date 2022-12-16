@@ -102,23 +102,27 @@
                 </Border>
 
                 <!--연동 확인 칸-->
-                <Border Style="{StaticResource mainBorder}" Margin="15,0,30,644" Grid.Column="1" Grid.RowSpan="2">
+                <Border x:Name="connectionCheck" Style="{StaticResource mainBorder}" Margin="15,0,30,644" Grid.Column="1" Grid.RowSpan="2" LostMouseCapture="connectionCheck_LostMouseCapture">
                     <Grid Grid.Column = "3" Margin="0,-11,0,-11">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55*"/>
+                            <RowDefinition Height="13*"/>
+                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="10"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <!--ATS 운용 상태-->
-                        <StackPanel Grid.Column="0" Margin="0 0 15 0">
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0" Grid.RowSpan="2">
                             <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
                             <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlug"  Foreground="LawnGreen" HorizontalAlignment="Center" 
-                                                        Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized"/>
+                                                        Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized" LostMouseCapture="ATS_LostMouseCapture"/>
                         </StackPanel>
 
-                        <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#151f2d"/>
+                        <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#151f2d" Margin="2,2,2,2" Grid.RowSpan="2"/>
                         <!--MSS 운용 상태-->
-                        <StackPanel Grid.Column="2" Margin="15 0 0 0">
+                        <StackPanel Grid.Column="2" Margin="14,0,0,0" Grid.RowSpan="2">
                             <TextBlock Text="MSS" TextAlignment="Center" Foreground="White"/>
                             <iconPacks:PackIconMaterial Kind="PowerPlug"  Foreground="LawnGreen" HorizontalAlignment="Center" VerticalAlignment="Center"
                                                         Height="30" Width="30" Margin="0 15 0 0"/>
