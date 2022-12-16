@@ -6,10 +6,10 @@
 -------------
 |역할|이름|GitHub|역할|
 |---|---|---|---|
-|조장|강준희🤷‍♂️|<https://github.com/jhkang>|MSS(MiSsile Simulator|
-|조원|하태민🤷‍♂️|<https://github.com/TaeMin15>|ATS(AirThreat Simulator|
+|조장|강준희🤷‍♂️|<https://github.com/jhkang>|MSS(MiSsile Simulator)|
+|조원|하태민🤷‍♂️|<https://github.com/TaeMin15>|ATS(AirThreat Simulator)|
 |조원|이채현🤷‍♂️|<https://github.com/xmfxhddl>|UDP|
-|조원|장우진🤷‍♀️|<https://github.com/W00JIN>|TCC(TestControl Computer|
+|조원|장우진🤷‍♀️|<https://github.com/W00JIN>|TCC(TestControl Computer)|
 |조원|우용안🤷‍♂️|<https://github.com/wya002>|GUI|
 
 -------------
