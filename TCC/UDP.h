@@ -10,8 +10,8 @@ using namespace std;
 class UDP
 {
 public :
-	UDP() {};
-	UDP(int simulatorPort, queue<string>* aMsgQueue, queue<string>* mMsgQueue);
+	UDP();
+	UDP(int simulatorPort, queue<string>* aMsgQueue, queue<string>* mMsgQueue, pair<bool&, bool&> c);
 	~UDP();
 	void createSocket();
 	void sendData();
@@ -21,7 +21,7 @@ public :
 	bool getReceived();
 
 private :
-
+	pair<bool&, bool&> connect;
 	queue<string>* atsMsgQueue;
 	queue<string>* mssMsgQueue;
 	struct sockaddr_in simulatorAddr;

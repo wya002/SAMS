@@ -11,7 +11,6 @@ void TCCLibrary::WrapperClass::Init()
 	tcc->initTcc();
 }
 
-
 void TCCLibrary::WrapperClass::start()
 {
 	tcc->start();
@@ -30,3 +29,13 @@ void TCCLibrary::WrapperClass::restart()
 {
 	tcc->restart();
 }
+void TCCLibrary::WrapperClass::launch()
+{
+	tcc->launch();
+}
+void TCCLibrary::WrapperClass::getConnect()
+{
+	this->atsConnect = tcc->getAtsConnect();
+	this->mssConnect = tcc->getMssConnect();
+}
+

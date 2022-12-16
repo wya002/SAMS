@@ -13,6 +13,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputPath>C:\Users\User\source\repos\wya002\SAMS\x64\Debug\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
