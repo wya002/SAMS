@@ -78,8 +78,12 @@ namespace GUI
 
         private void Menubutton_LostMouseCapture_1(object sender, MouseEventArgs e)
         {
-            ScenarioLoad load = new ScenarioLoad();
-            load.ShowDialog();
+            if (sl == null)
+            {
+                sl = new ScenarioLoad();
+                sl.OnChildListInputEvent += new ScenarioLoad.OnChildListInputHandler(sl_OnChildListInputEvent);
+                sl.ShowDialog();
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -496,6 +500,32 @@ namespace GUI
         private void ATS_LostMouseCapture(object sender, MouseEventArgs e)
         {
 
+        }
+        
+        //시나리오 불러오기 윈도우 객체 생성
+        ScenarioLoad sl = null;
+
+        //시나리오 데이터를 불러와 값을 입력해주는 함수
+        private void sl_OnChildListInputEvent(List<string> Parameters)
+        {
+            ATSX1.Text = Parameters[0];
+            ATSY1.Text = Parameters[1];
+            ATSX2.Text = Parameters[2];
+            ATSY2.Text = Parameters[3];
+            MSSX.Text = Parameters[4];
+            MSSY.Text = Parameters[5];
+            mvh.isExist();
+            mvh.Drawrect(new System.Windows.Point(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text)));
+            mvh2.isExist();
+            mvh2.Drawrect2(new System.Windows.Point(Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text)));
+            mvh3.isExist();
+            mvh3.Drawrect3(new System.Windows.Point(Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text)));
+            if (sl != null)
+            {
+                sl.Close();
+                sl.OnChildListInputEvent -= new ScenarioLoad.OnChildListInputHandler(sl_OnChildListInputEvent);
+                sl = null;
+            }
         }
     }
 }
