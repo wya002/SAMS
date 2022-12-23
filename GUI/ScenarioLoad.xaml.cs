@@ -58,29 +58,43 @@ namespace GUI
             previewFile.Text = File.ReadAllText(path);
         }
 
-        /*private void xmlRead()
+        //XML 데이터 파싱
+        private List<string> xmlRead()
         {
-            string temp = "";
-            XmlDocument xml = new XmlDocument();
-            DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
-            try
-            {
-                xml.Load(@"C:\Users\User\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml");
-                XmlNodeList xmlList = xml.SelectNodes("/Synario/SynarioStart");
+            //string temp = "";
+            List<string> posValue = new List<string>();
 
-                foreach (XmlNode xnl in xmlList)
-                {
-                    temp += xnl["SynarioStart"].InnerText;
-                    temp += xnl["SynarioDestination"].InnerText;
-                    temp += xnl["SynarioMSS"].InnerText;
-                    //temp += xml.SelectSingleNode(Synari)
-                }
-                MessageBox.Show(temp);
-            }
-            catch (Exception exc)
+            DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
+
+            XmlTextReader reader = new(@"C:\Users\74265\Downloads\SAMS-main\SAMS-main\GUI\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml");
+            while (reader.Read())
             {
-                MessageBox.Show(exc.Message);
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element: // The node is an element.
+                        //temp += "<" + reader.Name;
+                        while (reader.MoveToNextAttribute())
+                        {
+                            //temp += " " + reader.Name + "='" + reader.Value + "'";
+                            if (reader.Value != "Value")
+                            {
+                                posValue.Add(reader.Value);
+                            }
+                        }
+                        //temp += ">";
+                        break;
+
+                    case XmlNodeType.EndElement: //Display the end of the element.
+                        //temp += "</" + reader.Name;
+                        //temp += ">";
+                        break;
+                }
             }
-        }*/
+            //MessageBox.Show(temp);
+            return posValue;
+        }
+        //XML 파싱 데이터 넘기는 이벤트 핸들러
+        public delegate void OnChildListInputHandler(List<string> Parameters);
+        public event OnChildListInputHandler OnChildListInputEvent;
     }
 }
