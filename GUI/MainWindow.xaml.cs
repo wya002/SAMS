@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using OpenCvSharp;
 using Point = System.Windows.Point;
-using TCCLibrary;
+//using TCCLibrary;
 using System.Threading;
 
 namespace GUI
@@ -18,10 +18,9 @@ namespace GUI
     /// </summary>s
     public partial class MainWindow : System.Windows.Window
     {
-        TCCLibrary.WrapperClass wc = new WrapperClass();
+        //TCCLibrary.WrapperClass wc = new WrapperClass();
 
-        private static readonly NLog.Logger Logger = NLog.LogManager.GetCurrentClassLogger();
-
+        // 지도에 마우스 클릭 지점 찍는 객체
         MyVisualHost mvh = new MyVisualHost();
         MyVisualHost mvh2 = new MyVisualHost();
         MyVisualHost mvh3 = new MyVisualHost();
@@ -31,16 +30,8 @@ namespace GUI
             ImageGrid.Children.Add(mvh);
             ImageGrid.Children.Add(mvh2);
             ImageGrid.Children.Add(mvh3);
-            Thread myThread = new Thread(Func);
-            myThread.Start();
-            //로그 찍는 메서드
-            /*Task.Run(async () => {
-                for (int i = 0; ; i++)
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(1)).ConfigureAwait(false);
-                    Logger.Debug("Log {0}", i);
-                }
-            });*/
+            /*Thread myThread = new Thread(Func);
+            myThread.Start();*/
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -204,7 +195,7 @@ namespace GUI
 
         private void ScenarioStart_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            wc.start();
+            //wc.start();
             startScenario();
         }
         private Tuple<double, double> linear_equ(double x1, double y1, double x2, double y2, double X)
@@ -349,8 +340,7 @@ namespace GUI
                     {
                         TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
                         TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 실패 \n";
-                        wc.done();
-                        //TbLog.Text += "--------------------------------------------  \n";
+                        //wc.done();
                         break;
                     }
 
@@ -391,16 +381,14 @@ namespace GUI
                             {
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 성공! \n";
-                                wc.done();
-                                //TbLog.Text += "--------------------------------------------  \n";
+                                //wc.done();
                                 break;
                             }
                             else if (-diss < dis2_x && dis2_x < diss && -diss < dis2_y && dis2_y < diss) // 현재 ATS와 현재 MSS 사이의 x 거리와 y 거리가 지정된 pixel 값 미만일 경우 → 요격 성공 (현재 2 pixel로 설정)
                             {
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 종료 \n";
                                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 공중위협 요격 성공 \n";
-                                wc.done();
-                                //TbLog.Text += "--------------------------------------------  \n";
+                                //wc.done();
                                 break;
                             }
 
@@ -442,7 +430,7 @@ namespace GUI
 
         private void restart_LostMouseCapture(object sender, MouseEventArgs e) //재시작 버튼
         {
-            wc.restart();
+            //wc.restart();
             if (pause.IsActive == true)
             {
                 command = "restart";
@@ -453,13 +441,13 @@ namespace GUI
         }
         private void Func()
         {
-            wc.Init();
+            //wc.Init();
         }
 
 
         private void pause_LostMouseCapture(object sender, MouseEventArgs e) //일시정지 버튼
         {
-            wc.pause();
+            //wc.pause();
             if (ATSX1.Text != "" && ATSX2.Text != "" && ATSY1.Text != "" && ATSY2.Text != "" && MSSX.Text != "" && MSSY.Text != "")
             {
                 command = "pause";
@@ -473,7 +461,7 @@ namespace GUI
 
         private void Launch_button_LostMouseCapture(object sender, MouseEventArgs e)//발사 버튼
         {
-            wc.launch();
+            //wc.launch();
             if (pause.IsActive != true)
             {
                 command2 = "launch";
@@ -487,9 +475,9 @@ namespace GUI
         private void deploy_LostMouseCapture(object sender, MouseEventArgs e)
         {
             command = "deploy";
-            wc.deploy(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text),
+            /*wc.deploy(Convert.ToInt64(ATSX1.Text), Convert.ToInt64(ATSY1.Text),
                 Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text),
-                Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text));
+                Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text));*/
             TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + "시나리오 배포\n";
         }
 
@@ -506,7 +494,7 @@ namespace GUI
         ScenarioLoad sl = null;
 
         //시나리오 데이터를 불러와 값을 입력해주는 함수
-        private void sl_OnChildListInputEvent(List<string> Parameters)
+        private void sl_OnChildListInputEvent(System.Collections.Generic.List<string> Parameters)
         {
             ATSX1.Text = Parameters[0];
             ATSY1.Text = Parameters[1];
