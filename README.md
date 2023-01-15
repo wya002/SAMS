@@ -19,9 +19,6 @@ https://github.com/xmfxhddl/SAMS_opencv
 ## 🚀시스템 개요
 
  * 대공유도탄 모의 시스템은 공중위협에 대응하여 지대공 유도탄 발사를 통해 교전 하는 모의 시스템이다.
- 
-<img src="https://user-images.githubusercontent.com/75249093/206380124-7bd65489-b120-496a-81f0-2736938fce32.png" width="600" height="400"/>
-
 
 --------------
 ## 🚀메인 화면 (TCC)
