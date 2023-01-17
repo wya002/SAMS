@@ -34,7 +34,7 @@ namespace GUI
 
         private void Button_LostMouseCapture(object sender, MouseEventArgs e)
         {
-            DirectoryInfo di = new DirectoryInfo("C:/Users/User/Scenario");
+            DirectoryInfo di = new DirectoryInfo("C:/Users/dndyd/OneDrive/문서");
 
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("ScenarioName", typeof(string));
@@ -48,14 +48,14 @@ namespace GUI
 
         private void Button_LostMouseCapture_1(object sender, MouseEventArgs e)
         {
-            //xmlRead();
-            //Window.GetWindow(this).Close();
+            OnChildListInputEvent(xmlRead());
+            Window.GetWindow(this).Close();
         }
 
         private void datagrid1_SelectedCellsChanged(object sender, System.Windows.Controls.SelectedCellsChangedEventArgs e)
         {
             DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
-            string path = @"C:\Users\User\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml";
+            string path = @"C:\Users\dndyd\OneDrive\문서" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml";
             previewFile.Text = File.ReadAllText(path);
         }
 
@@ -67,7 +67,7 @@ namespace GUI
 
             DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
 
-            XmlTextReader reader = new(@"C:\Users\74265\Downloads\SAMS-main\SAMS-main\GUI\Scenario" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml");
+            XmlTextReader reader = new(@"C:\Users\dndyd\OneDrive\문서" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml");
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -97,5 +97,10 @@ namespace GUI
         //XML 파싱 데이터 넘기는 이벤트 핸들러
         public delegate void OnChildListInputHandler(List<string> Parameters);
         public event OnChildListInputHandler OnChildListInputEvent;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

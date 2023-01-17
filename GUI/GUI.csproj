@@ -13,7 +13,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <OutputPath>C:\Users\User\source\repos\wya002\SAMS\x64\Debug\</OutputPath>
+    <OutputPath>C:\Users\dndyd\source\repos\wya002\SAMS\x64\Debug\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -30,7 +30,6 @@
     <PackageReference Include="LiveCharts" Version="0.9.7" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.7" />
     <PackageReference Include="MahApps.Metro.IconPacks" Version="4.11.0" />
-    <PackageReference Include="NLog" Version="5.1.0" />
     <PackageReference Include="OpenCvSharp4" Version="4.6.0.20220608" />
     <PackageReference Include="OpenCvSharp4.Extensions" Version="4.6.0.20220608" />
     <PackageReference Include="OpenCvSharp4.runtime.win" Version="4.6.0.20220608" />

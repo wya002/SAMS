@@ -252,7 +252,7 @@ namespace GUI
                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 중지 \n";
                 TbLog.Text += "--------------------------------------------  \n";
                 //System.Windows.Forms.Application.Restart();
-                mapImage.Source = new BitmapImage(new Uri("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png"));
+                mapImage.Source = new BitmapImage(new Uri("C:/Users/dndyd/source/repos/wya002/SAMS/GUI/map6.png"));
                 ScenarioStart.IsActive = false;
                 ScenarioStart.IsEnabled = true;
                 pause.IsActive = false;
@@ -288,8 +288,8 @@ namespace GUI
             if (ATSX1.Text != "" && ATSX2.Text != "" && ATSY1.Text != "" && ATSY2.Text != "" && MSSX.Text != "" && MSSY.Text != "")
             {
                 ScenarioStart.IsActive = true;
-                Mat mat1 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
-                Mat mat2 = new("C:/Users/User/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
+                Mat mat1 = new("C:/Users/dndyd/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
+                Mat mat2 = new("C:/Users/dndyd/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
 
                 double ATS_init_x = Convert.ToInt64(ATSX1.Text); // 시나리오 ATS 초기 발사 x 위치
                 double ATS_init_y = Convert.ToInt64(ATSY1.Text); // 시나리오 ATS 초기 발사 y 위치
@@ -401,7 +401,7 @@ namespace GUI
                         }
                     }
 
-                    Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1000, 800)); // 이미지 Resize
+                    Cv2.Resize(mat1, mat2, new OpenCvSharp.Size(1600, 1280)); // 이미지 Resize
                     Bitmap bitimg = MatToBitmap(mat2); // 이미지 bitmap 변환
                     mapImage.Source = BitmapToImageSource(bitimg);
 
