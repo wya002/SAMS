@@ -57,7 +57,7 @@ namespace GUI
             DataRowView dataRow = (DataRowView)datagrid1.SelectedItem;
             string path = @"C:\Users\dndyd\OneDrive\문서" + "\\" + dataRow.Row.ItemArray[0].ToString() + ".xml";
             previewFile.Text = File.ReadAllText(path);
-        }
+        }//종료 이벤트 버튼 클릭
 
         //XML 데이터 파싱
         private List<string> xmlRead()

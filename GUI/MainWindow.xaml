@@ -6,7 +6,7 @@
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:iconPacks="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" mc:Ignorable="av" x:Class="GUI.MainWindow"
         Height="760" Width="1280" Background="Transparent" ResizeMode="NoResize"
-        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" WindowState="Normal" Icon="/Material-RocketLaunchOutline.png">
+        AllowsTransparency="True" WindowStyle="None" WindowStartupLocation="CenterScreen" WindowState="Normal" Icon="/Material-RocketLaunchOutline.png">
 
     <Window.Resources>
 
@@ -18,7 +18,8 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="843"/>
+                <ColumnDefinition Width="69.197"/>
+                <ColumnDefinition Width="773.803"/>
                 <ColumnDefinition Width="337"/>
             </Grid.ColumnDefinitions>
 
@@ -65,7 +66,7 @@
             </Border>
 
             <!--Middle Section-->
-            <Grid Grid.Row="3" Grid.Column="1" Margin="0 30 0 0" Grid.ColumnSpan="2">
+            <Grid Grid.Column="1" Margin="0 30 0 0" Grid.ColumnSpan="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="52"/>
                     <RowDefinition Height="313*"/>
@@ -83,9 +84,9 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="50"/>
                         </Grid.RowDefinitions>
-                        <Image x:Name="mapImage" Source="map6.png" Stretch="None" MouseDown="mapImage_MouseDown" 
+                        <Image x:Name="mapImage" Source="map6.png" Stretch="None" 
                                Margin="0 0 0 0" MouseLeftButtonDown="mapImage_MouseLeftButtonDown" 
-                               MouseRightButtonDown="mapImage_MouseRightButtonDown" MouseWheel="mapImage_MouseWheel" Initialized="mapImage_Initialized" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                               MouseRightButtonDown="mapImage_MouseRightButtonDown" MouseWheel="mapImage_MouseWheel" HorizontalAlignment="Left" VerticalAlignment="Top"/>
                         <StackPanel Orientation="Horizontal" Margin="0,640,0,1">
                             <TextBlock Text="공중위협 현재 좌표 : X=" Foreground ="White" FontSize="14"/>
                             <TextBlock x:Name="ATS_current_x" Foreground ="White" FontSize="14"/>
@@ -102,7 +103,7 @@
                 </Border>
 
                 <!--연동 확인 칸-->
-                <Border x:Name="connectionCheck" Style="{StaticResource mainBorder}" Margin="15,0,30,644" Grid.Column="1" Grid.RowSpan="2" LostMouseCapture="connectionCheck_LostMouseCapture">
+                <Border x:Name="connectionCheck" Style="{StaticResource mainBorder}" Margin="15,0,30,644" Grid.Column="1" Grid.RowSpan="2">
                     <Grid Grid.Column = "3" Margin="0,-11,0,-11">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55*"/>
@@ -117,7 +118,7 @@
                         <StackPanel Grid.Column="0" Margin="0,0,16,0" Grid.RowSpan="2">
                             <TextBlock Text="ATS" TextAlignment="Center" Foreground="White"/>
                             <iconPacks:PackIconMaterial Name="ATS" Kind="PowerPlug"  Foreground="LawnGreen" HorizontalAlignment="Center" 
-                                                        Height="30" Width="30" Margin="0 15 0 0" Initialized="PackIconMaterial_Initialized" LostMouseCapture="ATS_LostMouseCapture"/>
+                                                        Height="30" Width="30" Margin="0 15 0 0"/>
                         </StackPanel>
 
                         <Separator Grid.Column="1" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="#151f2d" Margin="2,2,2,2" Grid.RowSpan="2"/>

@@ -18,6 +18,7 @@ namespace GUI
     /// </summary>s
     public partial class MainWindow : System.Windows.Window
     {
+        //TCC 객체 생성
         //TCCLibrary.WrapperClass wc = new WrapperClass();
 
         // 지도에 마우스 클릭 지점 찍는 객체
@@ -41,30 +42,16 @@ namespace GUI
                 this.DragMove();
             }
         }
-
+        //종료 이벤트 버튼 클릭
         private void Menubutton_MouseEnter(object sender, MouseEventArgs e)
         {
             this.Close();
         }
 
-        private void Menubutton_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-        //종료 이벤트 버튼 클릭
-        private void Menubutton_Clicked(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
         //시나리오 페이지 이동
         private void Menubutton_LostMouseCapture(object sender, MouseEventArgs e)
         {
             System.Windows.Window.GetWindow(this).Close();
-        }
-
-        private void PackIconMaterial_Initialized(object sender, EventArgs e)
-        {
-
         }
 
         private void Menubutton_LostMouseCapture_1(object sender, MouseEventArgs e)
@@ -75,10 +62,6 @@ namespace GUI
                 sl.OnChildListInputEvent += new ScenarioLoad.OnChildListInputHandler(sl_OnChildListInputEvent);
                 sl.ShowDialog();
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
         }
 
         private string xmlParse()
@@ -111,15 +94,6 @@ namespace GUI
                 }
                 
             }
-        }
-        private void mapImage_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Button_LostMouseCapture(object sender, MouseEventArgs e)
-        {
-
         }
 
         private void mapImage_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -156,20 +130,6 @@ namespace GUI
             MSSY.Text = ClickY.ToString();
             mvh3.isExist();
             mvh3.Drawrect3(new System.Windows.Point(ClickX, ClickY));
-        }
-
-        private void WriteLogToTextBox(string log)
-        {
-            //로그 찍는 메서드
-            /*TbLog.Dispatcher.BeginInvoke(new Action(() => {
-                TbLog.ScrollToEnd();
-                TbLog.AppendText(string.Format("\n{0}", log));
-            }));*/
-        }
-
-        private void mapImage_Initialized(object sender, EventArgs e)
-        {
-          
         }
 
         public static Bitmap MatToBitmap(Mat image)
@@ -479,15 +439,6 @@ namespace GUI
                 Convert.ToInt64(ATSX2.Text), Convert.ToInt64(ATSY2.Text),
                 Convert.ToInt64(MSSX.Text), Convert.ToInt64(MSSY.Text));*/
             TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + "시나리오 배포\n";
-        }
-
-        private void connectionCheck_LostMouseCapture(object sender, MouseEventArgs e)
-        {
-        }
-
-        private void ATS_LostMouseCapture(object sender, MouseEventArgs e)
-        {
-
         }
         
         //시나리오 불러오기 윈도우 객체 생성
