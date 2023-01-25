@@ -34,8 +34,9 @@ namespace GUI
 
         private void Button_LostMouseCapture(object sender, MouseEventArgs e)
         {
+            //다음에 수정할 부분 -> 상대경로
             DirectoryInfo di = new DirectoryInfo("C:/Users/dndyd/OneDrive/문서");
-
+            //
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("ScenarioName", typeof(string));
 

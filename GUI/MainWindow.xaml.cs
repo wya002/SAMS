@@ -10,6 +10,7 @@ using OpenCvSharp;
 using Point = System.Windows.Point;
 //using TCCLibrary;
 using System.Threading;
+using System.Reflection;
 
 namespace GUI
 {
@@ -78,7 +79,9 @@ namespace GUI
         private void Menubutton_LostMouseCapture_2(object sender, MouseEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
+            //다음에 수정할 부분 -> 상대경로로
             dlg.InitialDirectory = @"C:\Users\User\Scenario";
+            //
             dlg.FileName = "UnnamedScenario.xml"; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "Scenario File (.xml)|*.xml"; // Filter files by extension
@@ -211,8 +214,7 @@ namespace GUI
             {
                 TbLog.Text += System.DateTime.Now.ToString("hh:mm:ss.fff") + " 시나리오 중지 \n";
                 TbLog.Text += "--------------------------------------------  \n";
-                //System.Windows.Forms.Application.Restart();
-                mapImage.Source = new BitmapImage(new Uri("C:/Users/dndyd/source/repos/wya002/SAMS/GUI/map6.png"));
+                mapImage.Source = new BitmapImage(new Uri("map6.png",UriKind.Relative));
                 ScenarioStart.IsActive = false;
                 ScenarioStart.IsEnabled = true;
                 pause.IsActive = false;
@@ -234,7 +236,6 @@ namespace GUI
                 target_distance.Text = "";
                 command = "";
                 command2 = "";
-                //System.Windows.Application.Current.Shutdown();
             }
             catch (Exception exc)
             {
@@ -248,8 +249,8 @@ namespace GUI
             if (ATSX1.Text != "" && ATSX2.Text != "" && ATSY1.Text != "" && ATSY2.Text != "" && MSSX.Text != "" && MSSY.Text != "")
             {
                 ScenarioStart.IsActive = true;
-                Mat mat1 = new("C:/Users/dndyd/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
-                Mat mat2 = new("C:/Users/dndyd/source/repos/wya002/SAMS/GUI/map6.png", ImreadModes.Color);
+                Mat mat1 = new("map6.png", ImreadModes.Color);
+                Mat mat2 = new("map6.png", ImreadModes.Color);
 
                 double ATS_init_x = Convert.ToInt64(ATSX1.Text); // 시나리오 ATS 초기 발사 x 위치
                 double ATS_init_y = Convert.ToInt64(ATSY1.Text); // 시나리오 ATS 초기 발사 y 위치
