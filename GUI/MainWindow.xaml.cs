@@ -79,10 +79,7 @@ namespace GUI
         private void Menubutton_LostMouseCapture_2(object sender, MouseEventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            //다음에 수정할 부분 -> 상대경로로
-            dlg.InitialDirectory = @"C:\Users\User\Scenario";
-            //
-            dlg.FileName = "UnnamedScenario.xml"; // Default file name
+            dlg.FileName = "Scenario.xml"; // Default file name
             dlg.DefaultExt = ".xml"; // Default file extension
             dlg.Filter = "Scenario File (.xml)|*.xml"; // Filter files by extension
 
